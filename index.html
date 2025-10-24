@@ -6,7 +6,7 @@
     <title>Trabajos</title>
 
     <style>
-        /* Estilos básicos */
+      
         body {
             font-family: Arial, sans-serif;
             background-color: black;
@@ -18,17 +18,17 @@
         h1 {
         
             
-  color: #FFD700;               /* Color dorado que resalta sobre negro */
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Tipografía profesional */
-  font-weight: 600;             /* Un poco más grueso pero elegante */
-  font-size: 48px;              /* Tamaño grande para destacar */
-  text-align: center;           /* Centrado */
-  text-shadow: 2px 2px 4px #000000; /* Sombra ligera para darle relieve */
-  font-style: normal;           /* Puedes usar italic si quieres cursiva ligera */
+              color: red;               
+              font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+              font-weight: 600;            
+              font-size: 48px;            
+              text-align: center;        
+              text-shadow: 2px 2px 4px #000000; 
+              font-style: normal;          
 
         }
 
-        /* Estilos de los enlaces */
+       
         a {
             text-decoration: none;
             color: #007bff;
@@ -41,7 +41,7 @@
             color: #0056b3;
         }
 
-        /* Estilo para el área de mensaje */
+    
         .message {
             margin-top: 30px;
             padding: 20px;
@@ -53,23 +53,21 @@
     </style>
 </head>
 <body>
-
-    <h1>Trabajos</h1>
-    <img src="Imagenes/pantalla.jpg" widht="250" height="250" style="border: 3px solid red;" alt="Logo">
-   
-
-    <p>
-        <a href="Archivos/1.pdf" target="_blank">Trabajo(1)</a>
-         <a href="Archivos/index11.html" target="_blank">Trabajo(4)</a>
-        <a href="#" onclick="showMessage('Enlace 1 fue clickeado!')">Enlace 1</a>
-        <a href="#" onclick="showMessage('Enlace 2 fue clickeado!')">Enlace 2</a>
-        <a href="#" onclick="showMessage('Enlace 3 fue clickeado!')">Enlace 3</a>
-    </p>
+                
+        <h1>Trabajos</h1>
+                <img src="Imagenes/pantalla.jpg" widht="250" height="250" style="border: 3px solid red;" alt="Logo"></img>
+                   
+                
+                    <p>
+                        <a href="Archivos/1.pdf" target="_blank">Trabajo(1)</a>
+                        <a href="Archivos/4.pdf" target="_blank">Trabajo(4)</a>
+                        
+                    </p>
 
     <div id="message" class="message"></div>
 
     <script>
-        // Función de JavaScript que muestra el mensaje cuando se hace clic en un enlace
+      
         function showMessage(msg) {
             var messageDiv = document.getElementById('message');
             messageDiv.style.display = 'block';
