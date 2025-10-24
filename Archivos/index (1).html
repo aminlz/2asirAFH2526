@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trabajos</title>
+
+    <style>
+        /* Estilos básicos */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: black;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        h1 {
+            color: #00FFFF;
+            margin-top: 50px;
+        }
+
+        /* Estilos de los enlaces */
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-size: 1.2rem;
+            margin: 10px;
+            display: inline-block;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+
+        /* Estilo para el área de mensaje */
+        .message {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e7f1ff;
+            border: 1px solid #007bff;
+            border-radius: 4px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Trabajos</h1>
+    <img src="Imagenes/pantalla.jpg" widht="250" height="250" style="border: 3px solid red;" alt="Logo">
+   
+
+    <p>
+        <a href="Archivos/1.pdf" target="_blank">Trabajo(1)</a>
+        <a href="#" onclick="showMessage('Enlace 1 fue clickeado!')">Enlace 1</a>
+        <a href="#" onclick="showMessage('Enlace 2 fue clickeado!')">Enlace 2</a>
+        <a href="#" onclick="showMessage('Enlace 3 fue clickeado!')">Enlace 3</a>
+    </p>
+
+    <div id="message" class="message"></div>
+
+    <script>
+        // Función de JavaScript que muestra el mensaje cuando se hace clic en un enlace
+        function showMessage(msg) {
+            var messageDiv = document.getElementById('message');
+            messageDiv.style.display = 'block';
+            messageDiv.textContent = msg;
+        }
+    </script>
+
+</body>
+</html>
+
