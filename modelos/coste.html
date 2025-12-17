@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Coste - Modelos IA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg: #020617;
+      --card: #0f172a;
+      --border: #1f2937;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px 16px;
+      background: #020617;
+      color: var(--text);
+    }
+    main { max-width: 900px; margin: 0 auto; }
+    h1, h2 { text-align: center; }
+    h1 { margin-bottom: 6px; }
+    .sub {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+    .panel {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 14px 14px 16px;
+      border: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+    .controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+    label { color: var(--muted); }
+    select {
+      background: #020617;
+      color: var(--text);
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      font-size: 0.9rem;
+    }
+    .chart-wrap { height: 260px; }
+    canvas { max-width: 100%; }
+    a {
+      color: #38bdf8;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    a:hover { text-decoration: underline; }
+    .footer {
+      text-align: center;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+<div class="top-bar">
+    <a href="index.html">⟵ Volver a la página principal</a>
+  </div>
+<main>
+  <h1>Coste por 1K tokens</h1>
+  <p class="sub">
+    Coste estimado (ptk) por 1.000 tokens para cada modelo, comparando Mac mini y Windows.
+  </p>
+
+  <section class="panel">
+    <div class="controls">
+      <span>Ver costes para:</span>
+      <select id="viewSelect">
+        <option value="both">Mac y Windows</option>
+        <option value="mac">Solo Mac mini</option>
+        <option value="win">Solo Windows</option>
+      </select>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Coste ptk por modelo</h2>
+    <p style="text-align:center; font-size:0.85rem; color:var(--muted); margin-top:0;">
+      Los valores son de ejemplo pero sirven para comparar el coste relativo de cada modelo en ambos sistemas.
+    </p>
+    <div class="chart-wrap">
+      <canvas id="costChart"></canvas>
+    </div>
+  </section>
+
+  <p style="text-align:center; margin-top:8px;">
+    <a href="index.html">⟵ Volver al índice</a>
+  </p>
+
+  <div class="footer">
+    Mismos modelos que en rendimiento: qwen 4B, gemma 12B, granite tiny y OpenAI “potente”.
+  </div>
+</main>
+
+<script>
+  // Datos compartidos (tk/s reales por SO)[file:48]
+  const allData = {
+    Mac: [
+      { id: "qwen",    modelo: "qwen/qwen3-v1-4b",     so: "Mac mini", tks: 37 },
+      { id: "gemma",   modelo: "google/gemma-3-12b",   so: "Mac mini", tks: 42 },
+      { id: "granite", modelo: "ibm/granite-4-h-tiny", so: "Mac mini", tks: 70 },
+      { id: "openai",  modelo: "OpenAI \"potente\" (API)", so: "Mac mini", tks: 95 }
+    ],
+    Win: [
+      { id: "qwen",    modelo: "qwen/qwen3-v1-4b",     so: "Windows", tks: 44 },
+      { id: "gemma",   modelo: "google/gemma-3-12b",   so: "Windows", tks: 50 },
+      { id: "granite", modelo: "ibm/granite-4-h-tiny", so: "Windows", tks: 84 },
+      { id: "openai",  modelo: "OpenAI \"potente\"",   so: "Windows", tks: 100 }
+    ]
+  };
+
+  // Coste estimado por 1K tokens (mismo en Mac y Windows, pero lo mostramos separado para comparar).
+  const costPtk = {
+    qwen:   0.003,
+    gemma:  0.004,
+    granite:0.002,
+    openai: 0.010
+  };
+
+  const colors = {
+    qwen:   "rgba(56, 189, 248, 1)",
+    gemma:  "rgba(239, 68, 68, 1)",
+    granite:"rgba(34, 197, 94, 1)",
+    openai: "rgba(250, 204, 21, 1)"
+  };
+</script>
+
+<script>
+  const viewSelect = document.getElementById("viewSelect");
+  const ctx = document.getElementById("costChart").getContext("2d");
+
+  const macRows = allData.Mac;
+  const winRows = allData.Win;
+  const labelsModels = macRows.map(r => r.modelo);
+
+  function buildDatasets(view) {
+    const macData = macRows.map(r => costPtk[r.id]);
+    const winData = winRows.map(r => costPtk[r.id]);
+
+    const baseColors = macRows.map(r => colors[r.id]);
+
+    const dsMac = {
+      label: "Mac mini",
+      data: macData,
+      backgroundColor: baseColors.map(c => c.replace("1)", "0.55)")),
+      borderColor: baseColors,
+      borderWidth: 1
+    };
+
+    const dsWin = {
+      label: "Windows",
+      data: winData,
+      backgroundColor: baseColors.map(c => c.replace("1)", "0.25)")),
+      borderColor: baseColors.map(c => c.replace("1)", "0.9)")),
+      borderWidth: 1
+    };
+
+    if (view === "mac") return [dsMac];
+    if (view === "win") return [dsWin];
+    return [dsMac, dsWin];
+  }
+
+  const costChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: labelsModels,
+      datasets: buildDatasets("both")
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color: "#e5e7eb" } }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: { color: "#9ca3af" },
+          title: { display: true, text: "Coste ptk (1K tokens)", color: "#9ca3af" }
+        },
+        x: { ticks: { color: "#9ca3af" } }
+      }
+    }
+  });
+
+  viewSelect.addEventListener("change", () => {
+    const view = viewSelect.value; // both | mac | win
+    costChart.data.datasets = buildDatasets(view);
+    costChart.update();
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Calidad - Modelos IA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg: #020617;
+      --card: #0f172a;
+      --border: #1f2937;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 20px 16px;
+      background: #020617;
+      color: var(--text);
+    }
+    main { max-width: 900px; margin: 0 auto; }
+    h1, h2 { text-align: center; }
+    h1 { margin-bottom: 6px; }
+    .sub {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+    .panel {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 14px 14px 16px;
+      border: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+    .controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      font-size: 0.9rem;
+    }
+    label { color: var(--muted); }
+    select {
+      background: #020617;
+      color: var(--text);
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      padding: 5px 10px;
+      font-size: 0.9rem;
+    }
+    .chart-wrap { height: 260px; }
+    canvas { max-width: 100%; }
+    a {
+      color: #38bdf8;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+    a:hover { text-decoration: underline; }
+    .footer {
+      text-align: center;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+<div class="top-bar">
+    <a href="index.html">⟵ Volver a la página principal</a>
+  </div>
+<main>
+  <h1>Calidad en acertijos</h1>
+  <p class="sub">
+    Porcentaje de acertijos resueltos correctamente en Mac mini y Windows, con prompts cortos y largos.
+  </p>
+
+  <section class="panel">
+    <div class="controls">
+      <span>Mostrar calidad para:</span>
+      <select id="viewSelect">
+        <option value="both">Mac y Windows</option>
+        <option value="mac">Solo Mac mini</option>
+        <option value="win">Solo Windows</option>
+      </select>
+
+      <span>Escenario:</span>
+      <select id="scenarioSelect">
+        <option value="corto">Prompts/contextos cortos</option>
+        <option value="largo">Prompts/contextos largos</option>
+      </select>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Calidad (%) por modelo</h2>
+    <p style="text-align:center; font-size:0.85rem; color:var(--muted); margin-top:0;">
+      Valores basados en tus aciertos con acertijos sencillos y una estimación para prompts más largos.
+    </p>
+    <div class="chart-wrap">
+      <canvas id="qualityChart"></canvas>
+    </div>
+  </section>
+
+  <p style="text-align:center; margin-top:8px;">
+    <a href="index.html">⟵ Volver al índice</a>
+  </p>
+
+  <div class="footer">
+    La calidad es similar en Mac y Windows; se simula una ligera variación entre escenarios corto y largo.
+  </div>
+</main>
+
+<script>
+  // Modelos (mismos en Mac y Windows).[file:48]
+  const modelos = [
+    { id: "qwen",    nombre: "qwen/qwen3-v1-4b" },
+    { id: "gemma",   nombre: "google/gemma-3-12b" },
+    { id: "granite", nombre: "ibm/granite-4-h-tiny" },
+    { id: "openai",  nombre: "OpenAI \"potente\"" }
+  ];
+
+  // Calidad corto/largo: basados en tus aciertos (corto) y degradación ligera en largo.[file:48]
+  // Se supone que el rendimiento en calidad es prácticamente igual en ambos SO.
+  const qualityShort = { qwen: 80, gemma: 100, granite: 100, openai: 100 };
+  const qualityLong  = { qwen: 65, gemma: 95,  granite: 95,  openai: 98 };
+
+  const colors = {
+    qwen:   "rgba(56, 189, 248, 1)",
+    gemma:  "rgba(239, 68, 68, 1)",
+    granite:"rgba(34, 197, 94, 1)",
+    openai: "rgba(250, 204, 21, 1)"
+  };
+</script>
+
+<script>
+  const viewSelect = document.getElementById("viewSelect");
+  const scenarioSelect = document.getElementById("scenarioSelect");
+  const ctx = document.getElementById("qualityChart").getContext("2d");
+
+  const labelsModels = modelos.map(m => m.nombre);
+
+  function getQualityMap(scenario) {
+    return scenario === "corto" ? qualityShort : qualityLong;
+  }
+
+  function buildDatasets(view, scenario) {
+    const qm = getQualityMap(scenario);
+
+    const baseData = modelos.map(m => qm[m.id]);
+    const baseColors = modelos.map(m => colors[m.id]);
+
+    const dsMac = {
+      label: "Mac mini",
+      data: baseData,
+      backgroundColor: baseColors.map(c => c.replace("1)", "0.55)")),
+      borderColor: baseColors,
+      borderWidth: 1
+    };
+
+    // Para esta práctica asumimos misma calidad en Windows;
+    // si quieres, puedes cambiar algún valor para simular pequeñas diferencias.
+    const dsWin = {
+      label: "Windows",
+      data: baseData,
+      backgroundColor: baseColors.map(c => c.replace("1)", "0.25)")),
+      borderColor: baseColors.map(c => c.replace("1)", "0.9)")),
+      borderWidth: 1
+    };
+
+    if (view === "mac") return [dsMac];
+    if (view === "win") return [dsWin];
+    return [dsMac, dsWin];
+  }
+
+  const qualityChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: labelsModels,
+      datasets: buildDatasets("both", "corto")
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color: "#e5e7eb" } }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          max: 100,
+          ticks: { color: "#9ca3af" },
+          title: { display: true, text: "Porcentaje de aciertos", color: "#9ca3af" }
+        },
+        x: { ticks: { color: "#9ca3af" } }
+      }
+    }
+  });
+
+  function updateChart() {
+    const view = viewSelect.value;        // both | mac | win
+    const scenario = scenarioSelect.value; // corto | largo
+    qualityChart.data.datasets = buildDatasets(view, scenario);
+    qualityChart.update();
+  }
+
+  viewSelect.addEventListener("change", updateChart);
+  scenarioSelect.addEventListener("change", updateChart);
+</script>
+</body>
+</html>
