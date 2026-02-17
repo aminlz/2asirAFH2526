@@ -50,25 +50,43 @@
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-        .main-image {
+        .images-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin: 60px auto;
+            max-width: 1200px;
+        }
+
+        .image-card {
             background: var(--card-bg);
             backdrop-filter: blur(20px);
-            margin: 60px auto;
-            padding: 40px;
+            padding: 30px;
             border-radius: 25px;
             box-shadow: var(--shadow);
             text-align: center;
-            max-width: 900px;
             border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s ease;
         }
-        .main-image img {
-            width: 100%; 
-            max-width: 800px;
-            height: 400px;
+        .image-card:hover { transform: translateY(-5px); }
+        
+        .image-card img {
+            width: 100%;
+            height: 300px;
             object-fit: cover;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-            margin-bottom: 30px;
+            margin-bottom: 20px;
+        }
+
+        .image-card h3 {
+            color: #1e293b;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .detailed-description {
@@ -103,12 +121,6 @@
             font-family: 'Fira Code', monospace;
             overflow-x: auto;
             margin: 20px 0;
-        }
-        .detailed-description code {
-            background: rgba(0,0,0,0.1);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Fira Code', monospace;
         }
 
         .analysis-section {
@@ -196,9 +208,14 @@
 
         @media (max-width: 768px) {
             .container, .analysis-section { padding: 20px; margin: 20px 0; }
-            .main-image img { height: 250px; }
-            .step-grid { grid-template-columns: 1fr; }
+            .images-gallery { 
+                grid-template-columns: 1fr; 
+                gap: 20px;
+                padding: 0 10px;
+            }
+            .image-card img { height: 250px; }
             .detailed-description { padding: 25px; margin: 20px auto; }
+            .step-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -211,34 +228,41 @@
     </div>
 
     <div class="container">
-        <!-- IMAGEN PRINCIPAL -->
-        <div class="main-image">
-            <img src="des1.png" alt="Captura principal Destilación IA">
-            <h2 style="color: #1e293b; margin-bottom: 20px;"><i class="fas fa-image"></i> Captura Principal</h2>
+        <!-- GALERÍA DE 4 IMÁGENES EN ORDEN -->
+        <div class="images-gallery">
+            <div class="image-card">
+                <img src="des1.png" alt="Captura 1 - Logs Entrenamiento">
+                <h3><i class="fas fa-chart-line"></i> Captura 1 - Logs Entrenamiento</h3>
+            </div>
+            <div class="image-card">
+                <img src="des2.png" alt="Captura 2 - Evaluación Final">
+                <h3><i class="fas fa-check-circle"></i> Captura 2 - Evaluación Final</h3>
+            </div>
+            <div class="image-card">
+                <img src="des3.png" alt="Captura 3 - Script probar.py">
+                <h3><i class="fas fa-code"></i> Captura 3 - Script probar.py</h3>
+            </div>
+            <div class="image-card">
+                <img src="des4.png" alt="Captura 4 - Acerijos Sarcasmo">
+                <h3><i class="fas fa-puzzle-piece"></i> Captura 4 - Acerijos Sarcasmo</h3>
+            </div>
         </div>
 
-        <!-- DESCRIPCIÓN DETALLADA DEBAJO DE LA IMAGEN -->
+        <!-- DESCRIPCIÓN DETALLADA -->
         <div class="detailed-description">
             <h3><i class="fas fa-file-pdf"></i> Análisis Completo del Proyecto</h3>
             <p>El archivo "Destilacion.pdf" documenta un proyecto completo de destilación de conocimiento entre modelos de lenguaje, entrenando un modelo estudiante ligero (4.4M parámetros) a partir de un teacher DistilBERT (67M parámetros) para análisis de sentimiento, con pruebas en casos complejos de sarcasmo.</p>
             
-            <p>La primera captura muestra los logs de entrenamiento con Hugging Face Transformers, donde la loss disminuye progresivamente de 1.94 a 1.49 durante 2 épocas completas. Este comportamiento es exactamente correcto, ya que confirma que el fine-tuning del modelo estudiante converge correctamente con learning rate decreciente. Las métricas de evaluación muestran accuracy 74.08% y F1 74.06%, resultados esperados para destilación efectiva en dataset SST-2.</p>
+            <p><strong>Captura 1:</strong> Logs de entrenamiento con Hugging Face Transformers, loss disminuye de 1.94 a 1.49 durante 2 épocas. Accuracy 74.08% y F1 74.06%, confirma convergencia correcta.</p>
             
-            <p>La segunda captura presenta la evaluación final completada al 100% (626/626 pasos entrenamiento, 28/28 evaluación) guardando el modelo en ./modelo_final. Esta finalización exitosa es precisamente como debe terminar el proceso de destilación, validando 5 minutos de entrenamiento exitoso. La comparación teacher 67M vs student 4.4M confirma reducción exitosa de parámetros manteniendo rendimiento.</p>
+            <p><strong>Captura 2:</strong> Evaluación final completada (626/626 pasos entrenamiento, 28/28 evaluación). Modelo guardado en ./modelo_final. Teacher 67M vs Student 4.4M (reducción 15x).</p>
 
             <h4><i class="fas fa-code"></i> Benchmark de Comprensión Contextual</h4>
-            <p>Este código Python implementa un benchmark sofisticado para comparar la comprensión contextual de dos modelos de análisis de sentimiento: un "teacher" robusto (DistilBERT finetuned en SST-2 con 67M parámetros) contra un "student" ligero (BERT-tiny destilado con solo 4.4M parámetros), utilizando 10 "acerijos" diseñados específicamente para exponer fallos en sarcasmo, ironía, doble negación y ambigüedad contextual.</p>
+            <p><strong>Captura 3:</strong> Script probar.py con pipeline Transformers. Clasifica correctamente textos básicos. <strong>Captura 4:</strong> 10 "acerijos" con sarcasmo/ironia (Teacher 30% vs Student 0%).</p>
 
             <pre><code># Cargar modelos
-print("🔄 Cargando modelos...")
-teacher = pipeline("sentiment-analysis",
-model="distilbert/distilbert-base-uncased-finetuned-sst-2-english")
-student = pipeline("sentiment-analysis", model="./modelo_final",
-tokenizer="prajjwal1/bert-tiny")</code></pre>
-
-            <p>La tercera captura ejecuta el script probar.py cargando ambos modelos con pipeline de Transformers para inferencia de sentimiento. Los resultados del modelo destilado son correctos, clasificando correctamente textos como "This movie is absolutely amazing!" → LABEL_1 (83.98%) y "I hate this terrible film" → LABEL_0 (78.24%). La warning sobre tokenization es normal en transformers &lt; v4.45 y no afecta funcionalidad.</p>
-
-            <p>La cuarta captura define 10 "acerijos" (frases complejas con sarcasmo, ironía, doble negación) para testear comprensión contextual avanzada. Esta estructura de pruebas es perfecta para evaluar limitaciones del modelo destilado vs teacher, enfocándose en trampas lingüísticas reales. Cada caso incluye explicación de la trampa y etiqueta correcta (NEGATIVE/POSITIVE).</p>
+teacher = pipeline("sentiment-analysis", model="distilbert/distilbert-base-uncased-finetuned-sst-2-english")
+student = pipeline("sentiment-analysis", model="./modelo_final", tokenizer="prajjwal1/bert-tiny")</code></pre>
         </div>
 
         <!-- ANÁLISIS DETALLADO -->
@@ -264,35 +288,30 @@ tokenizer="prajjwal1/bert-tiny")</code></pre>
                 <div class="step-card">
                     <div class="step-number">1</div>
                     <h3>📊 Logs Entrenamiento</h3>
-                    <p>Loss disminuye de <strong>1.94 → 1.49</strong> durante 2 épocas. Hugging Face Transformers confirma convergencia correcta con learning rate decreciente. Accuracy <strong>74.08%</strong>, F1 <strong>74.06%</strong>.</p>
+                    <p>Loss disminuye de <strong>1.94 → 1.49</strong> durante 2 épocas. Hugging Face Transformers confirma convergencia correcta con learning rate decreciente. Accuracy <strong>74.08%</strong>.</p>
                 </div>
                 <div class="step-card">
                     <div class="step-number">2</div>
                     <h3>✅ Evaluación Final</h3>
-                    <p><strong>626/626 pasos entrenamiento</strong>, <strong>28/28 evaluación</strong>. Modelo guardado en <code>./modelo_final</code>. Teacher 67M vs Student 4.4M confirma reducción exitosa.</p>
+                    <p><strong>626/626 pasos entrenamiento</strong>, <strong>28/28 evaluación</strong>. Modelo guardado en <code>./modelo_final</code>.</p>
                 </div>
                 <div class="step-card">
                     <div class="step-number">3</div>
                     <h3>🔬 Script Benchmark</h3>
-                    <p><code>pipeline("sentiment-analysis")</code> compara comprensión contextual. 10 "acerijos" con sarcasmo, ironía, doble negación. Student más débil en casos complejos.</p>
+                    <p><code>pipeline("sentiment-analysis")</code> compara comprensión contextual. 10 "acerijos" con sarcasmo, ironía, doble negación.</p>
                 </div>
                 <div class="step-card">
                     <div class="step-number">4</div>
                     <h3>📈 Resultados Acerijos</h3>
-                    <p>Teacher: <strong>30% (3/10)</strong> | Student: <strong>0% (0/10)</strong>. Trade-off destilación: velocidad/memoria vs comprensión ironía compleja.</p>
+                    <p>Teacher: <strong>30% (3/10)</strong> | Student: <strong>0% (0/10)</strong>. Trade-off destilación: velocidad vs comprensión compleja.</p>
                 </div>
             </div>
 
-            <!-- CÓDIGO PYTHON -->
             <div class="code-block">
                 <div style="color: #7dd3fc; font-weight: 600; margin-bottom: 15px;">
                     📝 Código Python - Benchmark Acerijos
                 </div>
-                <pre><code># Cargar modelos
-teacher = pipeline("sentiment-analysis", model="distilbert/distilbert-base-uncased-finetuned-sst-2-english")
-student = pipeline("sentiment-analysis", model="./modelo_final", tokenizer="prajjwal1/bert-tiny")
-
-# Ejemplo acerijo
+                <pre><code># Ejemplo acerijo sarcasmo
 acerijo = {
     "texto": "Not bad at all, actually quite impressive!",
     "trampa": "Doble negación: 'not bad' = POSITIVE",
