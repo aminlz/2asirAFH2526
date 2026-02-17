@@ -1,1 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔬 Destilación de Conocimiento IA - Guía ASIR Jerez</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --success: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+            --warning: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --white: #ffffff;
+            --shadow: 0 20px 60px rgba(0,0,0,0.1);
+            --shadow-hover: 0 30px 80px rgba(0,0,0,0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            background: var(--light);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .hero {
+            background: var(--primary);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="%23ffffff15"><polygon points="0,100 1000,0 1000,100"/></svg>');
+            background-size: cover;
+        }
+        .hero-content { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; }
+        .hero h1 { 
+            font-size: clamp(2.5rem, 5vw, 4rem); 
+            font-weight: 700; 
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, white 0%, #f0f0f0 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero p { font-size: 1.3rem; opacity: 0.95; margin-bottom: 2rem; }
+
+        /* Container */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        /* GitHub Steps */
+        .github-setup {
+            background: var(--dark);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .github-setup::before {
+            content: '';
+            position: absolute;
+            top: 0; right: 0;
+            width: 200px; height: 200px;
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            border-radius: 50%;
+            opacity: 0.1;
+        }
+        .github-setup h2 { 
+            font-size: 2rem; 
+            margin-bottom: 2rem; 
+            display: flex; 
+            align-items: center; 
+            gap: 15px;
+        }
+        .github-steps {
+            list-style: none; 
+            counter-reset: step-counter;
+            font-size: 1.1rem;
+        }
+        .github-steps li {
+            counter-increment: step-counter;
+            margin-bottom: 1.5rem;
+            padding-left: 50px;
+            position: relative;
+        }
+        .github-steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0; top: 0;
+            width: 40px; height: 40px;
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        /* Sections */
+        .section {
+            background: var(--white);
+            margin: 60px 0;
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .section:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
+
+        /* Metrics */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .metric-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: -50%; right: -50%;
+            width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transition: all 0.3s ease;
+        }
+        .metric-card:hover::before { transform: scale(1.2); }
+        .metric-value { font-size: 3rem; font-weight: 700; margin-bottom: 10px; }
+        .metric-label { font-size: 1.1rem; opacity: 0.95; }
+
+        /* Steps */
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 25px;
+            margin: 35px 0;
+            padding: 30px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f4f8 100%);
+            border-radius: 20px;
+            border: 1px solid rgba(102,126,234,0.2);
+            transition: all 0.3s ease;
+        }
+        .step:hover { transform: translateX(10px); }
+        .step-number {
+            width: 55px; height: 55px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            box-shadow: 0 10px 30px rgba(102,126,234,0.4);
+        }
+        .step-content h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* Screenshots */
+        .screenshot {
+            width: 100%; 
+            max-width: 500px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            margin: 20px 0;
+            transition: transform 0.3s ease;
+        }
+        .screenshot:hover { transform: scale(1.02); }
+
+        /* Acerijos */
+        .acerijo {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #fbbc04;
+            box-shadow: 0 5px 20px rgba(251,188,4,0.2);
+        }
+        .acerijo-title { 
+            font-weight: 600; 
+            color: #d97706; 
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        /* Conclusion */
+        .conclusion {
+            background: var(--success);
+            color: white;
+            text-align: center;
+            padding: 60px 40px;
+            border-radius: 25px;
+            margin: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .conclusion::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, transparent, white, transparent);
+            animation: shine 3s infinite;
+        }
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: #ccc;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 80px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .step { flex-direction: column; text-align: center; }
+            .hero { padding: 60px 0; }
+            .section, .github-setup { padding: 25px; margin: 20px 0; }
+            .metrics-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-content">
+            <h1><i class="fas fa-flask"></i> Destilación IA</h1>
+            <p>Teacher DistilBERT 67M → Student BERT-tiny 4.4M<br><strong>ASIR Jerez de la Frontera • Febrero 2026</strong></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- GitHub Deployment -->
+        <div class="github-setup">
+            <h2><i class="fab fa-github"></i> 🚀 Deploy GitHub Pages (3 min)</h2>
+            <ol class="github-steps">
+                <li>Crear repo <code>destilacion-ia-asir</code></li>
+                <li><code>index.html</code> ← Copiar este archivo</li>
+                <li>Crear <code>img/capturas/</code> ← Screenshots del PDF</li>
+                <li>Settings → Pages → <code>main</code> branch</li>
+                <li>Visitar: <code>https://tuusuario.github.io/destilacion-ia-asir</code></li>
+            </ol>
+        </div>
+
+        <!-- Metrics -->
+        <div class="section">
+            <h2 style="text-align: center; margin-bottom: 40px; font-size: 2.2rem;">
+                <i class="fas fa-chart-line"></i> Resultados Destilación
+            </h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">74.08%</div>
+                    <div class="metric-label">Accuracy Student</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">15x</div>
+                    <div class="metric-label">↓ Parámetros</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">30% vs 0%</div>
+                    <div class="metric-label">Sarcasmo Teacher/Student</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Process Steps -->
+        <div class="section">
+            <h2 style="text-align: center; margin-bottom: 50px; font-size: 2.2rem;">
+                <i class="fas fa-cogs"></i> Proceso Completo
+            </h2>
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3><i class="fas fa-terminal"></i> Logs Entrenamiento</h3>
+                    <p>Loss baja de <strong>1.94 → 1.49</strong> en 2 épocas. <strong>626/626 pasos</strong> completados exitosamente.</p>
+                    <img src="img/captura1-logs-entrenamiento.jpg" alt="Logs entrenamiento" class="screenshot">
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3><i class="fas fa-check-circle"></i> Evaluación Final</h3>
+                    <p><strong>74.08% accuracy</strong>, F1-score 74.06%. Modelo guardado en <code>./modelo_final</code>.</p>
+                    <img src="img/captura2-evaluacion-final.jpg" alt="Evaluación final" class="screenshot">
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3><i class="fas fa-tasks"></i> Test Acerijos Sarcasmo</h3>
+                    <p>10 casos complejos (sarcasmo, ironía, doble negación). <strong>Teacher 3/10, Student 0/10</strong>.</p>
+                    <img src="img/captura5-acerijos.jpg" alt="Acerijos sarcasmo" class="screenshot">
+                </div>
+            </div>
+        </div>
+
+        <!-- Acerijos Examples -->
+        <div class="section">
+            <h2 style="text-align: center; margin-bottom: 40px; font-size: 2rem;">
+                <i class="fas fa-puzzle-piece"></i> Ejemplos Fallos
+            </h2>
+            <div class="acerijo">
+                <div class="acerijo-title">❌ "Not bad at all, actually quite impressive!"</div>
+                <p><strong>Trampa:</strong> Doble negación (= POSITIVE)<br>
+                <strong>Teacher:</strong> ✅ POSITIVE (99.98%)<br>
+                <strong>Student:</strong> ❌ LABEL_0 (76.27%)</p>
+            </div>
+            <div class="acerijo">
+                <div class="acerijo-title">❌ "If you enjoy watching paint dry..."</div>
+                <p><strong>Trampa:</strong> Sarcasmo indirecto (= NEGATIVE)<br>
+                <strong>Teacher:</strong> ❌ POSITIVE (99.97%)<br>
+                <strong>Student:</strong> ❌ LABEL_1 (64.27%)</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="conclusion">
+        <h2 style="font-size: 2.5rem; margin-bottom: 20px;">
+            <i class="fas fa-graduation-cap"></i> Conclusión ASIR
+        </h2>
+        <p style="font-size: 1.3rem; max-width: 800px; margin: 0 auto 30px;">
+            Destilación exitosa: <strong>15x menos parámetros</strong>, 74% accuracy mantenida.<br>
+            Limitación esperada: Student pierde comprensión sarcasmo/ironia compleja.<br>
+            <strong>✅ Perfecto para producción ligera RTX 5060 Ti</strong>
+        </p>
+    </div>
+
+    <footer>
+        <div style="max-width: 800px; margin: 0 auto;">
+            <p><i class="fas fa-school"></i> ASIR Jerez de la Frontera | Febrero 2026</p>
+            <p><i class="fas fa-file-pdf"></i> Basado en Destilacion.pdf • Generado por Perplexity AI</p>
+        </div>
+    </footer>
+</body>
+</html>
 
