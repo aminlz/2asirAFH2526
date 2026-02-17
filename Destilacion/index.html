@@ -3,323 +3,315 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔬 [TUTORIAL] Destilación de Conocimiento IA - Foro ASIR</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>🔬 Destilación IA - ASIR Jerez 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --success: #10b981;
-            --danger: #ef4444;
-            --warning: #f59e0b;
-            --bg-primary: #ffffff;
-            --bg-secondary: #f8fafc;
-            --text-primary: #0f172a;
-            --text-secondary: #475569;
-            --border: #e2e8f0;
-            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --success: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            --bg: #f8fafc;
+            --card-bg: rgba(255,255,255,0.95);
+            --shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
             font-family: 'Inter', sans-serif; 
             line-height: 1.7; 
-            background: var(--bg-secondary);
-            color: var(--text-primary);
+            background: var(--bg); 
+            color: #1e293b;
         }
 
-        /* HEADER FORO */
-        .forum-header {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        .hero {
+            background: var(--primary);
             color: white;
-            padding: 2rem 0;
-            box-shadow: var(--shadow-lg);
-        }
-        .forum-header-content {
-            max-width: 1200px; margin: 0 auto; padding: 0 2rem;
-            display: flex; align-items: center; gap: 2rem;
-        }
-        .forum-title {
-            font-size: 2.2rem; font-weight: 800;
-        }
-        .forum-stats {
-            display: flex; gap: 2rem; font-size: 0.95rem; opacity: 0.9;
-        }
-
-        /* MAIN FORO */
-        .forum-container {
-            max-width: 1100px; margin: 0 auto; padding: 2rem 2rem 4rem;
-        }
-
-        /* POST PRINCIPAL */
-        .main-post {
-            background: var(--bg-primary);
-            border-radius: 16px;
-            box-shadow: var(--shadow-lg);
-            overflow: hidden;
-            margin-bottom: 3rem;
-        }
-        .post-header {
-            background: var(--primary); color: white;
-            padding: 1.5rem 2rem;
-            display: flex; align-items: center; gap: 1rem;
-        }
-        .author-avatar {
-            width: 50px; height: 50px;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-weight: 700; font-size: 1.1rem;
-        }
-        .post-meta h2 {
-            font-size: 1.6rem; font-weight: 700; margin-bottom: 0.25rem;
-        }
-        .post-date { opacity: 0.9; font-size: 0.95rem; }
-
-        .post-content {
-            padding: 2.5rem;
-        }
-        .post-section {
-            margin-bottom: 3rem; padding-bottom: 2rem;
-            border-bottom: 1px solid var(--border);
-        }
-        .post-section:last-child { border-bottom: none; margin-bottom: 0; }
-
-        /* SCREENSHOTS */
-        .screenshot-container {
-            background: #f1f5f9;
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            position: relative;
-        }
-        .screenshot-label {
-            background: var(--primary); color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            position: absolute; top: -12px; left: 20px;
-        }
-        .screenshot-image {
-            width: 100%; height: 400px; object-fit: cover;
-            border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-        /* CODE BLOCKS */
-        .code-block {
-            background: #0f172a; color: #e2e8f0;
-            padding: 2rem; border-radius: 12px;
-            font-family: 'JetBrains Mono', monospace;
-            margin: 2rem 0; overflow-x: auto;
-            position: relative;
-        }
-        .code-header {
-            background: rgba(15, 23, 42, 0.8);
-            padding: 1rem 1.5rem;
-            border-radius: 12px 12px 0 0;
-            display: flex; justify-content: space-between; align-items: center;
-            font-size: 0.9rem;
-        }
-        .code-content {
-            padding: 1.5rem 0; font-size: 0.95rem; line-height: 1.6;
-        }
-
-        /* METRICS TABLE */
-        .metrics-table {
-            width: 100%; border-collapse: collapse; margin: 2rem 0;
-            background: var(--bg-primary); border-radius: 12px; overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-        .metrics-table th {
-            background: var(--primary); color: white;
-            padding: 1.2rem; text-align: left; font-weight: 600;
-        }
-        .metrics-table td {
-            padding: 1.2rem; border-bottom: 1px solid var(--border);
-        }
-        .metric-success { color: var(--success); font-weight: 700; font-size: 1.1rem; }
-        .metric-warning { color: var(--warning); font-weight: 600; }
-
-        /* REPLIES */
-        .replies-section {
-            background: var(--bg-primary);
-            border-radius: 16px;
-            box-shadow: var(--shadow);
-            padding: 2rem;
-            margin-top: 3rem;
-        }
-        .reply {
-            border-left: 4px solid var(--primary);
-            padding-left: 2rem;
-            margin-bottom: 2rem;
-            padding-bottom: 2rem;
-            border-bottom: 1px solid var(--border);
-        }
-        .reply:last-child { border-bottom: none; margin-bottom: 0; }
-
-        .stats-bar {
-            display: flex; gap: 2rem; justify-content: center;
-            padding: 2rem; background: var(--bg-primary);
-            border-radius: 12px; margin: 3rem 0;
-            box-shadow: var(--shadow);
-        }
-        .stat-item {
+            padding: 80px 0;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
-        .stat-number {
-            font-size: 2.5rem; font-weight: 800;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><polygon points="0,100 1000,0 1000,100"/></svg>');
+            background-size: cover;
+        }
+        .hero-content { position: relative; z-index: 2; max-width: 1000px; margin: 0 auto; }
+        .hero h1 { 
+            font-size: clamp(2.5rem, 6vw, 4.5rem); 
+            font-weight: 800; 
+            background: linear-gradient(135deg, white 0%, #f8fafc 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
         }
-        .stat-label { color: var(--text-secondary); font-size: 0.95rem; margin-top: 0.25rem; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        .main-image {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            margin: 60px auto;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            max-width: 900px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .main-image img {
+            width: 100%; 
+            max-width: 800px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+
+        .detailed-description {
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(20px);
+            margin: 30px auto 60px;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            max-width: 900px;
+            border-left: 5px solid #10b981;
+        }
+        .detailed-description h3 {
+            color: #1e293b;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .detailed-description p {
+            color: #475569;
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        .detailed-description pre {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 12px;
+            font-family: 'Fira Code', monospace;
+            overflow-x: auto;
+            margin: 20px 0;
+        }
+        .detailed-description code {
+            background: rgba(0,0,0,0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Fira Code', monospace;
+        }
+
+        .analysis-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            margin: 60px 0;
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .analysis-section h2 {
+            font-size: 2.2rem;
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .metric-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(248,250,252,0.8));
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(102,126,234,0.2);
+        }
+        .metric-card:hover { transform: translateY(-10px); }
+        .metric-value { font-size: 3rem; font-weight: 700; background: var(--success); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .metric-label { font-size: 1.1rem; color: #64748b; margin-top: 10px; }
+
+        .step-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        .step-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-left: 5px solid #3b82f6;
+            transition: all 0.3s ease;
+        }
+        .step-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+        .step-number {
+            width: 50px; height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 1.3rem; margin-bottom: 20px;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 15px;
+            font-family: 'Fira Code', monospace;
+            margin: 30px 0;
+            overflow-x: auto;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .conclusion {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 25px;
+            text-align: center;
+            margin: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
 
         @media (max-width: 768px) {
-            .forum-header-content, .container { padding-left: 1rem; padding-right: 1rem; }
-            .screenshot-image { height: 250px; }
-            .stats-bar { flex-direction: column; gap: 1.5rem; }
+            .container, .analysis-section { padding: 20px; margin: 20px 0; }
+            .main-image img { height: 250px; }
+            .step-grid { grid-template-columns: 1fr; }
+            .detailed-description { padding: 25px; margin: 20px auto; }
         }
     </style>
 </head>
 <body>
-    <!-- HEADER -->
-    <header class="forum-header">
-        <div class="forum-header-content">
-            <div class="forum-title">
-                <i class="fas fa-comments"></i> Foro IA ASIR Jerez
+    <div class="hero">
+        <div class="hero-content">
+            <h1><i class="fas fa-flask"></i> Destilación IA</h1>
+            <p>Teacher DistilBERT 67M → Student BERT-tiny 4.4M | ASIR Jerez 2026</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- IMAGEN PRINCIPAL -->
+        <div class="main-image">
+            <img src="des1.png" alt="Captura principal Destilación IA">
+            <h2 style="color: #1e293b; margin-bottom: 20px;"><i class="fas fa-image"></i> Captura Principal</h2>
+        </div>
+
+        <!-- DESCRIPCIÓN DETALLADA DEBAJO DE LA IMAGEN -->
+        <div class="detailed-description">
+            <h3><i class="fas fa-file-pdf"></i> Análisis Completo del Proyecto</h3>
+            <p>El archivo "Destilacion.pdf" documenta un proyecto completo de destilación de conocimiento entre modelos de lenguaje, entrenando un modelo estudiante ligero (4.4M parámetros) a partir de un teacher DistilBERT (67M parámetros) para análisis de sentimiento, con pruebas en casos complejos de sarcasmo.</p>
+            
+            <p>La primera captura muestra los logs de entrenamiento con Hugging Face Transformers, donde la loss disminuye progresivamente de 1.94 a 1.49 durante 2 épocas completas. Este comportamiento es exactamente correcto, ya que confirma que el fine-tuning del modelo estudiante converge correctamente con learning rate decreciente. Las métricas de evaluación muestran accuracy 74.08% y F1 74.06%, resultados esperados para destilación efectiva en dataset SST-2.</p>
+            
+            <p>La segunda captura presenta la evaluación final completada al 100% (626/626 pasos entrenamiento, 28/28 evaluación) guardando el modelo en ./modelo_final. Esta finalización exitosa es precisamente como debe terminar el proceso de destilación, validando 5 minutos de entrenamiento exitoso. La comparación teacher 67M vs student 4.4M confirma reducción exitosa de parámetros manteniendo rendimiento.</p>
+
+            <h4><i class="fas fa-code"></i> Benchmark de Comprensión Contextual</h4>
+            <p>Este código Python implementa un benchmark sofisticado para comparar la comprensión contextual de dos modelos de análisis de sentimiento: un "teacher" robusto (DistilBERT finetuned en SST-2 con 67M parámetros) contra un "student" ligero (BERT-tiny destilado con solo 4.4M parámetros), utilizando 10 "acerijos" diseñados específicamente para exponer fallos en sarcasmo, ironía, doble negación y ambigüedad contextual.</p>
+
+            <pre><code># Cargar modelos
+print("🔄 Cargando modelos...")
+teacher = pipeline("sentiment-analysis",
+model="distilbert/distilbert-base-uncased-finetuned-sst-2-english")
+student = pipeline("sentiment-analysis", model="./modelo_final",
+tokenizer="prajjwal1/bert-tiny")</code></pre>
+
+            <p>La tercera captura ejecuta el script probar.py cargando ambos modelos con pipeline de Transformers para inferencia de sentimiento. Los resultados del modelo destilado son correctos, clasificando correctamente textos como "This movie is absolutely amazing!" → LABEL_1 (83.98%) y "I hate this terrible film" → LABEL_0 (78.24%). La warning sobre tokenization es normal en transformers &lt; v4.45 y no afecta funcionalidad.</p>
+
+            <p>La cuarta captura define 10 "acerijos" (frases complejas con sarcasmo, ironía, doble negación) para testear comprensión contextual avanzada. Esta estructura de pruebas es perfecta para evaluar limitaciones del modelo destilado vs teacher, enfocándose en trampas lingüísticas reales. Cada caso incluye explicación de la trampa y etiqueta correcta (NEGATIVE/POSITIVE).</p>
+        </div>
+
+        <!-- ANÁLISIS DETALLADO -->
+        <div class="analysis-section">
+            <h2><i class="fas fa-chart-line"></i> Análisis Técnico Completo</h2>
+            
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">74.08%</div>
+                    <div class="metric-label">Accuracy Student</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">15x</div>
+                    <div class="metric-label">↓ Parámetros</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">30% vs 0%</div>
+                    <div class="metric-label">Sarcasmo T/S</div>
+                </div>
             </div>
-            <div class="forum-stats">
-                <span>🧑‍🏫 1 Tutorial</span>
-                <span>👁️ 247 Vistas</span>
-                <span>💬 12 Respuestas</span>
-                <span>⭐ 4.9 Rating</span>
+
+            <div class="step-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>📊 Logs Entrenamiento</h3>
+                    <p>Loss disminuye de <strong>1.94 → 1.49</strong> durante 2 épocas. Hugging Face Transformers confirma convergencia correcta con learning rate decreciente. Accuracy <strong>74.08%</strong>, F1 <strong>74.06%</strong>.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>✅ Evaluación Final</h3>
+                    <p><strong>626/626 pasos entrenamiento</strong>, <strong>28/28 evaluación</strong>. Modelo guardado en <code>./modelo_final</code>. Teacher 67M vs Student 4.4M confirma reducción exitosa.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>🔬 Script Benchmark</h3>
+                    <p><code>pipeline("sentiment-analysis")</code> compara comprensión contextual. 10 "acerijos" con sarcasmo, ironía, doble negación. Student más débil en casos complejos.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>📈 Resultados Acerijos</h3>
+                    <p>Teacher: <strong>30% (3/10)</strong> | Student: <strong>0% (0/10)</strong>. Trade-off destilación: velocidad/memoria vs comprensión ironía compleja.</p>
+                </div>
+            </div>
+
+            <!-- CÓDIGO PYTHON -->
+            <div class="code-block">
+                <div style="color: #7dd3fc; font-weight: 600; margin-bottom: 15px;">
+                    📝 Código Python - Benchmark Acerijos
+                </div>
+                <pre><code># Cargar modelos
+teacher = pipeline("sentiment-analysis", model="distilbert/distilbert-base-uncased-finetuned-sst-2-english")
+student = pipeline("sentiment-analysis", model="./modelo_final", tokenizer="prajjwal1/bert-tiny")
+
+# Ejemplo acerijo
+acerijo = {
+    "texto": "Not bad at all, actually quite impressive!",
+    "trampa": "Doble negación: 'not bad' = POSITIVE",
+    "correcto": "POSITIVE"
+}
+print(f"✅ Teacher: POSITIVE | ❌ Student: LABEL_0")</code></pre>
             </div>
         </div>
-    </header>
+    </div>
 
-    <div class="forum-container">
-        <!-- POST PRINCIPAL -->
-        <article class="main-post">
-            <div class="post-header">
-                <div class="author-avatar">AS</div>
-                <div class="post-meta">
-                    <h2>🔬 [TUTORIAL] Destilación de Modelos IA - Paso a Paso Completo</h2>
-                    <div class="post-date">
-                        <i class="fas fa-calendar"></i> 17 Febrero 2026 • 
-                        <i class="fas fa-user"></i> aulateca26 • ASIR Jerez
-                    </div>
-                </div>
-            </div>
-
-            <div class="post-content">
-                <div class="post-section">
-                    <h3><i class="fas fa-flask"></i> ¿Qué es Destilación de Conocimiento?</h3>
-                    <p>
-                        Transferimos conocimiento de un modelo "teacher" pesado (DistilBERT 67M parámetros) 
-                        a un modelo "student" ligero (BERT-tiny 4.4M parámetros) para análisis de sentimiento. 
-                        <strong>Objetivo:</strong> 15x menos parámetros manteniendo rendimiento.
-                    </p>
-                </div>
-
-                <!-- CAPTURA 1 -->
-                <div class="screenshot-container">
-                    <div class="screenshot-label">
-                        <i class="fas fa-terminal"></i> PASO 1: Logs Entrenamiento
-                    </div>
-                    <img src="des1.png" alt="Logs entrenamiento Hugging Face" class="screenshot-image">
-                </div>
-                <div style="background: #f8fafc; padding: 1.5rem; border-radius: 12px; margin: 1rem 0;">
-                    <strong>✅ ¿QUÉ ESTÁ PASANDO?</strong><br>
-                    <strong>Loss baja de 1.94 → 1.49</strong> durante 2 épocas completas. Hugging Face Transformers confirma 
-                    que el modelo estudiante está <strong>convergente correctamente</strong>. Accuracy final: <span class="metric-success">74.08%</span>.
-                </div>
-
-                <!-- CAPTURA 2 -->
-                <div class="screenshot-container">
-                    <div class="screenshot-label">
-                        <i class="fas fa-check-circle"></i> PASO 2: Evaluación Final
-                    </div>
-                    <img src="des2.png" alt="Evaluación final 100%" class="screenshot-image">
-                </div>
-                <div style="background: #f0fdf4; padding: 1.5rem; border-radius: 12px; margin: 1rem 0; border-left: 4px solid var(--success);">
-                    <strong>✅ ¿QUÉ ESTÁ PASANDO?</strong><br>
-                    <strong>626/626 pasos completados ✓</strong>. Modelo guardado en <code>./modelo_final</code>. 
-                    Comparación: <strong>Teacher 67M → Student 4.4M</strong> (<span class="metric-success">15x menos</span>).
-                </div>
-
-                <!-- MÉTRICAS CENTRALES -->
-                <div class="stats-bar">
-                    <div class="stat-item">
-                        <div class="stat-number">74.08%</div>
-                        <div class="stat-label">Accuracy Final</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">15x</div>
-                        <div class="stat-label">↓ Parámetros</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">30% vs 0%</div>
-                        <div class="stat-label">Test Sarcasmo</div>
-                    </div>
-                </div>
-
-                <!-- CAPTURA 3 -->
-                <div class="screenshot-container">
-                    <div class="screenshot-label">
-                        <i class="fas fa-code"></i> PASO 3: Benchmark Python
-                    </div>
-                    <img src="des3.png" alt="Script Python pipeline()" class="screenshot-image">
-                </div>
-                <div class="code-block">
-                    <div class="code-header">
-                        <span>probar.py - Benchmark Acerijos Sarcasmo</span>
-                        <span><i class="fas fa-play"></i> Ejecutado</span>
-                    </div>
-                    <div class="code-content">
-from transformers import pipeline<br>
-teacher = pipeline("sentiment-analysis", model="distilbert/distilbert-base-uncased-finetuned-sst-2-english")<br>
-student = pipeline("sentiment-analysis", model="./modelo_final", tokenizer="prajjwal1/bert-tiny")<br><br>
-# 10 ACERIJOS sarcasmo/ironia<br>
-acerijos = [{"texto": "Not bad at all!", "correcto": "POSITIVE"}, ...]
-                    </div>
-                </div>
-                <div style="background: #fef3c7; padding: 1.5rem; border-radius: 12px; margin: 1rem 0; border-left: 4px solid var(--warning);">
-                    <strong>🔬 ¿QUÉ ESTÁ PASANDO?</strong><br>
-                    Script ejecuta <strong>10 casos trampa</strong> (sarcasmo, doble negación). Compara Teacher vs Student 
-                    en comprensión contextual real. <span class="metric-warning">Student falla sistemáticamente</span>.
-                </div>
-
-                <!-- CAPTURA 4 -->
-                <div class="screenshot-container">
-                    <div class="screenshot-label">
-                        <i class="fas fa-chart-bar"></i> PASO 4: Resultados
-                    </div>
-                    <img src="des4.png" alt="Resultados acerijos sarcasmo" class="screenshot-image">
-                </div>
-                <div style="background: #fee2e2; padding: 1.5rem; border-radius: 12px; margin: 1rem 0; border-left: 4px solid var(--danger);">
-                    <strong>📊 RESULTADO FINAL:</strong><br>
-                    <strong>Teacher: 3/10 (30%)</strong> | <strong>Student: 0/10 (0%)</strong><br>
-                    Trade-off destilación: <strong>velocidad/memoria ✓ | comprensión sarcasmo ✗</strong>
-                </div>
-            </div>
-        </article>
-
-        <!-- RESPUESTAS/COMENTARIOS -->
-        <div class="replies-section">
-            <h3 style="margin-bottom: 1.5rem; color: var(--text-primary);">
-                <i class="fas fa-comments"></i> Respuestas (12)
-            </h3>
-            <div class="reply">
-                <div style="font-weight: 600; color: var(--primary); margin-bottom: 0.5rem;">
-                    prof.asir_jerez • hace 2h
-                </div>
-                <p><strong>¡Tutorial excelente!</strong> Perfecta demostración del trade-off destilación para ASIR. 
-                El caso "Not bad at all" es brutal para explicar limitaciones reales. ⭐⭐⭐⭐⭐</p>
-            </div>
-        </div>
+    <div class="conclusion">
+        <h2 style="font-size: 2.5rem; margin-bottom: 25px;">
+            <i class="fas fa-graduation-cap"></i> Conclusión ASIR
+        </h2>
+        <p style="font-size: 1.3rem; max-width: 800px; margin: 0 auto 30px; opacity: 0.95;">
+            Destilación técnica exitosa: <strong>74% accuracy básica</strong> con <strong>15x menos parámetros</strong>.<br>
+            Limitación esperada: Student pierde comprensión sarcasmo/ironia compleja.<br>
+            <strong>✅ Perfecto para producción ligera en RTX 5060 Ti</strong>
+        </p>
     </div>
 </body>
 </html>
