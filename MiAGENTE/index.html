@@ -22,6 +22,8 @@
             line-height: 1.7; 
             background: var(--bg); 
             color: #1e293b;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
         }
 
         .hero {
@@ -66,13 +68,20 @@
             width: 100%;
             max-width: 900px;
             height: 450px;
-            object-fit: cover;
+            object-fit: contain;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            image-rendering: pixelated;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.2);
             margin-bottom: 30px;
             display: block;
             margin-left: auto;
             margin-right: auto;
+            background: white;
+            padding: 8px;
         }
 
         .image-section h3 {
@@ -160,7 +169,10 @@
 
         @media (max-width: 768px) {
             .container, .image-section { padding: 25px; margin: 20px 0; }
-            .image-section img { height: 280px; }
+            .image-section img { 
+                height: 300px; 
+                padding: 6px;
+            }
         }
     </style>
 </head>
@@ -175,7 +187,7 @@
     <div class="container">
         <!-- CAPTURA 1: Interfaz Kilo Code -->
         <div class="image-section">
-            <img src="ag1.png" alt="Interfaz principal Kilo Code VS Code">
+            <img src="ag1.png" alt="Interfaz principal Kilo Code VS Code" loading="lazy">
             <h3><i class="fas fa-code"></i> Captura 1 - Interfaz Kilo Code</h3>
             <p>La primera captura muestra la <strong>interfaz principal de Kilo Code en VS Code</strong>, donde se inicia una tarea simple con <strong>"Task: Hola"</strong> y el agente responde detectando un <strong>proyecto vacío</strong>. Esta vista es exactamente como debe ser, ya que confirma que <strong>Kilo Code está correctamente conectado a LM Studio</strong> y listo para generar código.</p>
             <p>Aquí el agente <strong>Deepseek Coder V2 Lite</strong>, ejecutándose en tu <strong>RTX 5060 Ti</strong>, ofrece ayuda para agregar contexto o archivos mediante comandos o arrastrar con shift.</p>
@@ -183,7 +195,7 @@
 
         <!-- CAPTURA 2: LM Studio Servidor Activo -->
         <div class="image-section">
-            <img src="ag2.png" alt="LM Studio servidor activo Deepseek Coder">
+            <img src="ag2.png" alt="LM Studio servidor activo Deepseek Coder" loading="lazy">
             <h3><i class="fas fa-server"></i> Captura 2 - LM Studio Activo</h3>
             <p>La segunda captura presenta <strong>LM Studio con el servidor activo</strong> y el modelo cargado en <strong>"Status: Running"</strong>, mostrando endpoints API compatibles con OpenAI y logs de generación en progreso. Esto es precisamente el estado correcto que debe mostrar cuando el servidor local funciona en <code>http://192.168.7.102:1234</code>.</p>
             
@@ -205,7 +217,7 @@
 
         <!-- CAPTURA 3: Administrador de Tareas -->
         <div class="image-section">
-            <img src="ag3.png" alt="Administrador de Tareas monitoreo GPU RTX 5060 Ti">
+            <img src="ag3.png" alt="Administrador de Tareas monitoreo GPU RTX 5060 Ti" loading="lazy">
             <h3><i class="fas fa-tachometer-alt"></i> Captura 3 - Recursos Hardware</h3>
             <p>La tercera captura del <strong>Administrador de Tareas de Windows</strong> monitorea recursos durante la inferencia, con <strong>GPU al 100% (15.4/16GB a 39-40°C)</strong>, CPU al 23-27% y RAM al 69-70%. Este comportamiento es totalmente normal y esperado para modelos GGUF pesados como <strong>Deepseek de 11.85GB</strong>.</p>
             <p>La <strong>saturación de GPU confirma que todo el cómputo de IA se procesa en tu hardware local</strong> sin depender de servicios cloud.</p>
@@ -213,7 +225,7 @@
 
         <!-- CAPTURA 4: Configuración Proveedores -->
         <div class="image-section">
-            <img src="ag4.png" alt="Configuración proveedores Kilo Code LM Studio">
+            <img src="ag4.png" alt="Configuración proveedores Kilo Code LM Studio" loading="lazy">
             <h3><i class="fas fa-cogs"></i> Captura 4 - Configuración Proveedores</h3>
             <p>La cuarta captura muestra la <strong>configuración de proveedores en Kilo Code</strong>, apuntando al servidor LM Studio local con URL base <code>http://192.168.7.102:1234</code> y lista de modelos como <strong>Deepseek, Gemma y Qwen</strong> disponibles.</p>
             <p>Esta configuración es correcta e idéntica en estructura a tu <code>opencode.json</code> para Ollama, solo cambia la IP/puerto. Puedes fácilmente alternar a tu Ollama en <code>192.168.7.114:11434</code> siguiendo el mismo patrón.</p>
@@ -221,7 +233,7 @@
 
         <!-- CAPTURA 5: Generación Código -->
         <div class="image-section">
-            <img src="ag5.png" alt="Generación código Python agente IA">
+            <img src="ag5.png" alt="Generación código Python agente IA" loading="lazy">
             <h3><i class="fas fa-magic"></i> Captura 5 - Generación Código</h3>
             <p>La quinta captura demuestra <strong>generación de código en el chat de VS Code</strong>, donde el agente responde al prompt en español <strong>"Escribe una función en Python que sume dos números"</strong> creando una función completa <code>sumar(a, b)</code> con docstring, ejemplo de uso y output 8 para <code>sumar(5,3)</code>.</p>
             
@@ -256,4 +268,3 @@ print(f"5 + 3 = {resultado}")  # Output: 5 + 3 = 8</code></pre>
     </div>
 </body>
 </html>
-
