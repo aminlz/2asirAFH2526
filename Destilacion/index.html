@@ -1,40 +1,259 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>🔬 Destilación IA ASIR</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔬 Destilación IA - ASIR Jerez 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body { font-family: Arial; max-width: 900px; margin: 50px auto; padding: 30px; background: #f5f7fa; }
-        h1 { color: #1e3a8a; text-align: center; background: linear-gradient(90deg, #3b82f6, #1e40af); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .card { background: white; padding: 25px; margin: 20px 0; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .metric { font-size: 2em; color: #10b981; font-weight: bold; }
+        :root {
+            --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --success: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+            --bg: #f8fafc;
+            --card-bg: rgba(255,255,255,0.95);
+            --shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            line-height: 1.7; 
+            background: var(--bg); 
+            color: #1e293b;
+        }
+
+        .hero {
+            background: var(--primary);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><polygon points="0,100 1000,0 1000,100"/></svg>');
+            background-size: cover;
+        }
+        .hero-content { position: relative; z-index: 2; max-width: 1000px; margin: 0 auto; }
+        .hero h1 { 
+            font-size: clamp(2.5rem, 6vw, 4.5rem); 
+            font-weight: 800; 
+            background: linear-gradient(135deg, white 0%, #f8fafc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        .main-image {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            margin: 60px auto;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            max-width: 900px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .main-image img {
+            width: 100%; 
+            max-width: 800px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+        }
+
+        .analysis-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            margin: 60px 0;
+            padding: 50px;
+            border-radius: 25px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .analysis-section h2 {
+            font-size: 2.2rem;
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        .metric-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(248,250,252,0.8));
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border: 1px solid rgba(102,126,234,0.2);
+        }
+        .metric-card:hover { transform: translateY(-10px); }
+        .metric-value { font-size: 3rem; font-weight: 700; background: var(--success); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .metric-label { font-size: 1.1rem; color: #64748b; margin-top: 10px; }
+
+        .step-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        .step-card {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border-left: 5px solid #3b82f6;
+            transition: all 0.3s ease;
+        }
+        .step-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+        .step-number {
+            width: 50px; height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 1.3rem; margin-bottom: 20px;
+        }
+
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 25px;
+            border-radius: 15px;
+            font-family: 'Fira Code', monospace;
+            margin: 30px 0;
+            overflow-x: auto;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .conclusion {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 25px;
+            text-align: center;
+            margin: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .container, .analysis-section { padding: 20px; margin: 20px 0; }
+            .main-image img { height: 250px; }
+            .step-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
-    <h1>🔬 Destilación de Conocimiento IA</h1>
-    <img src="des1.png" width="500">
-    <img src="des1.png" width="500">
+    <div class="hero">
+        <div class="hero-content">
+            <h1><i class="fas fa-flask"></i> Destilación IA</h1>
+            <p>Teacher DistilBERT 67M → Student BERT-tiny 4.4M | ASIR Jerez 2026</p>
+        </div>
+    </div>
 
-    
-    <div class="card">
-        <h2>📊 Resultados</h2>
-        <p class="metric">74.08% Accuracy</p>
-        <p>Teacher: DistilBERT 67M → Student: BERT-tiny 4.4M</p>
-        <p>Sarcasmo: Teacher 30% vs Student 0%</p>
+    <div class="container">
+        <!-- IMAGEN PRINCIPAL -->
+        <div class="main-image">
+            <img src="des1.png" alt="Captura principal Destilación IA">
+            <h2 style="color: #1e293b; margin-bottom: 20px;"><i class="fas fa-image"></i> Captura Principal</h2>
+            <p style="color: #64748b; font-size: 1.1rem;">
+                El archivo "Destilacion.pdf" documenta un proyecto completo de destilación de conocimiento 
+                entre modelos de lenguaje, entrenando un modelo estudiante ligero (4.4M parámetros) a partir 
+                de un teacher DistilBERT (67M parámetros) para análisis de sentimiento.
+            </p>
+        </div>
+
+        <!-- ANÁLISIS DETALLADO -->
+        <div class="analysis-section">
+            <h2><i class="fas fa-chart-line"></i> Análisis Técnico Completo</h2>
+            
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-value">74.08%</div>
+                    <div class="metric-label">Accuracy Student</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">15x</div>
+                    <div class="metric-label">↓ Parámetros</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">30% vs 0%</div>
+                    <div class="metric-label">Sarcasmo T/S</div>
+                </div>
+            </div>
+
+            <div class="step-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <h3>📊 Logs Entrenamiento</h3>
+                    <p>Loss disminuye de <strong>1.94 → 1.49</strong> durante 2 épocas. Hugging Face Transformers confirma convergencia correcta con learning rate decreciente. Accuracy <strong>74.08%</strong>, F1 <strong>74.06%</strong>.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <h3>✅ Evaluación Final</h3>
+                    <p><strong>626/626 pasos entrenamiento</strong>, <strong>28/28 evaluación</strong>. Modelo guardado en <code>./modelo_final</code>. Teacher 67M vs Student 4.4M confirma reducción exitosa.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <h3>🔬 Script Benchmark</h3>
+                    <p><code>pipeline("sentiment-analysis")</code> compara comprensión contextual. 10 "acerijos" con sarcasmo, ironía, doble negación. Student más débil en casos complejos.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">4</div>
+                    <h3>📈 Resultados Acerijos</h3>
+                    <p>Teacher: <strong>30% (3/10)</strong> | Student: <strong>0% (0/10)</strong>. Trade-off destilación: velocidad/memoria vs comprensión ironía compleja.</p>
+                </div>
+            </div>
+
+            <!-- CÓDIGO PYTHON -->
+            <div class="code-block">
+                <div style="color: #7dd3fc; font-weight: 600; margin-bottom: 15px;">
+                    📝 Código Python - Benchmark Acerijos
+                </div>
+                <pre><code># Cargar modelos
+teacher = pipeline("sentiment-analysis", model="distilbert/distilbert-base-uncased-finetuned-sst-2-english")
+student = pipeline("sentiment-analysis", model="./modelo_final", tokenizer="prajjwal1/bert-tiny")
+
+# Ejemplo acerijo
+acerijo = {
+    "texto": "Not bad at all, actually quite impressive!",
+    "trampa": "Doble negación: 'not bad' = POSITIVE",
+    "correcto": "POSITIVE"
+}
+print(f"✅ Teacher: POSITIVE | ❌ Student: LABEL_0")</code></pre>
+            </div>
+        </div>
     </div>
-    
-    <div class="card">
-        <h3>✅ Proceso Completado</h3>
-        <ul>
-            <li>Loss: 1.94 → 1.49 (2 épocas)</li>
-            <li>626/626 pasos ✓</li>
-            <li>Modelo guardado: ./modelo_final</li>
-        </ul>
-    </div>
-    
-    <div class="card">
-        <h3>💡 Lección ASIR</h3>
-        <p>Destilación reduce 15x parámetros pero pierde comprensión sarcasmo compleja</p>
+
+    <div class="conclusion">
+        <h2 style="font-size: 2.5rem; margin-bottom: 25px;">
+            <i class="fas fa-graduation-cap"></i> Conclusión ASIR
+        </h2>
+        <p style="font-size: 1.3rem; max-width: 800px; margin: 0 auto 30px; opacity: 0.95;">
+            Destilación técnica exitosa: <strong>74% accuracy básica</strong> con <strong>15x menos parámetros</strong>.<br>
+            Limitación esperada: Student pierde comprensión sarcasmo/ironia compleja.<br>
+            <strong>✅ Perfecto para producción ligera en RTX 5060 Ti</strong>
+        </p>
     </div>
 </body>
 </html>
+
 
