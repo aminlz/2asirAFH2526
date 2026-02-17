@@ -10,8 +10,6 @@
         :root {
             --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             --success: linear-gradient(135deg, #10b981 0%, #34d399 100%);
-            --warning: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
-            --danger: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
             --bg: #f8fafc;
             --card-bg: rgba(255,255,255,0.95);
             --shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
@@ -23,8 +21,20 @@
             line-height: 1.7; 
             background: var(--bg); 
             color: #1e293b;
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* FIX IMÁGENES BORROSAS - ULTRA NÍTRIDO */
+        img {
+            image-rendering: optimizeQuality !important;
+            image-rendering: -webkit-optimize-contrast !important;
+            image-rendering: -moz-crisp-edges !important;
+            image-rendering: crisp-edges !important;
+            image-rendering: pixelated !important;
+            -ms-interpolation-mode: nearest-neighbor !important;
+            backface-visibility: hidden !important;
+            transform: translateZ(0) !important;
         }
 
         .hero {
@@ -65,24 +75,20 @@
             max-width: 1000px;
         }
 
+        /* IMÁGENES ULTRA NÍTRIDAS */
         .image-section img {
             width: 100%;
             max-width: 900px;
-            height: 450px;
+            height: auto !important;  /* ALTURA AUTOMÁTICA */
+            max-height: 500px;
             object-fit: contain;
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
-            image-rendering: pixelated;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-            margin-bottom: 30px;
             display: block;
-            margin-left: auto;
-            margin-right: auto;
-            background: white;
-            padding: 8px;
+            margin: 0 auto 30px;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            /* FIX RETINA */
+            width: auto;
+            height: auto;
         }
 
         .image-section h3 {
@@ -97,15 +103,6 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .image-section h4 {
-            color: #1e293b;
-            font-size: 1.3rem;
-            margin: 25px 0 15px 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
         .image-section p {
             color: #475569;
             font-size: 1.1rem;
@@ -118,9 +115,9 @@
         }
 
         .image-section code {
-            background: rgba(0,0,0,0.1);
-            padding: 2px 6px;
-            border-radius: 4px;
+            background: rgba(0,0,0,0.08);
+            padding: 3px 8px;
+            border-radius: 6px;
             font-family: 'Fira Code', monospace;
             color: #059669;
         }
@@ -138,12 +135,6 @@
             border-radius: 20px;
             text-align: center;
             border: 2px solid rgba(102,126,234,0.3);
-            transition: all 0.3s ease;
-        }
-
-        .model-card:hover {
-            transform: translateY(-5px);
-            border-color: #667eea;
         }
 
         .model-name {
@@ -162,12 +153,6 @@
             margin-bottom: 10px;
         }
 
-        .model-speed {
-            font-size: 1.3rem;
-            color: #10b981;
-            font-weight: 600;
-        }
-
         .conclusion {
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
             color: white;
@@ -181,10 +166,7 @@
 
         @media (max-width: 768px) {
             .container, .image-section { padding: 25px; margin: 20px 0; }
-            .image-section img { 
-                height: 300px; 
-                padding: 6px;
-            }
+            .image-section img { max-height: 350px !important; }
         }
     </style>
 </head>
@@ -197,64 +179,56 @@
     </div>
 
     <div class="container">
-        <!-- CAPTURA 1: Phi-3 Q8 Inferencia -->
+        <!-- CAPTURA 1: Phi-3 Q8 -->
         <div class="image-section">
-            <img src="cu1.png" alt="Inferencia phi-3-mini-q8.gguf 64.59 tokens/seg" loading="lazy">
-            <h3><i class="fas fa-bolt"></i> Captura 1 - Phi-3 Q8 Inferencia</h3>
-            <p>La primera captura muestra la inferencia del modelo <strong>phi-3-mini-q8.gguf (cuantizado)</strong> respondiendo <strong>"¡Hola! ¿En qué puedo ayudarte hoy?"</strong> con velocidad de <strong>64.59 tokens/segundo</strong>, 17 tokens generados en apenas <strong>0.02s hasta el primer token</strong>.</p>
-            <p>Este rendimiento es <strong>excelente y exactamente como debe ser para un modelo cuantizado Q8 en tu RTX 5060 Ti</strong>, confirmando que la compresión mantiene respuestas coherentes. La velocidad superior indica que la cuantización optimiza inferencia sin pérdida perceptible de calidad en prompts simples.</p>
+            <img src="cu1.png" alt="Inferencia phi-3-mini-q8.gguf 64.59 tokens/seg">
+            <h3><i class="fas fa-bolt"></i> Captura 1 - Phi-3 Q8 (64.59 t/s)</h3>
+            <p>Modelo <strong>phi-3-mini-q8.gguf cuantizado</strong> responde <strong>"¡Hola! ¿En qué puedo ayudarte hoy?"</strong> a <strong>64.59 tokens/segundo</strong>, 17 tokens en <strong>0.02s primer token</strong>.</p>
+            <p><strong>Excelente rendimiento Q8 en RTX 5060 Ti</strong> - cuantización optimiza velocidad sin pérdida coherencia.</p>
         </div>
 
         <!-- CAPTURA 2: Propiedades Q8 -->
         <div class="image-section">
-            <img src="cu2.png" alt="Propiedades phi-3-mini-q8.gguf 3.78 GB" loading="lazy">
-            <h3><i class="fas fa-file"></i> Captura 2 - Propiedades Q8 (3.78 GB)</h3>
-            <p>La segunda captura presenta las propiedades del archivo <strong>phi-3-mini-q8.gguf</strong> en Explorador de Windows: <strong>3.78 GB en disco</strong>, ubicado en <code>C:\Users\aulateca26\.lmstudio\models\Imstudio</code>, creado/modificado <strong>23 enero 2026</strong> con atributos solo lectura/oculto.</p>
-            <p>Estos detalles son correctos para modelos GGUF descargados por LM Studio, confirmando instalación exitosa. La <strong>reducción de ~47% en tamaño (vs 7.11 GB FP16) valida objetivo principal de cuantización: eficiencia en almacenamiento</strong>.</p>
+            <img src="cu2.png" alt="phi-3-mini-q8.gguf 3.78 GB">
+            <h3><i class="fas fa-file"></i> Captura 2 - Q8 3.78 GB</h3>
+            <p><strong>phi-3-mini-q8.gguf: 3.78 GB</strong> en <code>C:\Users\aulateca26\.lmstudio\models\Imstudio</code> (23 ene 2026). <strong>47% ↓ tamaño vs FP16</strong>.</p>
         </div>
 
-        <!-- CAPTURA 3: Phi-3 FP16 Inferencia -->
+        <!-- CAPTURA 3: Phi-3 FP16 -->
         <div class="image-section">
-            <img src="cu3.png" alt="Inferencia phi-3-mini-fp16.gguf 52.11 tokens/seg" loading="lazy">
-            <h3><i class="fas fa-microchip"></i> Captura 3 - Phi-3 FP16 Inferencia</h3>
-            <p>La tercera captura ejecuta el modelo original <strong>phi-3-mini-4k-instruct-fp16.gguf (7.11 GB)</strong> respondiendo un saludo más elaborado <strong>"¡Bienvenido! Si tienes alguna pregunta... ¿Cómo te sientes hoy?"</strong> a <strong>52.11 tokens/segundo</strong> con 50 tokens en <strong>0.24s</strong>.</p>
-            <p>Este rendimiento es normal para FP16 sin compresión, siendo ~20% más lento que Q8 pero generando respuestas más detalladas. <strong>Comparación directa demuestra trade-off cuantización: Q8 más rápido/más ligero vs FP16 más verbose</strong>.</p>
+            <img src="cu3.png" alt="phi-3-mini-fp16.gguf 52.11 tokens/seg">
+            <h3><i class="fas fa-microchip"></i> Captura 3 - FP16 (52.11 t/s)</h3>
+            <p>Modelo original <strong>phi-3-mini-4k-instruct-fp16.gguf (7.11 GB)</strong> a <strong>52.11 tokens/segundo</strong>. ~20% más lento pero más detallado.</p>
         </div>
 
         <!-- CAPTURA 4: Propiedades FP16 -->
         <div class="image-section">
-            <img src="cu4.png" alt="Propiedades phi-3-mini-fp16.gguf 7.11 GB" loading="lazy">
-            <h3><i class="fas fa-hdd"></i> Captura 4 - Propiedades FP16 (7.11 GB)</h3>
-            <p>La cuarta captura detalla propiedades del <strong>phi-3-mini-4k-instruct-fp16.gguf: 7.11 GB</strong> en <code>C:\Users\aulateca26\.lmstudio\models\microsc</code>, mismo patrón de instalación LM Studio.</p>
-            <p>La diferencia de rutas (<code>Imstudio</code> vs <code>microsc</code>) indica descargas separadas para cada formato. <strong>Tamaño duplicado (7.11 vs 3.78 GB) confirma experimento de cuantización exitosa</strong>.</p>
-
+            <img src="cu4.png" alt="phi-3-mini-fp16.gguf 7.11 GB">
+            <h3><i class="fas fa-hdd"></i> Captura 4 - FP16 7.11 GB</h3>
+            <p><strong>phi-3-mini-4k-instruct-fp16.gguf: 7.11 GB</strong> en <code>C:\Users\aulateca26\.lmstudio\models\microsc</code>.</p>
+            
             <div class="comparison-grid">
                 <div class="model-card">
-                    <div class="model-name">🟢 Phi-3 Q8</div>
+                    <div class="model-name">🟢 Q8 Cuantizado</div>
                     <div class="model-size">3.78 GB</div>
-                    <div class="model-speed">64.59 t/s</div>
-                    <div style="font-size: 0.9rem; color: #64748b;">+47% más rápido</div>
+                    <div>64.59 t/s</div>
                 </div>
                 <div class="model-card">
-                    <div class="model-name">🔴 Phi-3 FP16</div>
+                    <div class="model-name">🔴 FP16 Original</div>
                     <div class="model-size">7.11 GB</div>
-                    <div class="model-speed">52.11 t/s</div>
-                    <div style="font-size: 0.9rem; color: #64748b;">Más detallado</div>
+                    <div>52.11 t/s</div>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="conclusion">
-        <h2 style="font-size: 2.5rem; margin-bottom: 25px;">
-            <i class="fas fa-graduation-cap"></i> Conclusión ASIR
-        </h2>
+        <h2><i class="fas fa-graduation-cap"></i> Conclusión ASIR</h2>
         <p style="font-size: 1.3rem; max-width: 800px; margin: 0 auto 30px; opacity: 0.95;">
-            <strong>✅ Cuantización Q8 exitosa: 47% ↓ tamaño, 24% ↑ velocidad</strong><br>
-            <strong>Phi-3-mini perfecto en RTX 5060 Ti tanto FP16 como Q8</strong><br>
-            <strong>Trade-off validado: Q8 para velocidad vs FP16 para detalle</strong>
+            <strong>✅ Q8: 47% ↓ tamaño + 24% ↑ velocidad</strong><br>
+            <strong>Phi-3-mini perfecto RTX 5060 Ti</strong><br>
+            <strong>Trade-off validado experimentalmente</strong>
         </p>
     </div>
 </body>
 </html>
-
