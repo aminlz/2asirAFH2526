@@ -1,143 +1,434 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fine-Tuning Qwen2 con Unsloth - FútbolAl</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            line-height: 1.6; 
-            color: #333; 
-            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%); 
-            min-height: 100vh; 
-        }
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        header { 
-            text-align: center; 
-            color: white; 
-            padding: 40px 0; 
-        }
-        header h1 { 
-            font-size: 2.5em; 
-            margin-bottom: 10px; 
-            background: linear-gradient(45deg, #00d4ff, #4facfe); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-        }
-        header p { font-size: 1.2em; opacity: 0.9; }
-        .section { 
-            background: white; 
-            margin: 30px 0; 
-            border-radius: 20px; 
-            overflow: hidden; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2); 
-            transition: transform 0.3s ease, box-shadow 0.3s ease; 
-        }
-        .section:hover { 
-            transform: translateY(-10px); 
-            box-shadow: 0 30px 60px rgba(0,0,0,0.3); 
-        }
-        .section h2 { 
-            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%); 
-            color: white; 
-            padding: 20px; 
-            font-size: 1.8em; 
-            text-align: center; 
-        }
-        .content { padding: 30px; }
-        .screenshot { 
-            width: 100%; 
-            height: 300px; 
-            object-fit: cover; 
-            border-radius: 15px; 
-            margin-bottom: 20px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
-            transition: transform 0.3s ease; 
-        }
-        .screenshot:hover { transform: scale(1.02); }
-        ul { list-style: none; padding-left: 0; }
-        ul li { 
-            background: #f8f9fa; 
-            margin: 10px 0; 
-            padding: 15px; 
-            border-radius: 10px; 
-            border-left: 5px solid #4facfe; 
-        }
-        footer { 
-            text-align: center; 
-            color: white; 
-            padding: 20px; 
-            opacity: 0.8; 
-        }
-        @media (max-width: 768px) { 
-            .content { padding: 20px; } 
-            header h1 { font-size: 2em; } 
-            .screenshot { height: 250px; }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Fine-Tuning Qwen2 – FútbolAl</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f3f4f6;          /* gris claro de fondo */
+      --bg-card: #ffffff;     /* tarjetas blancas */
+      --accent: #10b981;      /* verde fútbol/IA */
+      --accent-soft: #d1fae5; /* verde suave */
+      --text: #111827;        /* gris muy oscuro */
+      --text-muted: #6b7280;  /* gris medio */
+      --border: #d1d5db;      /* borde gris claro */
+      --border-hover: #9ca3af;/* borde hover imagen */
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #e5e7eb 0, #f3f4f6 55%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: linear-gradient(to right, #111827, #1f2937);
+      color: #f9fafb;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .logo-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 30% 30%, #d1fae5, #10b981);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #111827;
+    }
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+    .logo-text span:first-child {
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+    .logo-text span:last-child {
+      font-size: 0.75rem;
+      color: #e5e7eb;
+    }
+    nav {
+      display: flex;
+      gap: 1.2rem;
+      font-size: 0.85rem;
+    }
+    nav a {
+      color: #e5e7eb;
+      opacity: 0.8;
+    }
+    nav a:hover {
+      opacity: 1;
+      color: #10b981;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 2rem auto 3rem;
+      padding: 0 1.5rem 3rem;
+    }
+
+    .hero {
+      margin-bottom: 2.5rem;
+      text-align: left;
+    }
+    .hero-title {
+      font-size: clamp(2rem, 3.1vw, 2.7rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #111827;
+      margin-bottom: 0.4rem;
+    }
+    .hero-sub {
+      color: var(--text-muted);
+      max-width: 40rem;
+      margin-bottom: 1.2rem;
+    }
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+    }
+    .tag {
+      border-radius: 999px;
+      padding: 0.2rem 0.7rem;
+      border: 1px solid rgba(16,185,129,0.35);
+      background: rgba(255,255,255,0.9);
+      color: #065f46;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: #111827;
+    }
+    .section-title::before {
+      content: "";
+      width: 5px;
+      height: 20px;
+      border-radius: 999px;
+      background: linear-gradient(to bottom, #10b981, #34d399);
+    }
+
+    .capture {
+      margin-bottom: 2rem;
+      background: var(--bg-card);
+      border-radius: 1rem;
+      padding: 1.1rem 1.1rem 1.2rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 30px rgba(15,23,42,0.09);
+    }
+    .capture-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.8rem;
+      border-bottom: 1px dashed #e5e7eb;
+      padding-bottom: 0.4rem;
+    }
+    .capture-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #111827;
+    }
+    .capture-tagline {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .capture-image-wrapper {
+      margin-bottom: 0.9rem;
+    }
+    .capture-image {
+      border-radius: 0.85rem;
+      border: 2px solid var(--border);
+      overflow: hidden;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.15s ease;
+      background: #111827;
+    }
+    .capture-image img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .capture-image:hover {
+      border-color: var(--border-hover);
+      box-shadow: 0 14px 28px rgba(55,65,81,0.35);
+      transform: translateY(-1px);
+    }
+
+    .capture-body {
+      font-size: 0.92rem;
+      color: var(--text);
+    }
+    .capture-body p {
+      margin-bottom: 0.55rem;
+    }
+    .capture-body code {
+      background: #f3f4f6;
+      padding: 0.1rem 0.3rem;
+      border-radius: 4px;
+      font-family: 'Monaco', monospace;
+      font-size: 0.9em;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 0.7rem;
+    }
+    .pill {
+      font-size: 0.75rem;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #065f46;
+      border: 1px solid rgba(16,185,129,0.3);
+    }
+
+    footer {
+      border-top: 1px solid #e5e7eb;
+      background: #e5e7eb;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      padding: 1rem 1.5rem 1.4rem;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .header-inner { flex-direction: column; align-items: flex-start; }
+      nav { width: 100%; justify-content: flex-start; flex-wrap: wrap; }
+      main { padding-inline: 1rem; }
+      .capture { padding-inline: 0.9rem; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🚀 Fine-Tuning Qwen2 con Unsloth</h1>
-            <p>Proceso completo en NVIDIA RTX 4070 Ti - Creación de FútbolAl</p>
-        </header>
 
-        <!-- SECCIÓN 1: Logs finales -->
-        <div class="section">
-            <h2>📊 Logs Finales del Entrenamiento</h2>
-            <div class="content">
-                <img src="image1.png" alt="Logs finales fine-tuning" class="screenshot">
-                <p>Loss baja de 0.0151 a 0.0131 (convergencia exitosa), gradnorm estable 0.04-0.17, learning rate de 2.3e-05 a 2.1e-06. Epoch 50.0 completada en 95.6s (trainloss 0.308).</p>
-            </div>
-        </div>
-
-        <!-- SECCIÓN 2: Barra de progreso -->
-        <div class="section">
-            <h2>✅ Barra de Progreso SFT</h2>
-            <div class="content">
-                <img src="image2.png" alt="Barra progreso 100%" class="screenshot">
-                <p>100/100 steps completados en 135s (1.05 its/s). Entrenamiento supervisado SFT finalizado exitosamente.[file:1]</p>
-            </div>
-        </div>
-
-        <!-- SECCIÓN 3: Optimizaciones Unsloth -->
-        <div class="section">
-            <h2>⚡ Optimizaciones Unsloth</h2>
-            <div class="content">
-                <img src="image3.png" alt="Parcheo QKV y MLP" class="screenshot">
-                <ul>
-                    <li>Unsloth v2026.2.1 parchea automáticamente 28 capas QKV + MLP</li>
-                    <li>2x velocidad, 70% menos memoria</li>
-                    <li>bfloat16 activado - 11.99GB GPU (RTX 4070 Ti)</li>
-                </ul>
-            </div>
-        </div>
-
-        <!-- SECCIÓN 4: Fusión LoRA -->
-        <div class="section">
-            <h2>🔗 Fusión LoRA + PEFT</h2>
-            <div class="content">
-                <img src="image4.png" alt="Fusión adaptador LoRA" class="screenshot">
-                <p>LoRA fusionado (1% parámetros entrenados) al modelo base 4-bit → <code>.futbolmodelmerged</code>. Listo para inferencia tras cierre venv PowerShell.[file:1]</p>
-            </div>
-        </div>
-
-        <!-- SECCIÓN 5: Interfaz Final -->
-        <div class="section">
-            <h2>🎯 FútbolAl - Listo para Chat</h2>
-            <div class="content">
-                <img src="image5.png" alt="Interfaz LM Studio/Ollama" class="screenshot">
-                <p><strong>FútbolAl:</strong> "Experto en táctica, historia, reglamento, análisis partidos y stats. Responde precisa y apasionadamente" (51 tokens). ¡Modelo listo![file:1]</p>
-            </div>
-        </div>
-
-        <footer>
-            <p>📈 Fine-Tuning Exitoso | Febrero 2026 | RTX 4070 Ti</p>
-        </footer>
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">FA</div>
+      <div class="logo-text">
+        <span>Fine-Tuning</span>
+        <span>FútbolAl · Documentación</span>
+      </div>
     </div>
+    <nav>
+      <a href="#intro">Inicio</a>
+      <a href="#capturas">Capturas</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="intro">
+    <h1 class="hero-title">Fine-Tuning Qwen2 con Unsloth</h1>
+    <p class="hero-sub">
+      Proceso completo desde los logs finales del entrenamiento hasta la interfaz de FútbolAl lista para chat,
+      ejecutado en RTX 4070 Ti con optimizaciones LoRA + PEFT.
+    </p>
+    <div class="hero-tags">
+      <span class="tag">Unsloth</span>
+      <span class="tag">Qwen2 · LoRA</span>
+      <span class="tag">RTX 4070 Ti</span>
+      <span class="tag">FútbolAl</span>
+    </div>
+  </section>
+
+  <section id="capturas">
+    <h2 class="section-title">Secuencia de capturas</h2>
+
+    <!-- Captura 1: Logs finales -->
+    <article class="capture">
+      <div class="capture-header">
+        <div class="capture-title">Captura 1 · Logs finales</div>
+        <div class="capture-tagline">Métricas de loss, gradnorm y learning rate en epoch 50.</div>
+      </div>
+      <div class="capture-image-wrapper">
+        <div class="capture-image">
+          <img src="image1.png" alt="Logs finales del fine-tuning Qwen2" />
+        </div>
+      </div>
+      <div class="capture-body">
+        <div class="pill-row">
+          <span class="pill">loss 0.0131</span>
+          <span class="pill">gradnorm 0.17</span>
+          <span class="pill">epoch 50.0</span>
+        </div>
+        <h3>Captura 1 – Métricas finales del entrenamiento</h3>
+        <p>
+          Loss desciende de 0.0151 a 0.0131 mostrando convergencia exitosa. Gradnorm estable (0.04-0.17),
+          learning rate lineal de <code>2.3e-05</code> a <code>2.1e-06</code>.
+        </p>
+        <p>
+          <strong>Resumen:</strong> <code>trainruntime 95.6s</code>, <code>trainloss 0.308</code>, 50 épocas completadas.[file:1]
+        </p>
+        <hr />
+      </div>
+    </article>
+
+    <!-- Captura 2: Barra progreso -->
+    <article class="capture">
+      <div class="capture-header">
+        <div class="capture-title">Captura 2 · Progreso SFT</div>
+        <div class="capture-tagline">100/100 steps completados en 135s.</div>
+      </div>
+      <div class="capture-image-wrapper">
+        <div class="capture-image">
+          <img src="image2.png" alt="Barra de progreso al 100% SFT" />
+        </div>
+      </div>
+      <div class="capture-body">
+        <div class="pill-row">
+          <span class="pill">SFT completado</span>
+          <span class="pill">1.05 its/s</span>
+          <span class="pill">135s total</span>
+        </div>
+        <h3>Captura 2 – Finalización Supervised Fine-Tuning</h3>
+        <p>
+          Barra de progreso al <strong>100%</strong> (<code>100/100 steps</code>) confirma finalización exitosa del
+          entrenamiento supervisado SFT (Supervised Fine-Tuning).[file:1]
+        </p>
+        <hr />
+      </div>
+    </article>
+
+    <!-- Captura 3: Optimizaciones Unsloth -->
+    <article class="capture">
+      <div class="capture-header">
+        <div class="capture-title">Captura 3 · Unsloth</div>
+        <div class="capture-tagline">Parcheo QKV + MLP para 2x velocidad.</div>
+      </div>
+      <div class="capture-image-wrapper">
+        <div class="capture-image">
+          <img src="image3.png" alt="Optimizaciones Unsloth v2026.2.1" />
+        </div>
+      </div>
+      <div class="capture-body">
+        <div class="pill-row">
+          <span class="pill">Unsloth 2026.2.1</span>
+          <span class="pill">28 capas QKV</span>
+          <span class="pill">bfloat16</span>
+        </div>
+        <h3>Captura 3 – Optimizaciones de Unsloth</h3>
+        <p>
+          Unsloth <code>v2026.2.1</code> parchea automáticamente 28 capas QKV (Query-Key-Value) y MLP del modelo base Qwen2.
+          Optimiza para <strong>2x velocidad</strong> y <strong>70% menos memoria</strong>.
+        </p>
+        <p>
+          Carga shards del checkpoint con <code>bfloat16</code> usando 11.99GB de la RTX 4070 Ti.[file:1]
+        </p>
+        <hr />
+      </div>
+    </article>
+
+    <!-- Captura 4: Fusión LoRA -->
+    <article class="capture">
+      <div class="capture-header">
+        <div class="capture-title">Captura 4 · LoRA</div>
+        <div class="capture-tagline">Fusión del adaptador al modelo base 4-bit.</div>
+      </div>
+      <div class="capture-image-wrapper">
+        <div class="capture-image">
+          <img src="image4.png" alt="Fusión LoRA y advertencia PEFT" />
+        </div>
+      </div>
+      <div class="capture-body">
+        <div class="pill-row">
+          <span class="pill">LoRA 1% params</span>
+          <span class="pill">4-bit quant</span>
+          <span class="pill">.futbolmodelmerged</span>
+        </div>
+        <h3>Captura 4 – Fusión LoRA + PEFT</h3>
+        <p>
+          Fusión del adaptador LoRA (solo <code>1%</code> parámetros entrenados) al modelo base cuantizado 4-bit,
+          generando <code>.futbolmodelmerged</code>.
+        </p>
+        <p>
+          Advertencia PEFT sobre diferencias por redondeo en capas <code>bnb</code>. Cierre PowerShell venv listo para inferencia.[file:1]
+        </p>
+        <hr />
+      </div>
+    </article>
+
+    <!-- Captura 5: Interfaz final -->
+    <article class="capture">
+      <div class="capture-header">
+        <div class="capture-title">Captura 5 · FútbolAl</div>
+        <div class="capture-tagline">Interfaz LM Studio/Ollama lista para chat.</div>
+      </div>
+      <div class="capture-image-wrapper">
+        <div class="capture-image">
+          <img src="image5.png" alt="FútbolAl system prompt en launcher" />
+        </div>
+      </div>
+      <div class="capture-body">
+        <div class="pill-row">
+          <span class="pill">FútbolAl</span>
+          <span class="pill">51 tokens</span>
+          <span class="pill">LM Studio</span>
+        </div>
+        <h3>Captura 5 – FútbolAl listo para producción</h3>
+        <p>
+          Interfaz final con preset <strong>FútbolAl</strong>: "Experto en táctica, historia, reglamento, análisis partidos
+          y stats. Responde precisa y apasionadamente" (<code>51 tokens</code>).[file:1]
+        </p>
+        <p>
+          Opciones <code>Save/Discard</code>, <code>Ctrl+E</code>. ¡Modelo fusionado listo para chat interactivo!
+        </p>
+        <hr />
+      </div>
+    </article>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>© 2026 · Fine-Tuning · FútbolAl.</span>
+    <span>RTX 4070 Ti · Unsloth + Qwen2</span>
+  </div>
+</footer>
+
 </body>
 </html>
-
