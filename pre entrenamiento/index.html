@@ -1,1 +1,498 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Documentación – Proyecto NanoQuijote</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-alt: #020617;
+      --card: #020617;
+      --accent: #38bdf8;
+      --accent-soft: rgba(56,189,248,0.15);
+      --text: #e5e7eb;
+      --text-muted: #9ca3af;
+      --border: #1f2933;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1f2937 0, #020617 55%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    header {
+      border-bottom: 1px solid rgba(148,163,184,0.25);
+      background: linear-gradient(to right, rgba(15,23,42,0.9), rgba(15,23,42,0.95));
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.2rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .logo-badge {
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #e5e7eb, #0f172a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+    }
+    nav {
+      font-size: 0.9rem;
+      display: flex;
+      gap: 1.2rem;
+    }
+    nav a { color: var(--text-muted); }
+    nav a:hover { color: var(--accent); }
+
+    main {
+      max-width: 1100px;
+      margin: 2rem auto 3rem;
+      padding: 0 1.5rem 2rem;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 2.5rem;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+    .hero-title {
+      font-size: clamp(2rem, 3vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.7rem;
+    }
+    .hero-sub {
+      color: var(--text-muted);
+      margin-bottom: 1.2rem;
+      max-width: 38rem;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .badge {
+      border-radius: 999px;
+      padding: 0.15rem 0.7rem;
+      border: 1px solid rgba(148,163,184,0.4);
+      background: rgba(15,23,42,0.8);
+    }
+    .hero-panel {
+      border-radius: 1.25rem;
+      padding: 1.5rem;
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.22), transparent 55%), 
+                  linear-gradient(to bottom right, rgba(15,23,42,0.95), rgba(15,23,42,0.98));
+      border: 1px solid rgba(148,163,184,0.4);
+      box-shadow: 0 18px 45px rgba(15,23,42,0.85);
+    }
+    .hero-panel h2 {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-muted);
+      margin-bottom: 0.7rem;
+    }
+    .hero-panel ul {
+      list-style: none;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .hero-panel li::before {
+      content: "●";
+      font-size: 0.5rem;
+      margin-right: 0.5rem;
+      color: var(--accent);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr);
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    .image-card {
+      background: linear-gradient(to bottom right, rgba(15,23,42,0.98), rgba(15,23,42,1));
+      border-radius: 1.25rem;
+      border: 1px solid rgba(148,163,184,0.45);
+      overflow: hidden;
+      box-shadow: 0 20px 55px rgba(15,23,42,0.9);
+    }
+    .image-card img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-bottom: 1px solid rgba(15,23,42,0.9);
+    }
+    .image-label {
+      padding: 0.65rem 0.9rem;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--text-muted);
+      border-bottom: 1px solid rgba(30,64,175,0.65);
+      background: linear-gradient(to right, rgba(15,23,42,0.96), rgba(30,64,175,0.5));
+    }
+
+    .text-card {
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.16), transparent 60%);
+      border-radius: 1.25rem;
+      padding: 1.3rem 1.4rem 1.4rem;
+      border: 1px solid rgba(148,163,184,0.5);
+      box-shadow: 0 20px 45px rgba(15,23,42,0.75);
+    }
+    .text-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+    .text-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.8rem;
+    }
+    .text-card p {
+      font-size: 0.9rem;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.8rem;
+    }
+    .pill {
+      font-size: 0.75rem;
+      padding: 0.18rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.5);
+      color: var(--text-muted);
+      background: rgba(15,23,42,0.9);
+    }
+
+    footer {
+      border-top: 1px solid rgba(15,23,42,0.9);
+      background: radial-gradient(circle at top, #020617, #020617);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      padding: 1.2rem 1.5rem 1.5rem;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-badge">NQ</div>
+      <span>Proyecto NanoQuijote</span>
+    </div>
+    <nav>
+      <a href="#overview">Resumen</a>
+      <a href="#capturas">Capturas</a>
+      <a href="#modelo">Modelo</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section class="hero" id="overview">
+    <div>
+      <h1 class="hero-title">Entrenamiento local de un modelo de lenguaje con el Quijote</h1>
+      <p class="hero-sub">
+        Documentación visual del flujo completo: desde la descarga del corpus hasta el entrenamiento,
+        configuración de hiperparámetros y generación de texto con un modelo tipo Transformer.
+      </p>
+      <div class="hero-meta">
+        <span class="badge">GPU RTX 4070 Ti</span>
+        <span class="badge">PyTorch · CUDA</span>
+        <span class="badge">Modelo ~10,8M parámetros</span>
+      </div>
+    </div>
+    <aside class="hero-panel" id="modelo">
+      <h2>Ficha rápida del experimento</h2>
+      <ul>
+        <li>Corpus: Don Quijote (Project Gutenberg).</li>
+        <li>Nivel: modelo de caracteres, estilo GPT mini.</li>
+        <li>Contexto: 256 caracteres por bloque.</li>
+        <li>Parámetros: 10.819.689 · ~41 MB.</li>
+        <li>Entrenamiento: 10.000 iteraciones, evaluación periódica.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <section id="capturas">
+
+    <!-- Captura 1 -->
+    <div class="grid">
+      <div class="image-card">
+        <div class="image-label">Captura 1 · Descarga del corpus</div>
+        <img src="image1.png" alt="Descarga y verificación del archivo quijote.txt en PowerShell" />
+      </div>
+      <article class="text-card">
+        <h3>Descarga y verificación del corpus</h3>
+        <div class="text-meta">Uso de PowerShell para obtener el texto del Quijote desde Project Gutenberg.</div>
+        <div class="pill-row">
+          <span class="pill">Invoke-WebRequest</span>
+          <span class="pill">Get-Content</span>
+          <span class="pill">Verificación inicial</span>
+        </div>
+        <p>
+          En esta captura se utiliza el comando <code>Invoke-WebRequest</code> desde PowerShell para descargar el eBook
+          del Quijote desde Project Gutenberg y guardarlo localmente con el nombre <code>quijote.txt</code>.
+        </p>
+        <p>
+          A continuación se ejecuta <code>Get-Content "quijote.txt" -TotalCount 5</code>, mostrando las primeras cinco
+          líneas del archivo, donde se ve el encabezado de Project Gutenberg.
+        </p>
+        <p>
+          Esto permite comprobar que el archivo se ha descargado sin errores y que el contenido corresponde al libro
+          que se va a usar como corpus para el entrenamiento.
+        </p>
+      </article>
+    </div>
+
+    <!-- Captura 2 -->
+    <div class="grid">
+      <div class="image-card">
+        <div class="image-label">Captura 2 · Creación del script</div>
+        <img src="image2.png" alt="Creación del archivo entrenar.py en la consola" />
+      </div>
+      <article class="text-card">
+        <h3>Creación del script de entrenamiento</h3>
+        <div class="text-meta">Definición del código que prepara datos y modelo.</div>
+        <div class="pill-row">
+          <span class="pill">Set-Content</span>
+          <span class="pill">entrenar.py</span>
+          <span class="pill">Arquitectura Transformer</span>
+        </div>
+        <p>
+          En esta captura se muestra el uso de <code>Set-Content -Path "entrenar.py" -Value @' ... '@</code> para crear
+          o sobrescribir el archivo <code>entrenar.py</code>.
+        </p>
+        <p>
+          Dentro de este bloque se introduce todo el código Python necesario para leer el archivo
+          <code>quijote.txt</code>, preparar los datos, definir la arquitectura del modelo de lenguaje basado en
+          Transformer y configurar los hiperparámetros de entrenamiento.
+        </p>
+        <p>
+          Con este paso queda generado el script que se utilizará para entrenar el modelo en las siguientes ejecuciones.
+        </p>
+      </article>
+    </div>
+
+    <!-- Captura 3 -->
+    <div class="grid">
+      <div class="image-card">
+        <div class="image-label">Captura 3 · Datos del entrenamiento</div>
+        <img src="image3.png" alt="Salida de consola con información de GPU, vocabulario y tokens" />
+      </div>
+      <article class="text-card">
+        <h3>Inicio del entrenamiento y resumen de datos</h3>
+        <div class="text-meta">Uso de CUDA y preparación del dataset.</div>
+        <div class="pill-row">
+          <span class="pill">CUDA</span>
+          <span class="pill">Vocabulario de caracteres</span>
+          <span class="pill">Tokens train/val</span>
+        </div>
+        <p>
+          En esta captura se ejecuta <code>python entrenar.py</code> desde el entorno virtual del proyecto. La salida
+          del programa indica que se está utilizando el dispositivo <code>cuda</code> y muestra la GPU disponible
+          (NVIDIA GeForce RTX 4070 Ti) junto con la VRAM libre.
+        </p>
+        <p>
+          Después se calcula el vocabulario de caracteres del corpus, mostrando el tamaño del vocabulario
+          (105 caracteres únicos) y el listado de caracteres detectados, junto con el número total de tokens generados a
+          partir del texto y su reparto entre entrenamiento y validación.
+        </p>
+        <p>
+          Finalmente se indica el número total de parámetros del modelo y la memoria estimada que ocupa, lo que da una
+          idea de la complejidad y tamaño del modelo que se está entrenando.
+        </p>
+      </article>
+    </div>
+
+    <!-- Captura 4 -->
+    <div class="grid">
+      <div class="image-card">
+        <div class="image-label">Captura 4 · Evolución de las pérdidas</div>
+        <img src="image4.png" alt="Iteraciones de entrenamiento con Train Loss y Val Loss" />
+      </div>
+      <article class="text-card">
+        <h3>Proceso de entrenamiento (métricas de pérdida)</h3>
+        <div class="text-meta">Seguimiento de Train Loss y Val Loss a lo largo de las iteraciones.</div>
+        <div class="pill-row">
+          <span class="pill">10.000 iteraciones</span>
+          <span class="pill">Validación periódica</span>
+          <span class="pill">Overfitting controlado</span>
+        </div>
+        <p>
+          En esta captura se muestra el bucle de entrenamiento del modelo, donde periódicamente se imprime el estado de
+          la pérdida.
+        </p>
+        <p>
+          Se indica el número de iteración y los valores de <code>Train Loss</code> y <code>Val Loss</code> cada 500
+          iteraciones, comenzando en una pérdida de entrenamiento alta y descendiendo progresivamente hasta valores
+          mucho más bajos.
+        </p>
+        <p>
+          La pérdida de validación también disminuye de forma significativa, reflejando que el modelo está aprendiendo
+          patrones del texto del Quijote y reduciendo el error tanto en los datos de entrenamiento como en los de
+          validación.
+        </p>
+      </article>
+    </div>
+
+    <!-- Captura 5 -->
+    <div class="grid">
+      <div class="image-card">
+        <div class="image-label">Captura 5 · Hiperparámetros</div>
+        <img src="image5.png" alt="Bloque de código con hiperparámetros del modelo" />
+      </div>
+      <article class="text-card">
+        <h3>Hiperparámetros detallados</h3>
+        <div class="text-meta">Configuración ajustada para la RTX 4070 Ti.</div>
+        <div class="pill-row">
+          <span class="pill">batch_size = 64</span>
+          <span class="pill">block_size = 256</span>
+          <span class="pill">n_layer = 6</span>
+          <span class="pill">dropout = 0.2</span>
+        </div>
+        <p>
+          En esta captura se recogen los hiperparámetros definidos en el script <code>entrenar.py</code>. Entre ellos se
+          encuentran <code>batch_size = 64</code>, <code>block_size = 256</code>, <code>max_iters = 10000</code> y
+          <code>eval_interval = 500</code>, además de la tasa de aprendizaje <code>learning_rate = 3e-4</code> y el
+          dispositivo de cómputo configurado para usar CUDA cuando está disponible.
+        </p>
+        <p>
+          También se detallan los parámetros de la arquitectura Transformer: <code>n_embd = 384</code> (dimensión de
+          los embeddings), <code>n_head = 6</code> (número de cabezas de atención), <code>n_layer = 6</code> (número de
+          capas) y <code>dropout = 0.2</code>.
+        </p>
+        <p>
+          En los comentarios se explica que estos valores se han ajustado para aprovechar los 12 GB de VRAM de la
+          RTX 4070 Ti, permitir un contexto más largo y aumentar la capacidad del modelo respecto a una configuración
+          básica.
+        </p>
+      </article>
+    </div>
+
+    <!-- Captura 6 -->
+    <div class="grid">
+      <div class="image-card">
+        <div class="image-label">Captura 6 · Texto generado</div>
+        <img src="image6.png" alt="Bloque de texto generado por el modelo estilo Quijote" />
+      </div>
+      <article class="text-card">
+        <h3>Generación de texto tras el entrenamiento</h3>
+        <div class="text-meta">Salida de ejemplo del modelo ya entrenado.</div>
+        <div class="pill-row">
+          <span class="pill">Modelo de caracteres</span>
+          <span class="pill">Estilo cervantino</span>
+          <span class="pill">quijote_model.pth</span>
+        </div>
+        <p>
+          En esta captura se ve el mensaje “Entrenamiento completado! Generando texto...” seguido de un bloque de texto
+          generado por el modelo que imita el estilo del Quijote.
+        </p>
+        <p>
+          El contenido utiliza vocabulario y estructuras propias de la obra original, aunque con frases parcialmente
+          incoherentes debido al tamaño limitado del modelo y al hecho de trabajar a nivel de caracteres.
+        </p>
+        <p>
+          Al final de la salida aparece el mensaje “Modelo guardado como <code>quijote_model.pth</code>”, indicando que
+          los pesos entrenados se han almacenado en un archivo para poder reutilizar el modelo posteriormente sin tener
+          que reentrenarlo desde cero.
+        </p>
+      </article>
+    </div>
+
+    <!-- Captura 7 -->
+    <div class="grid">
+      <div class="image-card">
+        <div class="image-label">Captura 7 · Nueva ejecución</div>
+        <img src="image7.png" alt="Nueva ejecución de entrenar.py guardando el modelo de nuevo" />
+      </div>
+      <article class="text-card">
+        <h3>Nueva ejecución y guardado del modelo</h3>
+        <div class="text-meta">Reutilización del script y confirmación del guardado.</div>
+        <div class="pill-row">
+          <span class="pill">Re-entrenamiento</span>
+          <span class="pill">Actualización de pesos</span>
+          <span class="pill">Persistencia del modelo</span>
+        </div>
+        <p>
+          En la última captura se muestra una nueva ejecución de <code>python entrenar.py</code> dentro del mismo
+          entorno virtual, volviendo a utilizar la GPU configurada mediante CUDA.
+        </p>
+        <p>
+          La salida destaca principalmente el mensaje de que el modelo ha sido guardado como
+          <code>quijote_model.pth</code>, sin detallar todo el proceso de entrenamiento intermedio.
+        </p>
+        <p>
+          Esta captura refleja que el script puede ejecutarse varias veces para continuar el entrenamiento, ajustar
+          parámetros o simplemente volver a guardar el modelo actualizado, manteniendo siempre el archivo
+          <code>quijote_model.pth</code> como salida final del proceso.
+        </p>
+      </article>
+    </div>
+
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>© 2026 · Proyecto NanoQuijote · Entrenamiento local de modelos de lenguaje.</span>
+    <span>Autor de la documentación: [tu nombre]</span>
+  </div>
+</footer>
+
+</body>
+</html>
 
