@@ -1,270 +1,183 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🤖 IA Agente Local - ASIR Jerez 2026</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --success: linear-gradient(135deg, #10b981 0%, #34d399 100%);
-            --warning: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
-            --bg: #f8fafc;
-            --card-bg: rgba(255,255,255,0.95);
-            --shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🤖 IA Agente</title>
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Inter', sans-serif; 
-            line-height: 1.7; 
-            background: var(--bg); 
-            color: #1e293b;
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-        .hero {
-            background: var(--primary);
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><polygon points="0,100 1000,0 1000,100"/></svg>');
-            background-size: cover;
-        }
-        .hero-content { position: relative; z-index: 2; max-width: 1000px; margin: 0 auto; }
-        .hero h1 { 
-            font-size: clamp(2.5rem, 6vw, 4.5rem); 
-            font-weight: 800; 
-            background: linear-gradient(135deg, white 0%, #f8fafc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
-        }
+<style>
+body{
+    font-family:'Inter',sans-serif;
+    background:#f8fafc;
+    margin:0;
+    line-height:1.8;
+    color:#1e293b;
+}
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.hero{
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    color:white;
+    text-align:center;
+    padding:80px 20px;
+}
 
-        .image-section {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            margin: 40px auto;
-            padding: 40px;
-            border-radius: 25px;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(255,255,255,0.2);
-            max-width: 1000px;
-        }
+.hero h1{
+    font-size:clamp(2.5rem,6vw,4rem);
+}
 
-        .image-section img {
-            width: 100%;
-            max-width: 900px;
-            height: 450px;
-            object-fit: contain;
-            image-rendering: -webkit-optimize-contrast;
-            image-rendering: crisp-edges;
-            image-rendering: pixelated;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-            margin-bottom: 30px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            background: white;
-            padding: 8px;
-        }
+.container{
+    max-width:1000px;
+    margin:auto;
+    padding:40px 20px;
+}
 
-        .image-section h3 {
-            color: #1e293b;
-            font-size: 1.6rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: var(--primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+.section{
+    background:white;
+    padding:40px;
+    border-radius:22px;
+    margin-bottom:45px;
+    box-shadow:0 20px 45px rgba(0,0,0,.12);
+}
 
-        .image-section h4 {
-            color: #1e293b;
-            font-size: 1.3rem;
-            margin: 25px 0 15px 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+.section img{
+    width:100%;
+    max-width:900px;
+    height:450px;
+    object-fit:contain;
+    display:block;
+    margin:auto;
+    border-radius:15px;
+    box-shadow:0 15px 40px rgba(0,0,0,.2);
+    background:white;
+    padding:8px;
+}
 
-        .image-section p {
-            color: #475569;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
+.section h2{
+    margin-top:25px;
+    color:#4f46e5;
+}
 
-        .image-section strong {
-            color: #1e293b;
-        }
+.section p{
+    font-size:1.1rem;
+    color:#475569;
+}
 
-        .image-section code {
-            background: rgba(0,0,0,0.1);
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Fira Code', monospace;
-            color: #059669;
-        }
-
-        .image-section pre {
-            background: #1e1e1e;
-            color: #d4d4d4;
-            padding: 25px;
-            border-radius: 15px;
-            font-family: 'Fira Code', monospace;
-            overflow-x: auto;
-            margin: 25px 0;
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.3);
-        }
-
-        .status-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin: 25px 0;
-        }
-
-        .status-card {
-            background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(52,211,153,0.1));
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            border: 1px solid rgba(16,185,129,0.3);
-        }
-
-        .status-value {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #10b981;
-        }
-
-        .conclusion {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-            padding: 60px 40px;
-            border-radius: 25px;
-            text-align: center;
-            margin: 80px 0;
-            position: relative;
-            overflow: hidden;
-        }
-
-        @media (max-width: 768px) {
-            .container, .image-section { padding: 25px; margin: 20px 0; }
-            .image-section img { 
-                height: 300px; 
-                padding: 6px;
-            }
-        }
-    </style>
+.conclusion{
+    background:linear-gradient(135deg,#10b981,#059669);
+    color:white;
+    text-align:center;
+    padding:70px 30px;
+}
+</style>
 </head>
+
 <body>
-    <div class="hero">
-        <div class="hero-content">
-            <h1><i class="fas fa-robot"></i> IA Agente Local</h1>
-            <p>Kilo Code + LM Studio + Deepseek Coder V2 | RTX 5060 Ti | ASIR Jerez 2026</p>
-        </div>
-    </div>
 
-    <div class="container">
-        <!-- CAPTURA 1: Interfaz Kilo Code -->
-        <div class="image-section">
-            <img src="ag1.png" alt="Interfaz principal Kilo Code VS Code" loading="lazy">
-            <h3><i class="fas fa-code"></i> Captura 1 - Interfaz Kilo Code</h3>
-            <p>La primera captura muestra la <strong>interfaz principal de Kilo Code en VS Code</strong>, donde se inicia una tarea simple con <strong>"Task: Hola"</strong> y el agente responde detectando un <strong>proyecto vacío</strong>. Esta vista es exactamente como debe ser, ya que confirma que <strong>Kilo Code está correctamente conectado a LM Studio</strong> y listo para generar código.</p>
-            <p>Aquí el agente <strong>Deepseek Coder V2 Lite</strong>, ejecutándose en tu <strong>RTX 5060 Ti</strong>, ofrece ayuda para agregar contexto o archivos mediante comandos o arrastrar con shift.</p>
-        </div>
+<div class="hero">
+<h1>🤖 IA Agente Local</h1>
+<p>Kilo Code + LM Studio + Deepseek Coder V2 · RTX 5060 Ti</p>
+</div>
 
-        <!-- CAPTURA 2: LM Studio Servidor Activo -->
-        <div class="image-section">
-            <img src="ag2.png" alt="LM Studio servidor activo Deepseek Coder" loading="lazy">
-            <h3><i class="fas fa-server"></i> Captura 2 - LM Studio Activo</h3>
-            <p>La segunda captura presenta <strong>LM Studio con el servidor activo</strong> y el modelo cargado en <strong>"Status: Running"</strong>, mostrando endpoints API compatibles con OpenAI y logs de generación en progreso. Esto es precisamente el estado correcto que debe mostrar cuando el servidor local funciona en <code>http://192.168.7.102:1234</code>.</p>
-            
-            <div class="status-grid">
-                <div class="status-card">
-                    <div class="status-value">99-100%</div>
-                    <div>GPU Usage</div>
-                </div>
-                <div class="status-card">
-                    <div class="status-value">20% → 50%</div>
-                    <div>Logs Processing</div>
-                </div>
-                <div class="status-card">
-                    <div class="status-value">Local Only</div>
-                    <div>No Cloud</div>
-                </div>
-            </div>
-        </div>
+<div class="container">
 
-        <!-- CAPTURA 3: Administrador de Tareas -->
-        <div class="image-section">
-            <img src="ag3.png" alt="Administrador de Tareas monitoreo GPU RTX 5060 Ti" loading="lazy">
-            <h3><i class="fas fa-tachometer-alt"></i> Captura 3 - Recursos Hardware</h3>
-            <p>La tercera captura del <strong>Administrador de Tareas de Windows</strong> monitorea recursos durante la inferencia, con <strong>GPU al 100% (15.4/16GB a 39-40°C)</strong>, CPU al 23-27% y RAM al 69-70%. Este comportamiento es totalmente normal y esperado para modelos GGUF pesados como <strong>Deepseek de 11.85GB</strong>.</p>
-            <p>La <strong>saturación de GPU confirma que todo el cómputo de IA se procesa en tu hardware local</strong> sin depender de servicios cloud.</p>
-        </div>
+<!-- CAPTURA 1 -->
+<div class="section">
+<img src="ag1.png">
+<h2>CAPTURA 1</h2>
 
-        <!-- CAPTURA 4: Configuración Proveedores -->
-        <div class="image-section">
-            <img src="ag4.png" alt="Configuración proveedores Kilo Code LM Studio" loading="lazy">
-            <h3><i class="fas fa-cogs"></i> Captura 4 - Configuración Proveedores</h3>
-            <p>La cuarta captura muestra la <strong>configuración de proveedores en Kilo Code</strong>, apuntando al servidor LM Studio local con URL base <code>http://192.168.7.102:1234</code> y lista de modelos como <strong>Deepseek, Gemma y Qwen</strong> disponibles.</p>
-            <p>Esta configuración es correcta e idéntica en estructura a tu <code>opencode.json</code> para Ollama, solo cambia la IP/puerto. Puedes fácilmente alternar a tu Ollama en <code>192.168.7.114:11434</code> siguiendo el mismo patrón.</p>
-        </div>
+<p>
+En esta imagen se observa el Administrador de tareas del sistema mientras el modelo de inteligencia artificial está en funcionamiento.
+La GPU aparece trabajando casi al máximo de su capacidad y la memoria de vídeo se encuentra prácticamente llena, lo que indica que el modelo está cargado completamente en la tarjeta gráfica.
+</p>
 
-        <!-- CAPTURA 5: Generación Código -->
-        <div class="image-section">
-            <img src="ag5.png" alt="Generación código Python agente IA" loading="lazy">
-            <h3><i class="fas fa-magic"></i> Captura 5 - Generación Código</h3>
-            <p>La quinta captura demuestra <strong>generación de código en el chat de VS Code</strong>, donde el agente responde al prompt en español <strong>"Escribe una función en Python que sume dos números"</strong> creando una función completa <code>sumar(a, b)</code> con docstring, ejemplo de uso y output 8 para <code>sumar(5,3)</code>.</p>
-            
-            <pre><code>def sumar(a, b):
-    """
-    Suma dos números.
-    Args:
-        a (int): Primer número
-        b (int): Segundo número
-    Returns:
-        int: Suma de ambos números
-    """
-    return a + b
+<p>
+Esta situación demuestra que el procesamiento se realiza de forma local y que el equipo está ejecutando tareas de generación de texto en tiempo real.
+El alto uso de recursos refleja un proceso activo de inferencia, donde el modelo analiza el contenido recibido y produce una respuesta utilizando toda la potencia disponible del hardware.
+</p>
+</div>
 
-# Ejemplo de uso
-resultado = sumar(5, 3)
-print(f"5 + 3 = {resultado}")  # Output: 5 + 3 = 8</code></pre>
+<!-- CAPTURA 2 -->
+<div class="section">
+<img src="ag2.png">
+<h2>CAPTURA 2</h2>
 
-            <p>Este flujo completo de <strong>prompt → código ejecutable</strong> es exactamente como debe funcionar un agente IA para desarrollo. Perfecto para tus proyectos ASIR de PHP/SQL, generando código funcional con explicaciones prácticas en español.</p>
-        </div>
-    </div>
+<p>
+La segunda imagen muestra la interfaz del programa utilizado para ejecutar el modelo, donde se puede ver que el sistema se encuentra en estado activo o “Running”.
+Aparecen disponibles varios endpoints de API compatibles con el formato de OpenAI, lo que significa que otros programas pueden conectarse al modelo como si fuera un servicio externo.
+</p>
 
-    <div class="conclusion">
-        <h2 style="font-size: 2.5rem; margin-bottom: 25px;">
-            <i class="fas fa-graduation-cap"></i> Conclusión ASIR
-        </h2>
-        <p style="font-size: 1.3rem; max-width: 800px; margin: 0 auto 30px; opacity: 0.95;">
-            <strong>✅ IA Agente 100% LOCAL funcionando perfecto</strong> en RTX 5060 Ti.<br>
-            <strong>Kilo Code + LM Studio + Deepseek Coder V2</strong> listos para proyectos ASIR.<br>
-            <strong>Generación código en español, GPU 100% local, sin cloud</strong>.
-        </p>
-    </div>
+<p>
+En esta situación el software actúa como un servidor local que permite enviar solicitudes y recibir respuestas desde diferentes aplicaciones dentro de la misma red.
+Esto convierte al modelo en un motor central que puede ser utilizado por herramientas de desarrollo o asistentes automáticos.
+</p>
+</div>
+
+<!-- CAPTURA 3 -->
+<div class="section">
+<img src="ag3.png">
+<h2>CAPTURA 3</h2>
+
+<p>
+En esta captura se visualizan los registros internos del modelo durante el procesamiento del prompt.
+Se observan porcentajes de progreso que indican cómo el sistema analiza y prepara la información antes de comenzar a generar la respuesta final.
+</p>
+
+<p>
+Este paso corresponde a la conversión del texto en tokens y a la carga del contexto dentro de la memoria de la GPU.
+La situación refleja una fase previa a la generación, normalmente más lenta cuando el contenido enviado es largo o complejo,
+ya que el modelo necesita comprender todo el contexto antes de producir resultados coherentes.
+</p>
+</div>
+
+<!-- CAPTURA 4 -->
+<div class="section">
+<img src="ag4.png">
+<h2>CAPTURA 4</h2>
+
+<p>
+La cuarta imagen presenta la configuración del agente dentro del entorno de desarrollo.
+Se muestran los parámetros necesarios para conectar el editor con el servidor local del modelo mediante una dirección IP y un puerto específico.
+</p>
+
+<p>
+Esto indica que el asistente de programación está enlazado directamente con el modelo ejecutado en el ordenador del usuario.
+En esta situación el editor actúa como interfaz de interacción,
+enviando instrucciones automáticamente al modelo y recibiendo sugerencias o código generado sin necesidad de conexión a servicios externos.
+</p>
+</div>
+
+<!-- CAPTURA 5 -->
+<div class="section">
+<img src="ag5.png">
+<h2>CAPTURA 5</h2>
+
+<p>
+En la última captura se observa el uso práctico del agente dentro del editor,
+donde aparece una conversación solicitando la creación de una función en Python.
+El sistema responde utilizando el modelo local previamente configurado,
+mostrando cómo el flujo completo funciona de principio a fin.
+</p>
+
+<p>
+La situación representa la integración final del entorno:
+el usuario escribe una petición, el agente la envía al servidor local,
+el modelo procesa la información mediante la GPU y la respuesta vuelve al editor lista para ser utilizada.
+Esto confirma que el conjunto funciona como un asistente de programación autónomo ejecutado completamente en local.
+</p>
+</div>
+
+</div>
+
+<div class="conclusion">
+<h2>✅ Conclusión</h2>
+<p>
+Sistema IA agente funcionando completamente en local,
+procesamiento mediante GPU dedicada y generación automática de código
+sin depender de servicios cloud.
+</p>
+</div>
+
 </body>
 </html>
