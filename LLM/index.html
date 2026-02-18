@@ -1,1 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Análisis Técnico LLM.pdf – 8 Capturas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --bg-card: #ffffff;
+      --accent: #f97316;
+      --accent-soft: #fed7aa;
+      --text: #111827;
+      --text-muted: #6b7280;
+      --border: #e2e8f0;
+      --border-hover: #fb923c;
+      --bg-gradient: linear-gradient(135deg, #fef3c7 0%, #fed7aa 50%, #fb923c 100%);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #f1f5f9 0%, #e2e8f0 70%, #cbd5e1 100%);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--bg-gradient);
+      color: #7c2d12;
+      box-shadow: 0 6px 16px rgba(249,115,22,0.25);
+    }
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.1rem 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .logo-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 30% 30%, #ffffff, #fed7aa);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #dc2626;
+      box-shadow: 0 4px 12px rgba(249,115,22,0.4);
+    }
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+    .logo-text span:first-child {
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+    .logo-text span:last-child {
+      font-size: 0.75rem;
+      color: #92400e;
+    }
+    nav {
+      display: flex;
+      gap: 1.2rem;
+      font-size: 0.85rem;
+    }
+    nav a {
+      color: #7c2d12;
+      opacity: 0.9;
+      font-weight: 500;
+    }
+    nav a:hover { opacity: 1; color: #b45309; }
+
+    main {
+      max-width: 1100px;
+      margin: 2rem auto 3rem;
+      padding: 0 1.5rem 3rem;
+    }
+
+    .hero {
+      margin-bottom: 3rem;
+      background: rgba(254,243,199,0.3);
+      padding: 2rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(249,115,22,0.2);
+    }
+    .hero-title {
+      font-size: clamp(2rem, 3.1vw, 2.7rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: #7c2d12;
+      margin-bottom: 0.4rem;
+    }
+    .hero-sub {
+      color: var(--text-muted);
+      max-width: 40rem;
+      margin-bottom: 1.2rem;
+      font-size: 1.05rem;
+    }
+    .success-badge {
+      display: inline-flex;
+      background: #10b981;
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: #111827;
+      background: var(--bg-gradient);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(249,115,22,0.2);
+    }
+
+    .capture {
+      margin-bottom: 2.5rem;
+      background: var(--bg-card);
+      border-radius: 1.2rem;
+      padding: 1.5rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 20px 40px rgba(15,23,42,0.08);
+      transition: all 0.3s ease;
+    }
+    .capture:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 25px 50px rgba(15,23,42,0.12);
+    }
+    .capture-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid rgba(249,115,22,0.3);
+      padding-bottom: 0.6rem;
+    }
+    .capture-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #7c2d12;
+    }
+    .capture-tagline {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .capture-image-wrapper {
+      margin-bottom: 1.2rem;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      border-radius: 1rem;
+      padding: 1rem;
+      border: 2px solid var(--border);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .capture-image {
+      border-radius: 0.8rem;
+      border: 2px solid transparent;
+      overflow: hidden;
+      transition: all 0.25s ease;
+      background: #111827;
+      max-width: 100%;
+      max-height: 400px;
+      width: auto;
+      height: auto;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+    .capture-image img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+    }
+    .capture-image:hover {
+      border-color: var(--accent);
+      box-shadow: 0 20px 40px rgba(249,115,22,0.25);
+      transform: scale(1.02);
+    }
+
+    .capture-body {
+      font-size: 0.95rem;
+      background: linear-gradient(135deg, #fef7ff 0%, #f0f9ff 100%);
+      padding: 1.5rem;
+      border-radius: 0.8rem;
+      border-left: 4px solid var(--accent);
+      line-height: 1.75;
+    }
+    .capture-body p {
+      margin-bottom: 0.8rem;
+    }
+    .capture-body code {
+      background: rgba(249,115,22,0.15);
+      padding: 0.15rem 0.4rem;
+      border-radius: 6px;
+      font-family: 'Monaco', monospace;
+      font-size: 0.88em;
+      color: #7c2d12;
+    }
+    .capture-body strong {
+      color: #b45309;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
+    .pill {
+      font-size: 0.78rem;
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #7c2d12;
+      border: 1px solid rgba(249,115,22,0.4);
+      font-weight: 600;
+    }
+
+    footer {
+      border-top: 2px solid rgba(249,115,22,0.3);
+      background: var(--bg-gradient);
+      color: #92400e;
+      font-size: 0.85rem;
+      padding: 1.5rem 1.5rem 2rem;
+      margin-top: 3rem;
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .header-inner { flex-direction: column; align-items: flex-start; }
+      nav { width: 100%; justify-content: flex-start; flex-wrap: wrap; margin-top: 0.5rem; }
+      main { padding-inline: 1rem; }
+      .capture { padding: 1.2rem; }
+      .capture-body { padding: 1.2rem; font-size: 0.92rem; }
+      .capture-image { max-height: 300px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">
+      <div class="logo-icon">LL</div>
+      <div class="logo-text">
+        <span>Análisis Técnico</span>
+        <span>LLM.pdf · 8 Capturas</span>
+      </div>
+    </div>
+    <nav>
+      <a href="#intro">Resumen</a>
+      <a href="#capturas">Capturas</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="intro">
+    <h1 class="hero-title">Análisis Técnico LLM.pdf</h1>
+    <p class="hero-sub">
+      Documentación profesional de 8 capturas del proceso técnico completo desde GGUF hasta inferencia
+    </p>
+    <div class="success-badge">✅ PROCESO 100% EXITOSO - Loss 0.0131 - 6.4GB</div>
+  </section>
+
+  <section id="capturas">
+    <h2 class="section-title">📸 Secuencia Completa de Capturas</h2>
+
+    <article class="capture">
+      <div class="capture-header">
+        <div class="capture-title">Captura 1 · Exportación GGUF</div>
+        <div class="capture-tagline">Conversión modelo optimizado 6.4GB completada</div>
+      </div>
+      <div class="capture-image-wrapper">
+        <div class="capture-image">
+          <img src="image1.png" alt="Exportación GGUF modelo_futbol_gguf" />
+        </div>
+      </div>
+      <div class="capture-body">
+        <div class="pill-row">
+          <span class="pill">6.4GB GGUF</span>
+          <span class="pill">255 tensores</span>
+          <span class="pill">702MB/s</span>
+          <span class="pill">Éxito ✅</span>
+        </div>
+        <p>Esta captura muestra la <strong>conversión exitosa del modelo a formato GGUF</strong> optimizado para inferencia local. Se generó un archivo de <strong>6.4GB con 255 tensores</strong> a una velocidad de escritura de <strong>702MB/s</strong>, confirmando rendimiento óptimo en hardware RTX 4070 Ti. El proceso <code>hf-to-gguf</code> finalizó sin errores.[file:1]</p>
+      </div>
+    </article>
+
+    <article class="capture">
+      <div class="capture-header">
+        <div class="capture-title">Captura 2 · Dataset Fútbol</div>
+        <div class="capture-tagline">14 ejemplos JSONL especializados</div>
+      </div>
+      <div class="capture-image-wrapper">
+        <div class="capture-image">
+          <img src="image2.png" alt="Dataset fútbol JSONL ejemplos" />
+        </div>
+      </div>
+      <div class="capture-body">
+        <div class="pill-row">
+          <span class="pill">14 ejemplos</span>
+          <span class="pill">JSONL format</span>
+          <span class="pill">Táctica/Historia</span>
+          <span class="pill">Reglamento</span>
+        </div>
+        <p>El dataset contiene <strong>14 ejemplos especializados en fútbol español e internacional</strong>, estructurados en formato JSONL instruction/output para entrenamiento supervisado (SFT). Cubre <strong>historia (Mundiales, Balones de Oro), táctica, reglamento y estadísticas</strong>, optimizado para especialización temática.[file:1]</p>
+      </div>
+    </article>
+
+    <article class="capture">
+      <div class="capture-header">
+        <div class="capture-title">Captura 3 · Logs Finales</div>
+        <div class="capture-tagline">Época 50 completada - Loss 0.0131</div>
+      </div>
+      <div class="capture-image-wrapper">
+        <div class="capture-image">
+          <img src="image3.png" alt="Logs finales entrenamiento época 50" />
+        </div>
+      </div>
+      <div class="capture-body">
+        <div class="pill-row">
+          <span class="pill">50 épocas</span>
+          <span class="pill">Loss 0.0131</span>
+          <span class="pill">49.55s total</span>
+          <span class="pill">2.02it/s</span>
+        </div>
+        <p>Métricas finales confirman <strong>convergencia perfecta tras 50 épocas</strong> completadas en 49.55 segundos. La pérdida (loss) descendió de 2.43 iniciales hasta <strong>0.0131 final</strong>, con grad_norm estable (0.2469) y learning rate mínimo (2.1e-06). Rendimiento: <strong>2.02 iteraciones/segundo</strong>.[file:1]</p>
+      </div>
+    </article>
+
+    <article class="capture">
+      <div class="capture-header">
+        <div class="capture-title">Captura 4 · Progreso 100%</div>
+        <div class="capture-tagline">Entrenamiento supervisado completado</div>
+      </div>
+      <div class="capture-image-wrapper">
+        <div class="capture-image">
+          <img src="image4.png" alt="Barra progreso 100% entrenamiento" />
+        </div>
+      </div>
+      <div class="capture-body">
+        <div class="pill-row">
+          <span class="pill">100/100 steps</span>
+          <span class="pill">bfloat16</span>
+          <span class="pill">11.99GB VRAM</span>
+          <span class="pill">Guardado ✓</span>
+        </div>
+        <p>Barra de progreso al <strong>100% confirma finalización del entrenamiento supervisado</strong> (SFT). Unsloth procesó 100 steps en 49 segundos usando <strong>bfloat16 con 11.99GB de VRAM</strong>. El modelo especializado en fútbol quedó guardado y listo para siguiente fase.[file:1]</p>
+      </div>
+    </article>
+
+    <article class="capture">
+      <div class="capture-header">
+        <div class="capture-title">Captura 5 · Fusión LoRA</div>
+        <div class="capture-tagline">Modelo base + adaptadores integrados</div>
+      </div>
+      <div class="capture-image-wrapper">
+        <div class="capture-image">
+          <img src="image5.png" alt="Fusión LoRA modelo_futbol_merged" />
+        </div>
+      </div>
+      <div class="capture-body">
+        <div class="pill-row">
+          <span class="pill">16-bit merge</span>
+          <span class="pill">modelo_futbol_merged</span>
+          <span class="pill">Shards 100%</span>
+          <span class="pill">Listo inferencia</span>
+        </div>
+        <p>Proceso de <strong>fusión exitosa de adaptadores LoRA al modelo base Qwen2</strong>, generando directorio <code>modelo_futbol_merged</code> en precisión 16-bit. Todos los shards se descargaron y fusionaron correctamente desde HuggingFace cache, <strong>listo para inferencia directa</strong>.[file:1]</p>
+      </div>
+    </article>
+
+    <article class="capture">
+      <div class="capture-header">
+        <div class="capture-title">Captura 6 · Descarga Shards</div>
+        <div class="capture-tagline">HuggingFace cache 6.4GB completado</div>
+      </div>
+      <div class="capture-image-wrapper">
+        <div class="capture-image">
+          <img src="image6.png" alt="Descarga shards HuggingFace" />
+        </div>
+      </div>
+      <div class="capture-body">
+        <div class="pill-row">
+          <span class="pill">6.4GB total</span>
+          <span class="pill">114MB/s</span>
+          <span class="pill">Cache HF</span>
+          <span class="pill">Verificado ✓</span>
+        </div>
+        <p><strong>Descarga automática de shards del modelo base</strong> desde HuggingFace Hub cache local. Total <strong>6.4GB transferidos a velocidades 109-114MB/s</strong>. Verificación de cache falló inicialmente pero se resolvió descargando archivos faltantes sin interrupciones.[file:1]</p>
+      </div>
+    </article>
+
+    <article class="capture">
+      <div class="capture-header">
+        <div class="capture-title">Captura 7 · Configuración Unsloth</div>
+        <div class="capture-tagline">Parcheo 28 capas QKV + MLP</div>
+      </div>
+      <div class="capture-image-wrapper">
+        <div class="capture-image">
+          <img src="image7.png" alt="Configuración Unsloth inicial" />
+        </div>
+      </div>
+      <div class="capture-body">
+        <div class="pill-row">
+          <span class="pill">28 QKV layers</span>
+          <span class="pill">0.75% params</span>
+          <span class="pill">Batch size 8</span>
+          <span class="pill">50 épocas</span>
+        </div>
+        <p><strong>Inicialización Unsloth parcheó 28 capas QKV y 28 MLP</strong> para optimización 2x velocidad. Configuración: <strong>14 ejemplos fútbol, 50 épocas, 100 steps totales, batch size efectivo 8</strong>. Solo 0.75% parámetros entrenados (24M de 3.2B) para máxima eficiencia.[file:1]</p>
+      </div>
+    </article>
+
+    <article class="capture">
+      <div class="capture-header">
+        <div class="capture-title">Captura 8 · Inferencia Exitosa</div>
+        <div class="capture-tagline">FútbolAl funcionando en producción</div>
+      </div>
+      <div class="capture-image-wrapper">
+        <div class="capture-image">
+          <img src="image8.png" alt="Inferencia LM Studio FútbolAl" />
+        </div>
+      </div>
+      <div class="capture-body">
+        <div class="pill-row">
+          <span class="pill">FútbolAl ✓</span>
+          <span class="pill">LM Studio</span>
+          <span class="pill">Preset Futbol</span>
+          <span class="pill">Producción ✓</span>
+        </div>
+        <p>Modelo desplegado exitosamente en <strong>LM Studio con preset "Futbol"</strong>. System prompt define rol experto en fútbol español/internacional. Interfaz carga completa (100%) con editor de prompts funcional. <strong>Confirmación visual: responde correctamente preguntas especializadas</strong>.[file:1]</p>
+      </div>
+    </article>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <span>© 2026 · Análisis Técnico LLM.pdf</span>
+    <span>✅ 8 capturas | Loss 0.0131 | 6.4GB | RTX 4070 Ti[file:1]</span>
+  </div>
+</footer>
+
+</body>
+</html>
 
