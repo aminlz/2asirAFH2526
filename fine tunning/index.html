@@ -1,1 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fine-Tuning Qwen2 con Unsloth - FútbolAl</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; 
+            color: #333; 
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%); 
+            min-height: 100vh; 
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        header { 
+            text-align: center; 
+            color: white; 
+            padding: 40px 0; 
+        }
+        header h1 { 
+            font-size: 2.5em; 
+            margin-bottom: 10px; 
+            background: linear-gradient(45deg, #00d4ff, #4facfe); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+        }
+        header p { font-size: 1.2em; opacity: 0.9; }
+        .section { 
+            background: white; 
+            margin: 30px 0; 
+            border-radius: 20px; 
+            overflow: hidden; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2); 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+        }
+        .section:hover { 
+            transform: translateY(-10px); 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3); 
+        }
+        .section h2 { 
+            background: linear-gradient(45deg, #667eea 0%, #764ba2 100%); 
+            color: white; 
+            padding: 20px; 
+            font-size: 1.8em; 
+            text-align: center; 
+        }
+        .content { padding: 30px; }
+        .screenshot { 
+            width: 100%; 
+            height: 300px; 
+            object-fit: cover; 
+            border-radius: 15px; 
+            margin-bottom: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
+            transition: transform 0.3s ease; 
+        }
+        .screenshot:hover { transform: scale(1.02); }
+        ul { list-style: none; padding-left: 0; }
+        ul li { 
+            background: #f8f9fa; 
+            margin: 10px 0; 
+            padding: 15px; 
+            border-radius: 10px; 
+            border-left: 5px solid #4facfe; 
+        }
+        footer { 
+            text-align: center; 
+            color: white; 
+            padding: 20px; 
+            opacity: 0.8; 
+        }
+        @media (max-width: 768px) { 
+            .content { padding: 20px; } 
+            header h1 { font-size: 2em; } 
+            .screenshot { height: 250px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🚀 Fine-Tuning Qwen2 con Unsloth</h1>
+            <p>Proceso completo en NVIDIA RTX 4070 Ti - Creación de FútbolAl</p>
+        </header>
+
+        <!-- SECCIÓN 1: Logs finales -->
+        <div class="section">
+            <h2>📊 Logs Finales del Entrenamiento</h2>
+            <div class="content">
+                <img src="image1.png" alt="Logs finales fine-tuning" class="screenshot">
+                <p>Loss baja de 0.0151 a 0.0131 (convergencia exitosa), gradnorm estable 0.04-0.17, learning rate de 2.3e-05 a 2.1e-06. Epoch 50.0 completada en 95.6s (trainloss 0.308).</p>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 2: Barra de progreso -->
+        <div class="section">
+            <h2>✅ Barra de Progreso SFT</h2>
+            <div class="content">
+                <img src="image2.png" alt="Barra progreso 100%" class="screenshot">
+                <p>100/100 steps completados en 135s (1.05 its/s). Entrenamiento supervisado SFT finalizado exitosamente.[file:1]</p>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 3: Optimizaciones Unsloth -->
+        <div class="section">
+            <h2>⚡ Optimizaciones Unsloth</h2>
+            <div class="content">
+                <img src="image3.png" alt="Parcheo QKV y MLP" class="screenshot">
+                <ul>
+                    <li>Unsloth v2026.2.1 parchea automáticamente 28 capas QKV + MLP</li>
+                    <li>2x velocidad, 70% menos memoria</li>
+                    <li>bfloat16 activado - 11.99GB GPU (RTX 4070 Ti)</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 4: Fusión LoRA -->
+        <div class="section">
+            <h2>🔗 Fusión LoRA + PEFT</h2>
+            <div class="content">
+                <img src="image4.png" alt="Fusión adaptador LoRA" class="screenshot">
+                <p>LoRA fusionado (1% parámetros entrenados) al modelo base 4-bit → <code>.futbolmodelmerged</code>. Listo para inferencia tras cierre venv PowerShell.[file:1]</p>
+            </div>
+        </div>
+
+        <!-- SECCIÓN 5: Interfaz Final -->
+        <div class="section">
+            <h2>🎯 FútbolAl - Listo para Chat</h2>
+            <div class="content">
+                <img src="image5.png" alt="Interfaz LM Studio/Ollama" class="screenshot">
+                <p><strong>FútbolAl:</strong> "Experto en táctica, historia, reglamento, análisis partidos y stats. Responde precisa y apasionadamente" (51 tokens). ¡Modelo listo![file:1]</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>📈 Fine-Tuning Exitoso | Febrero 2026 | RTX 4070 Ti</p>
+        </footer>
+    </div>
+</body>
+</html>
 
