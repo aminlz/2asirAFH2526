@@ -1,234 +1,261 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>⚡ Cuantización IA - ASIR Jerez 2026</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --success: linear-gradient(135deg, #10b981 0%, #34d399 100%);
-            --bg: #f8fafc;
-            --card-bg: rgba(255,255,255,0.95);
-            --shadow: 0 25px 50px -12px rgba(0,0,0,0.15);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Inter', sans-serif; 
-            line-height: 1.7; 
-            background: var(--bg); 
-            color: #1e293b;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
+<title>⚡ Cuantización IA - Benchmark Phi-3</title>
 
-        /* FIX IMÁGENES BORROSAS - ULTRA NÍTRIDO */
-        img {
-            image-rendering: optimizeQuality !important;
-            image-rendering: -webkit-optimize-contrast !important;
-            image-rendering: -moz-crisp-edges !important;
-            image-rendering: crisp-edges !important;
-            image-rendering: pixelated !important;
-            -ms-interpolation-mode: nearest-neighbor !important;
-            backface-visibility: hidden !important;
-            transform: translateZ(0) !important;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        .hero {
-            background: var(--primary);
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><polygon points="0,100 1000,0 1000,100"/></svg>');
-            background-size: cover;
-        }
-        .hero-content { position: relative; z-index: 2; max-width: 1000px; margin: 0 auto; }
-        .hero h1 { 
-            font-size: clamp(2.5rem, 6vw, 4.5rem); 
-            font-weight: 800; 
-            background: linear-gradient(135deg, white 0%, #f8fafc 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 1rem;
-        }
+<style>
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+:root{
+  --primary:linear-gradient(135deg,#667eea,#764ba2);
+  --success:linear-gradient(135deg,#10b981,#059669);
+  --bg:#f1f5f9;
+  --card:#ffffff;
+  --shadow:0 20px 45px rgba(0,0,0,.12);
+}
 
-        .image-section {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            margin: 40px auto;
-            padding: 40px;
-            border-radius: 25px;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(255,255,255,0.2);
-            max-width: 1000px;
-        }
+*{margin:0;padding:0;box-sizing:border-box;}
 
-        /* IMÁGENES ULTRA NÍTRIDAS */
-        .image-section img {
-            width: 100%;
-            max-width: 900px;
-            height: auto !important;  /* ALTURA AUTOMÁTICA */
-            max-height: 500px;
-            object-fit: contain;
-            display: block;
-            margin: 0 auto 30px;
-            border-radius: 12px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-            /* FIX RETINA */
-            width: auto;
-            height: auto;
-        }
+body{
+  font-family:'Inter',sans-serif;
+  background:var(--bg);
+  color:#1e293b;
+  line-height:1.7;
+}
 
-        .image-section h3 {
-            color: #1e293b;
-            font-size: 1.6rem;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: var(--primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+/* HERO */
+.hero{
+  background:var(--primary);
+  color:white;
+  text-align:center;
+  padding:90px 20px;
+}
 
-        .image-section p {
-            color: #475569;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
+.hero h1{
+  font-size:clamp(2.4rem,6vw,4rem);
+  font-weight:800;
+}
 
-        .image-section strong {
-            color: #1e293b;
-        }
+.hero p{
+  margin-top:15px;
+  font-size:1.2rem;
+  opacity:.9;
+}
 
-        .image-section code {
-            background: rgba(0,0,0,0.08);
-            padding: 3px 8px;
-            border-radius: 6px;
-            font-family: 'Fira Code', monospace;
-            color: #059669;
-        }
+.pill{
+  display:inline-block;
+  margin:8px;
+  padding:6px 14px;
+  border-radius:999px;
+  background:rgba(255,255,255,.2);
+  font-weight:600;
+  font-size:.85rem;
+}
 
-        .comparison-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin: 30px 0;
-        }
+/* CONTAINER */
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:40px 20px;
+}
 
-        .model-card {
-            background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(118,75,162,0.1));
-            padding: 25px;
-            border-radius: 20px;
-            text-align: center;
-            border: 2px solid rgba(102,126,234,0.3);
-        }
+/* CARDS */
+.section{
+  background:var(--card);
+  padding:40px;
+  border-radius:22px;
+  margin-bottom:40px;
+  box-shadow:var(--shadow);
+}
 
-        .model-name {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #1e293b;
-            margin-bottom: 15px;
-        }
+.section h3{
+  font-size:1.6rem;
+  margin-bottom:20px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  background:var(--primary);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
 
-        .model-size {
-            font-size: 2rem;
-            font-weight: 800;
-            background: var(--success);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
-        }
+.section p{
+  font-size:1.08rem;
+  color:#475569;
+  margin-bottom:18px;
+}
 
-        .conclusion {
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            color: white;
-            padding: 60px 40px;
-            border-radius: 25px;
-            text-align: center;
-            margin: 80px 0;
-            position: relative;
-            overflow: hidden;
-        }
+/* IMÁGENES NÍTIDAS */
+.section img{
+  width:100%;
+  max-width:900px;
+  display:block;
+  margin:0 auto 25px;
+  border-radius:14px;
+  box-shadow:0 15px 35px rgba(0,0,0,.18);
 
-        @media (max-width: 768px) {
-            .container, .image-section { padding: 25px; margin: 20px 0; }
-            .image-section img { max-height: 350px !important; }
-        }
-    </style>
+  image-rendering:optimizeQuality;
+  image-rendering:-webkit-optimize-contrast;
+}
+
+/* GRID COMPARACIÓN */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:25px;
+  margin-top:20px;
+}
+
+.card{
+  text-align:center;
+  padding:25px;
+  border-radius:18px;
+  background:linear-gradient(135deg,rgba(102,126,234,.12),rgba(118,75,162,.12));
+  border:2px solid rgba(102,126,234,.25);
+}
+
+.card h4{
+  font-size:1.3rem;
+  margin-bottom:10px;
+}
+
+.metric{
+  font-size:2rem;
+  font-weight:800;
+  background:var(--success);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* CONCLUSIÓN */
+.conclusion{
+  background:var(--success);
+  color:white;
+  text-align:center;
+  padding:70px 30px;
+}
+
+.conclusion h2{
+  font-size:2.2rem;
+  margin-bottom:20px;
+}
+
+@media(max-width:768px){
+  .section{padding:25px;}
+}
+
+</style>
 </head>
+
 <body>
-    <div class="hero">
-        <div class="hero-content">
-            <h1><i class="fas fa-compress-arrows-alt"></i> Cuantización IA</h1>
-            <p>Phi-3-mini FP16 (7.11GB) vs Q8 (3.78GB) | LM Studio | RTX 5060 Ti</p>
-        </div>
+
+<!-- HERO -->
+<section class="hero">
+  <h1><i class="fas fa-compress-arrows-alt"></i> Cuantización de Modelos IA</h1>
+  <p>Benchmark real Phi-3 Mini · LM Studio · RTX 5060 Ti</p>
+
+  <div>
+    <span class="pill">FP16</span>
+    <span class="pill">Q8 GGUF</span>
+    <span class="pill">Local Inference</span>
+    <span class="pill">Performance Test</span>
+  </div>
+</section>
+
+
+<div class="container">
+
+<!-- INTRO -->
+<div class="section">
+  <h3><i class="fas fa-brain"></i> ¿Qué es la cuantización?</h3>
+  <p>
+    La cuantización reduce la precisión numérica de los pesos del modelo
+    para disminuir consumo de memoria y acelerar la inferencia.
+    En este experimento se compara el modelo Phi-3 Mini en formato
+    FP16 original frente a su versión Q8 cuantizada.
+  </p>
+</div>
+
+<!-- Q8 -->
+<div class="section">
+  <img src="cu1.png">
+  <h3><i class="fas fa-bolt"></i> Rendimiento Q8</h3>
+
+  <p>
+    El modelo cuantizado alcanza <strong>64.59 tokens/segundo</strong>
+    con una latencia inicial de solo <strong>0.02 segundos</strong>.
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <h4>Velocidad</h4>
+      <div class="metric">64.59 t/s</div>
     </div>
 
-    <div class="container">
-        <!-- CAPTURA 1: Phi-3 Q8 -->
-        <div class="image-section">
-            <img src="cu1.png" alt="Inferencia phi-3-mini-q8.gguf 64.59 tokens/seg">
-            <h3><i class="fas fa-bolt"></i> Captura 1 - Phi-3 Q8 (64.59 t/s)</h3>
-            <p>Modelo <strong>phi-3-mini-q8.gguf cuantizado</strong> responde <strong>"¡Hola! ¿En qué puedo ayudarte hoy?"</strong> a <strong>64.59 tokens/segundo</strong>, 17 tokens en <strong>0.02s primer token</strong>.</p>
-            <p><strong>Excelente rendimiento Q8 en RTX 5060 Ti</strong> - cuantización optimiza velocidad sin pérdida coherencia.</p>
-        </div>
+    <div class="card">
+      <h4>Primer Token</h4>
+      <div class="metric">0.02 s</div>
+    </div>
+  </div>
+</div>
 
-        <!-- CAPTURA 2: Propiedades Q8 -->
-        <div class="image-section">
-            <img src="cu2.png" alt="phi-3-mini-q8.gguf 3.78 GB">
-            <h3><i class="fas fa-file"></i> Captura 2 - Q8 3.78 GB</h3>
-            <p><strong>phi-3-mini-q8.gguf: 3.78 GB</strong> en <code>C:\Users\aulateca26\.lmstudio\models\Imstudio</code> (23 ene 2026). <strong>47% ↓ tamaño vs FP16</strong>.</p>
-        </div>
+<!-- TAMAÑO -->
+<div class="section">
+  <img src="cu2.png">
+  <h3><i class="fas fa-file"></i> Tamaño Q8</h3>
+  <p>
+    El modelo ocupa solo <strong>3.78 GB</strong>,
+    reduciendo casi un 50% el tamaño respecto al FP16.
+  </p>
+</div>
 
-        <!-- CAPTURA 3: Phi-3 FP16 -->
-        <div class="image-section">
-            <img src="cu3.png" alt="phi-3-mini-fp16.gguf 52.11 tokens/seg">
-            <h3><i class="fas fa-microchip"></i> Captura 3 - FP16 (52.11 t/s)</h3>
-            <p>Modelo original <strong>phi-3-mini-4k-instruct-fp16.gguf (7.11 GB)</strong> a <strong>52.11 tokens/segundo</strong>. ~20% más lento pero más detallado.</p>
-        </div>
+<!-- FP16 -->
+<div class="section">
+  <img src="cu3.png">
+  <h3><i class="fas fa-microchip"></i> Rendimiento FP16</h3>
+  <p>
+    La versión original FP16 alcanza 52.11 tokens/s,
+    ofreciendo máxima precisión pero mayor consumo de VRAM.
+  </p>
+</div>
 
-        <!-- CAPTURA 4: Propiedades FP16 -->
-        <div class="image-section">
-            <img src="cu4.png" alt="phi-3-mini-fp16.gguf 7.11 GB">
-            <h3><i class="fas fa-hdd"></i> Captura 4 - FP16 7.11 GB</h3>
-            <p><strong>phi-3-mini-4k-instruct-fp16.gguf: 7.11 GB</strong> en <code>C:\Users\aulateca26\.lmstudio\models\microsc</code>.</p>
-            
-            <div class="comparison-grid">
-                <div class="model-card">
-                    <div class="model-name">🟢 Q8 Cuantizado</div>
-                    <div class="model-size">3.78 GB</div>
-                    <div>64.59 t/s</div>
-                </div>
-                <div class="model-card">
-                    <div class="model-name">🔴 FP16 Original</div>
-                    <div class="model-size">7.11 GB</div>
-                    <div>52.11 t/s</div>
-                </div>
-            </div>
-        </div>
+<!-- COMPARACIÓN -->
+<div class="section">
+  <img src="cu4.png">
+  <h3><i class="fas fa-scale-balanced"></i> Comparativa Final</h3>
+
+  <div class="grid">
+    <div class="card">
+      <h4>🟢 Q8 Cuantizado</h4>
+      <div class="metric">3.78 GB</div>
+      <p>64.59 tokens/s</p>
     </div>
 
-    <div class="conclusion">
-        <h2><i class="fas fa-graduation-cap"></i> Conclusión ASIR</h2>
-        <p style="font-size: 1.3rem; max-width: 800px; margin: 0 auto 30px; opacity: 0.95;">
-            <strong>✅ Q8: 47% ↓ tamaño + 24% ↑ velocidad</strong><br>
-            <strong>Phi-3-mini perfecto RTX 5060 Ti</strong><br>
-            <strong>Trade-off validado experimentalmente</strong>
-        </p>
+    <div class="card">
+      <h4>🔴 FP16 Original</h4>
+      <div class="metric">7.11 GB</div>
+      <p>52.11 tokens/s</p>
     </div>
+  </div>
+</div>
+
+</div>
+
+<!-- CONCLUSIÓN -->
+<section class="conclusion">
+  <h2><i class="fas fa-chart-line"></i> Resultado del Benchmark</h2>
+
+  <p style="font-size:1.3rem;max-width:800px;margin:auto;">
+    ✅ 47% menos tamaño<br>
+    ✅ ~24% más velocidad<br>
+    ✅ Inferencia local optimizada en GPU doméstica
+  </p>
+</section>
+
 </body>
 </html>
