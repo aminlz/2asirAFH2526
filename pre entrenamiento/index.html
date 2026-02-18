@@ -2,23 +2,23 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Documentación – Proyecto NanoQuijote</title>
+  <title>Pre entrenamiento – Proyecto NanoQuijote</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
-      --bg: #0f172a;
-      --bg-alt: #020617;
-      --card: #020617;
-      --accent: #38bdf8;
-      --accent-soft: rgba(56,189,248,0.15);
-      --text: #e5e7eb;
-      --text-muted: #9ca3af;
-      --border: #1f2933;
+      --bg: #f3f4f6;          /* gris claro de fondo */
+      --bg-card: #ffffff;     /* tarjetas blancas */
+      --accent: #f97316;      /* naranja principal */
+      --accent-soft: #fed7aa; /* naranja suave */
+      --text: #111827;        /* gris muy oscuro */
+      --text-muted: #6b7280;  /* gris medio */
+      --border: #d1d5db;      /* borde gris claro */
+      --border-hover: #9ca3af;/* borde hover imagen */
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #1f2937 0, #020617 55%);
+      background: radial-gradient(circle at top, #e5e7eb 0, #f3f4f6 55%);
       color: var(--text);
       line-height: 1.6;
     }
@@ -26,201 +26,213 @@
     a:hover { text-decoration: underline; }
 
     header {
-      border-bottom: 1px solid rgba(148,163,184,0.25);
-      background: linear-gradient(to right, rgba(15,23,42,0.9), rgba(15,23,42,0.95));
-      backdrop-filter: blur(12px);
       position: sticky;
       top: 0;
       z-index: 50;
+      background: linear-gradient(to right, #111827, #1f2937);
+      color: #f9fafb;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
     }
     .header-inner {
       max-width: 1100px;
       margin: 0 auto;
-      padding: 1.2rem 1.5rem;
+      padding: 1.1rem 1.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 1rem;
     }
     .logo {
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      font-size: 0.9rem;
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.75rem;
     }
-    .logo-badge {
-      width: 28px;
-      height: 28px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, #e5e7eb, #0f172a);
+    .logo-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: radial-gradient(circle at 30% 30%, #fed7aa, #f97316);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.7rem;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #111827;
+    }
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+    .logo-text span:first-child {
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+    .logo-text span:last-child {
+      font-size: 0.75rem;
+      color: #e5e7eb;
     }
     nav {
-      font-size: 0.9rem;
       display: flex;
       gap: 1.2rem;
+      font-size: 0.85rem;
     }
-    nav a { color: var(--text-muted); }
-    nav a:hover { color: var(--accent); }
+    nav a {
+      color: #e5e7eb;
+      opacity: 0.8;
+    }
+    nav a:hover {
+      opacity: 1;
+      color: #f97316;
+    }
 
     main {
       max-width: 1100px;
       margin: 2rem auto 3rem;
-      padding: 0 1.5rem 2rem;
+      padding: 0 1.5rem 3rem;
     }
 
     .hero {
-      display: grid;
-      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
-      gap: 2.5rem;
-      align-items: center;
-      margin-bottom: 3rem;
-    }
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; }
+      margin-bottom: 2.5rem;
+      text-align: left;
     }
     .hero-title {
-      font-size: clamp(2rem, 3vw, 2.6rem);
-      font-weight: 700;
+      font-size: clamp(2rem, 3.1vw, 2.7rem);
+      font-weight: 800;
       letter-spacing: -0.03em;
-      margin-bottom: 0.7rem;
+      color: #111827;
+      margin-bottom: 0.4rem;
     }
     .hero-sub {
       color: var(--text-muted);
+      max-width: 40rem;
       margin-bottom: 1.2rem;
-      max-width: 38rem;
     }
-    .hero-meta {
+    .hero-tags {
       display: flex;
       flex-wrap: wrap;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+    }
+    .tag {
+      border-radius: 999px;
+      padding: 0.2rem 0.7rem;
+      border: 1px solid rgba(249,115,22,0.35);
+      background: rgba(255,255,255,0.9);
+      color: #7c2d12;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
       gap: 0.6rem;
+      color: #111827;
+    }
+    .section-title::before {
+      content: "";
+      width: 5px;
+      height: 20px;
+      border-radius: 999px;
+      background: linear-gradient(to bottom, #f97316, #fb923c);
+    }
+
+    .capture {
+      margin-bottom: 2rem;
+      background: var(--bg-card);
+      border-radius: 1rem;
+      padding: 1.1rem 1.1rem 1.2rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 30px rgba(15,23,42,0.09);
+    }
+    .capture-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 0.8rem;
+      border-bottom: 1px dashed #e5e7eb;
+      padding-bottom: 0.4rem;
+    }
+    .capture-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #111827;
+    }
+    .capture-tagline {
       font-size: 0.8rem;
       color: var(--text-muted);
     }
-    .badge {
-      border-radius: 999px;
-      padding: 0.15rem 0.7rem;
-      border: 1px solid rgba(148,163,184,0.4);
-      background: rgba(15,23,42,0.8);
-    }
-    .hero-panel {
-      border-radius: 1.25rem;
-      padding: 1.5rem;
-      background: radial-gradient(circle at top left, rgba(56,189,248,0.22), transparent 55%), 
-                  linear-gradient(to bottom right, rgba(15,23,42,0.95), rgba(15,23,42,0.98));
-      border: 1px solid rgba(148,163,184,0.4);
-      box-shadow: 0 18px 45px rgba(15,23,42,0.85);
-    }
-    .hero-panel h2 {
-      font-size: 0.95rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--text-muted);
-      margin-bottom: 0.7rem;
-    }
-    .hero-panel ul {
-      list-style: none;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-    .hero-panel li::before {
-      content: "●";
-      font-size: 0.5rem;
-      margin-right: 0.5rem;
-      color: var(--accent);
-    }
 
-    .grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.2fr);
-      gap: 2rem;
-      margin-bottom: 2.5rem;
-      align-items: start;
+    .capture-image-wrapper {
+      margin-bottom: 0.9rem;
     }
-    @media (max-width: 900px) {
-      .grid { grid-template-columns: 1fr; }
-    }
-
-    .image-card {
-      background: linear-gradient(to bottom right, rgba(15,23,42,0.98), rgba(15,23,42,1));
-      border-radius: 1.25rem;
-      border: 1px solid rgba(148,163,184,0.45);
+    .capture-image {
+      border-radius: 0.85rem;
+      border: 2px solid var(--border);
       overflow: hidden;
-      box-shadow: 0 20px 55px rgba(15,23,42,0.9);
+      transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.15s ease;
+      background: #111827;
     }
-    .image-card img {
+    .capture-image img {
       display: block;
       width: 100%;
       height: auto;
-      border-bottom: 1px solid rgba(15,23,42,0.9);
     }
-    .image-label {
-      padding: 0.65rem 0.9rem;
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: var(--text-muted);
-      border-bottom: 1px solid rgba(30,64,175,0.65);
-      background: linear-gradient(to right, rgba(15,23,42,0.96), rgba(30,64,175,0.5));
+    .capture-image:hover {
+      border-color: var(--border-hover);     /* resalta gris más marcado */
+      box-shadow: 0 14px 28px rgba(55,65,81,0.35);
+      transform: translateY(-1px);
     }
 
-    .text-card {
-      background: radial-gradient(circle at top left, rgba(56,189,248,0.16), transparent 60%);
-      border-radius: 1.25rem;
-      padding: 1.3rem 1.4rem 1.4rem;
-      border: 1px solid rgba(148,163,184,0.5);
-      box-shadow: 0 20px 45px rgba(15,23,42,0.75);
-    }
-    .text-card h3 {
-      font-size: 1rem;
-      margin-bottom: 0.4rem;
-    }
-    .text-meta {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 0.8rem;
-    }
-    .text-card p {
-      font-size: 0.9rem;
+    .capture-body {
+      font-size: 0.92rem;
       color: var(--text);
-      margin-bottom: 0.75rem;
+    }
+    .capture-body p {
+      margin-bottom: 0.55rem;
     }
 
     .pill-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
-      margin-bottom: 0.8rem;
+      gap: 0.35rem;
+      margin-bottom: 0.7rem;
     }
     .pill {
       font-size: 0.75rem;
-      padding: 0.18rem 0.6rem;
+      padding: 0.15rem 0.55rem;
       border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.5);
-      color: var(--text-muted);
-      background: rgba(15,23,42,0.9);
+      background: var(--accent-soft);
+      color: #7c2d12;
+      border: 1px solid rgba(248,113,22,0.3);
     }
 
     footer {
-      border-top: 1px solid rgba(15,23,42,0.9);
-      background: radial-gradient(circle at top, #020617, #020617);
+      border-top: 1px solid #e5e7eb;
+      background: #e5e7eb;
       color: var(--text-muted);
       font-size: 0.8rem;
-      padding: 1.2rem 1.5rem 1.5rem;
+      padding: 1rem 1.5rem 1.4rem;
     }
     .footer-inner {
       max-width: 1100px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
-      gap: 1rem;
       flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .header-inner { flex-direction: column; align-items: flex-start; }
+      nav { width: 100%; justify-content: flex-start; flex-wrap: wrap; }
+      main { padding-inline: 1rem; }
+      .capture { padding-inline: 0.9rem; }
     }
   </style>
 </head>
@@ -229,152 +241,155 @@
 <header>
   <div class="header-inner">
     <div class="logo">
-      <div class="logo-badge">NQ</div>
-      <span>Proyecto NanoQuijote</span>
+      <div class="logo-icon">NQ</div>
+      <div class="logo-text">
+        <span>Pre entrenamiento</span>
+        <span>Proyecto NanoQuijote · Documentación</span>
+      </div>
     </div>
     <nav>
-      <a href="#overview">Resumen</a>
+      <a href="#intro">Inicio</a>
       <a href="#capturas">Capturas</a>
-      <a href="#modelo">Modelo</a>
     </nav>
   </div>
 </header>
 
 <main>
-  <!-- Hero -->
-  <section class="hero" id="overview">
-    <div>
-      <h1 class="hero-title">Entrenamiento local de un modelo de lenguaje con el Quijote</h1>
-      <p class="hero-sub">
-        Documentación visual del flujo completo: desde la descarga del corpus hasta el entrenamiento,
-        configuración de hiperparámetros y generación de texto con un modelo tipo Transformer.
-      </p>
-      <div class="hero-meta">
-        <span class="badge">GPU RTX 4070 Ti</span>
-        <span class="badge">PyTorch · CUDA</span>
-        <span class="badge">Modelo ~10,8M parámetros</span>
-      </div>
+  <section class="hero" id="intro">
+    <h1 class="hero-title">Pre entrenamiento del modelo de lenguaje</h1>
+    <p class="hero-sub">
+      Flujo de trabajo desde la descarga del corpus del Quijote hasta el guardado del modelo entrenado,
+      documentado paso a paso con capturas claras y explicación debajo de cada imagen.
+    </p>
+    <div class="hero-tags">
+      <span class="tag">PowerShell</span>
+      <span class="tag">PyTorch · CUDA</span>
+      <span class="tag">Modelo de caracteres</span>
+      <span class="tag">Documentación técnica</span>
     </div>
-    <aside class="hero-panel" id="modelo">
-      <h2>Ficha rápida del experimento</h2>
-      <ul>
-        <li>Corpus: Don Quijote (Project Gutenberg).</li>
-        <li>Nivel: modelo de caracteres, estilo GPT mini.</li>
-        <li>Contexto: 256 caracteres por bloque.</li>
-        <li>Parámetros: 10.819.689 · ~41 MB.</li>
-        <li>Entrenamiento: 10.000 iteraciones, evaluación periódica.</li>
-      </ul>
-    </aside>
   </section>
 
   <section id="capturas">
+    <h2 class="section-title">Secuencia de capturas</h2>
 
     <!-- Captura 1 -->
-    <div class="grid">
-      <div class="image-card">
-        <div class="image-label">Captura 1 · Descarga del corpus</div>
-        <img src="image1.png" alt="Descarga y verificación del archivo quijote.txt en PowerShell" />
+    <article class="capture">
+      <div class="capture-header">
+        <div class="capture-title">Captura 1 · Descarga del corpus</div>
+        <div class="capture-tagline">Obtención y comprobación de <code>quijote.txt</code>.</div>
       </div>
-      <article class="text-card">
-        <h3>Descarga y verificación del corpus</h3>
-        <div class="text-meta">Uso de PowerShell para obtener el texto del Quijote desde Project Gutenberg.</div>
+      <div class="capture-image-wrapper">
+        <div class="capture-image">
+          <img src="image1.png" alt="Descarga y verificación del archivo quijote.txt en PowerShell" />
+        </div>
+      </div>
+      <div class="capture-body">
         <div class="pill-row">
           <span class="pill">Invoke-WebRequest</span>
           <span class="pill">Get-Content</span>
-          <span class="pill">Verificación inicial</span>
+          <span class="pill">Corpus Quijote</span>
         </div>
         <p>
-          En esta captura se utiliza el comando <code>Invoke-WebRequest</code> desde PowerShell para descargar el eBook
-          del Quijote desde Project Gutenberg y guardarlo localmente con el nombre <code>quijote.txt</code>.
+          En esta captura se utiliza el comando <code>Invoke-WebRequest</code> desde PowerShell para descargar
+          el eBook del Quijote desde Project Gutenberg y guardarlo localmente con el nombre <code>quijote.txt</code>.
         </p>
         <p>
-          A continuación se ejecuta <code>Get-Content "quijote.txt" -TotalCount 5</code>, mostrando las primeras cinco
-          líneas del archivo, donde se ve el encabezado de Project Gutenberg.
+          A continuación se ejecuta <code>Get-Content "quijote.txt" -TotalCount 5</code>, mostrando las primeras
+          cinco líneas del archivo, donde se ve el encabezado de Project Gutenberg.
         </p>
         <p>
           Esto permite comprobar que el archivo se ha descargado sin errores y que el contenido corresponde al libro
           que se va a usar como corpus para el entrenamiento.
         </p>
-      </article>
-    </div>
+      </div>
+    </article>
 
     <!-- Captura 2 -->
-    <div class="grid">
-      <div class="image-card">
-        <div class="image-label">Captura 2 · Creación del script</div>
-        <img src="image2.png" alt="Creación del archivo entrenar.py en la consola" />
+    <article class="capture">
+      <div class="capture-header">
+        <div class="capture-title">Captura 2 · Creación del script</div>
+        <div class="capture-tagline">Generación de <code>entrenar.py</code> con el código del modelo.</div>
       </div>
-      <article class="text-card">
-        <h3>Creación del script de entrenamiento</h3>
-        <div class="text-meta">Definición del código que prepara datos y modelo.</div>
+      <div class="capture-image-wrapper">
+        <div class="capture-image">
+          <img src="image2.png" alt="Creación del archivo entrenar.py en la consola" />
+        </div>
+      </div>
+      <div class="capture-body">
         <div class="pill-row">
           <span class="pill">Set-Content</span>
           <span class="pill">entrenar.py</span>
-          <span class="pill">Arquitectura Transformer</span>
+          <span class="pill">Preparación del entorno</span>
         </div>
         <p>
-          En esta captura se muestra el uso de <code>Set-Content -Path "entrenar.py" -Value @' ... '@</code> para crear
-          o sobrescribir el archivo <code>entrenar.py</code>.
+          En esta captura se muestra el uso de <code>Set-Content -Path "entrenar.py" -Value @' ... '@</code>
+          para crear o sobrescribir el archivo <code>entrenar.py</code>.
         </p>
         <p>
           Dentro de este bloque se introduce todo el código Python necesario para leer el archivo
-          <code>quijote.txt</code>, preparar los datos, definir la arquitectura del modelo de lenguaje basado en
-          Transformer y configurar los hiperparámetros de entrenamiento.
+          <code>quijote.txt</code>, preparar los datos, definir la arquitectura del modelo de lenguaje basado
+          en Transformer y configurar los hiperparámetros de entrenamiento.
         </p>
         <p>
           Con este paso queda generado el script que se utilizará para entrenar el modelo en las siguientes ejecuciones.
         </p>
-      </article>
-    </div>
+      </div>
+    </article>
 
     <!-- Captura 3 -->
-    <div class="grid">
-      <div class="image-card">
-        <div class="image-label">Captura 3 · Datos del entrenamiento</div>
-        <img src="image3.png" alt="Salida de consola con información de GPU, vocabulario y tokens" />
+    <article class="capture">
+      <div class="capture-header">
+        <div class="capture-title">Captura 3 · Datos del entrenamiento</div>
+        <div class="capture-tagline">GPU, vocabulario y tamaño del dataset.</div>
       </div>
-      <article class="text-card">
-        <h3>Inicio del entrenamiento y resumen de datos</h3>
-        <div class="text-meta">Uso de CUDA y preparación del dataset.</div>
+      <div class="capture-image-wrapper">
+        <div class="capture-image">
+          <img src="image3.png" alt="Salida de consola con información de GPU, vocabulario y tokens" />
+        </div>
+      </div>
+      <div class="capture-body">
         <div class="pill-row">
           <span class="pill">CUDA</span>
-          <span class="pill">Vocabulario de caracteres</span>
+          <span class="pill">105 caracteres</span>
           <span class="pill">Tokens train/val</span>
         </div>
         <p>
-          En esta captura se ejecuta <code>python entrenar.py</code> desde el entorno virtual del proyecto. La salida
-          del programa indica que se está utilizando el dispositivo <code>cuda</code> y muestra la GPU disponible
+          En esta captura se ejecuta <code>python entrenar.py</code> desde el entorno virtual del proyecto.
+          La salida indica que se está utilizando el dispositivo <code>cuda</code> y muestra la GPU disponible
           (NVIDIA GeForce RTX 4070 Ti) junto con la VRAM libre.
         </p>
         <p>
           Después se calcula el vocabulario de caracteres del corpus, mostrando el tamaño del vocabulario
-          (105 caracteres únicos) y el listado de caracteres detectados, junto con el número total de tokens generados a
-          partir del texto y su reparto entre entrenamiento y validación.
+          (105 caracteres únicos) y el listado de caracteres detectados, además del número total de tokens generados
+          a partir del texto y su reparto entre entrenamiento y validación.
         </p>
         <p>
-          Finalmente se indica el número total de parámetros del modelo y la memoria estimada que ocupa, lo que da una
-          idea de la complejidad y tamaño del modelo que se está entrenando.
+          Finalmente se indica el número total de parámetros del modelo y la memoria estimada que ocupa, lo que da
+          una idea de la complejidad y tamaño del modelo que se está entrenando.
         </p>
-      </article>
-    </div>
+      </div>
+    </article>
 
     <!-- Captura 4 -->
-    <div class="grid">
-      <div class="image-card">
-        <div class="image-label">Captura 4 · Evolución de las pérdidas</div>
-        <img src="image4.png" alt="Iteraciones de entrenamiento con Train Loss y Val Loss" />
+    <article class="capture">
+      <div class="capture-header">
+        <div class="capture-title">Captura 4 · Evolución de las pérdidas</div>
+        <div class="capture-tagline">Train Loss y Val Loss durante las iteraciones.</div>
       </div>
-      <article class="text-card">
-        <h3>Proceso de entrenamiento (métricas de pérdida)</h3>
-        <div class="text-meta">Seguimiento de Train Loss y Val Loss a lo largo de las iteraciones.</div>
+      <div class="capture-image-wrapper">
+        <div class="capture-image">
+          <img src="image4.png" alt="Iteraciones de entrenamiento con valores de Train Loss y Val Loss" />
+        </div>
+      </div>
+      <div class="capture-body">
         <div class="pill-row">
-          <span class="pill">10.000 iteraciones</span>
-          <span class="pill">Validación periódica</span>
-          <span class="pill">Overfitting controlado</span>
+          <span class="pill">Iteraciones</span>
+          <span class="pill">Monitorización</span>
+          <span class="pill">Generalización</span>
         </div>
         <p>
-          En esta captura se muestra el bucle de entrenamiento del modelo, donde periódicamente se imprime el estado de
-          la pérdida.
+          En esta captura se muestra el bucle de entrenamiento del modelo, donde periódicamente se imprime el estado
+          de la pérdida.
         </p>
         <p>
           Se indica el número de iteración y los valores de <code>Train Loss</code> y <code>Val Loss</code> cada 500
@@ -386,27 +401,30 @@
           patrones del texto del Quijote y reduciendo el error tanto en los datos de entrenamiento como en los de
           validación.
         </p>
-      </article>
-    </div>
+      </div>
+    </article>
 
     <!-- Captura 5 -->
-    <div class="grid">
-      <div class="image-card">
-        <div class="image-label">Captura 5 · Hiperparámetros</div>
-        <img src="image5.png" alt="Bloque de código con hiperparámetros del modelo" />
+    <article class="capture">
+      <div class="capture-header">
+        <div class="capture-title">Captura 5 · Hiperparámetros</div>
+        <div class="capture-tagline">Configuración optimizada para la RTX 4070 Ti.</div>
       </div>
-      <article class="text-card">
-        <h3>Hiperparámetros detallados</h3>
-        <div class="text-meta">Configuración ajustada para la RTX 4070 Ti.</div>
+      <div class="capture-image-wrapper">
+        <div class="capture-image">
+          <img src="image5.png" alt="Bloque de código con hiperparámetros del modelo" />
+        </div>
+      </div>
+      <div class="capture-body">
         <div class="pill-row">
           <span class="pill">batch_size = 64</span>
           <span class="pill">block_size = 256</span>
-          <span class="pill">n_layer = 6</span>
+          <span class="pill">n_head = 6</span>
           <span class="pill">dropout = 0.2</span>
         </div>
         <p>
-          En esta captura se recogen los hiperparámetros definidos en el script <code>entrenar.py</code>. Entre ellos se
-          encuentran <code>batch_size = 64</code>, <code>block_size = 256</code>, <code>max_iters = 10000</code> y
+          En esta captura se recogen los hiperparámetros definidos en el script <code>entrenar.py</code>. Entre ellos
+          se encuentran <code>batch_size = 64</code>, <code>block_size = 256</code>, <code>max_iters = 10000</code> y
           <code>eval_interval = 500</code>, además de la tasa de aprendizaje <code>learning_rate = 3e-4</code> y el
           dispositivo de cómputo configurado para usar CUDA cuando está disponible.
         </p>
@@ -416,25 +434,27 @@
           capas) y <code>dropout = 0.2</code>.
         </p>
         <p>
-          En los comentarios se explica que estos valores se han ajustado para aprovechar los 12 GB de VRAM de la
-          RTX 4070 Ti, permitir un contexto más largo y aumentar la capacidad del modelo respecto a una configuración
-          básica.
+          Estos valores se han ajustado para aprovechar los 12 GB de VRAM de la RTX 4070 Ti, permitir un contexto más
+          largo y aumentar la capacidad del modelo respecto a una configuración básica.
         </p>
-      </article>
-    </div>
+      </div>
+    </article>
 
     <!-- Captura 6 -->
-    <div class="grid">
-      <div class="image-card">
-        <div class="image-label">Captura 6 · Texto generado</div>
-        <img src="image6.png" alt="Bloque de texto generado por el modelo estilo Quijote" />
+    <article class="capture">
+      <div class="capture-header">
+        <div class="capture-title">Captura 6 · Texto generado</div>
+        <div class="capture-tagline">Salida de ejemplo tras completar el entrenamiento.</div>
       </div>
-      <article class="text-card">
-        <h3>Generación de texto tras el entrenamiento</h3>
-        <div class="text-meta">Salida de ejemplo del modelo ya entrenado.</div>
+      <div class="capture-image-wrapper">
+        <div class="capture-image">
+          <img src="image6.png" alt="Bloque de texto generado por el modelo con estilo del Quijote" />
+        </div>
+      </div>
+      <div class="capture-body">
         <div class="pill-row">
           <span class="pill">Modelo de caracteres</span>
-          <span class="pill">Estilo cervantino</span>
+          <span class="pill">Estilo Quijote</span>
           <span class="pill">quijote_model.pth</span>
         </div>
         <p>
@@ -447,21 +467,24 @@
         </p>
         <p>
           Al final de la salida aparece el mensaje “Modelo guardado como <code>quijote_model.pth</code>”, indicando que
-          los pesos entrenados se han almacenado en un archivo para poder reutilizar el modelo posteriormente sin tener
-          que reentrenarlo desde cero.
+          los pesos entrenados se han almacenado en un archivo para poder reutilizar el modelo posteriormente sin
+          tener que reentrenarlo desde cero.
         </p>
-      </article>
-    </div>
+      </div>
+    </article>
 
     <!-- Captura 7 -->
-    <div class="grid">
-      <div class="image-card">
-        <div class="image-label">Captura 7 · Nueva ejecución</div>
-        <img src="image7.png" alt="Nueva ejecución de entrenar.py guardando el modelo de nuevo" />
+    <article class="capture">
+      <div class="capture-header">
+        <div class="capture-title">Captura 7 · Nueva ejecución</div>
+        <div class="capture-tagline">Reutilización del script y guardado del modelo.</div>
       </div>
-      <article class="text-card">
-        <h3>Nueva ejecución y guardado del modelo</h3>
-        <div class="text-meta">Reutilización del script y confirmación del guardado.</div>
+      <div class="capture-image-wrapper">
+        <div class="capture-image">
+          <img src="image7.png" alt="Nueva ejecución de entrenar.py guardando el modelo de nuevo" />
+        </div>
+      </div>
+      <div class="capture-body">
         <div class="pill-row">
           <span class="pill">Re-entrenamiento</span>
           <span class="pill">Actualización de pesos</span>
@@ -480,19 +503,18 @@
           parámetros o simplemente volver a guardar el modelo actualizado, manteniendo siempre el archivo
           <code>quijote_model.pth</code> como salida final del proceso.
         </p>
-      </article>
-    </div>
+      </div>
+    </article>
 
   </section>
 </main>
 
 <footer>
   <div class="footer-inner">
-    <span>© 2026 · Proyecto NanoQuijote · Entrenamiento local de modelos de lenguaje.</span>
+    <span>© 2026 · Pre entrenamiento · Proyecto NanoQuijote.</span>
     <span>Autor de la documentación: [tu nombre]</span>
   </div>
 </footer>
 
 </body>
 </html>
-
