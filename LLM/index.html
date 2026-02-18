@@ -248,155 +248,153 @@
 
   <main>
     <section class="hero">
-      <h1>8 Etapas del Entrenamiento LLM Fútbol</h1>
-      <p>Documentación completa del proceso desde conversión GGUF hasta modelo especializado listo para inferencia</p>
-      <div class="status">✅ PROCESO COMPLETADO · Loss 0.0596</div>
+      <h1>8 Capturas del Proceso Completo LLM Fútbol</h1>
+      <p>Análisis detallado de cada etapa desde conversión GGUF hasta modelo funcionando</p>
+      <div class="status">✅ PROCESO COMPLETADO · Fine-tuning Exitoso</div>
     </section>
 
     <section class="stages">
-      <!-- ORDEN CORREGIDO: 8→2→7→3→4→5→1→6 -->
-      
-      <!-- ETAPA 1 = image8.png (Captura 8) -->
+      <!-- CAPTURA 1 -->
       <article class="stage">
         <div class="stage-header">
           <div>
-            <h2 class="stage-title">Etapa 1: Finalización del Entrenamiento</h2>
-            <p class="stage-subtitle">Modelo listo para inferencia</p>
-          </div>
-          <div class="stage-number">8</div>
-        </div>
-        <div class="stage-image">
-          <img src="image8.png" alt="Finalización entrenamiento">
-        </div>
-        <div class="stage-text">
-          Captura 8: Finalización del entrenamiento<br>
-          Últimas épocas (42-50): loss muy bajo (0.05-0.06), entrenamiento completo en 49.5 minutos (2.02 steps/s, train_loss 0.367). Mensaje final: "¡Modelo de fútbol guardado!" con barra de progreso 100/100.
-        </div>
-      </article>
-
-      <!-- ETAPA 2 = image2.png (Captura 2) -->
-      <article class="stage">
-        <div class="stage-header">
-          <div>
-            <h2 class="stage-title">Etapa 2: Datos de entrenamiento JSONL</h2>
-            <p class="stage-subtitle">JSONL fútbol para fine-tuning</p>
-          </div>
-          <div class="stage-number">2</div>
-        </div>
-        <div class="stage-image">
-          <img src="image2.png" alt="Dataset ejemplos 1-3">
-        </div>
-        <div class="stage-text">
-          Captura 2: Datos de entrenamiento JSONL<br>
-          Aparecen ejemplos de datos en formato JSONL para fine-tuning: preguntas sobre fútbol como "¿Quién ganó el último Mundial?" (respuesta: Argentina 2022), Balones de Oro de Messi (8), explicación de fuera de juego y más (alrededor de 14 ejemplos visibles).
-        </div>
-      </article>
-
-      <!-- ETAPA 3 = image7.png (Captura 7) -->
-      <article class="stage">
-        <div class="stage-header">
-          <div>
-            <h2 class="stage-title">Etapa 3: Progreso intermedio del entrenamiento</h2>
-            <p class="stage-subtitle">Epochs iniciales y caída de loss</p>
-          </div>
-          <div class="stage-number">7</div>
-        </div>
-        <div class="stage-image">
-          <img src="image7.png" alt="Progreso epochs iniciales">
-        </div>
-        <div class="stage-text">
-          Captura 7: Progreso intermedio del entrenamiento<br>
-          Épocas medias: loss disminuyendo progresivamente (de 2.16 en epoch 3 a 0.34 en epoch 11-12). Muestra grad_norm variable (0.6-1.7) y learning_rate estabilizándose. Procesamiento eficiente con GPU única.
-        </div>
-      </article>
-
-      <!-- ETAPA 4 = image3.png (Captura 3) -->
-      <article class="stage">
-        <div class="stage-header">
-          <div>
-            <h2 class="stage-title">Etapa 4: Comando de salida de archivo</h2>
-            <p class="stage-subtitle">Creación del JSONL en disco</p>
-          </div>
-          <div class="stage-number">3</div>
-        </div>
-        <div class="stage-image">
-          <img src="image3.png" alt="Comando salida archivo">
-        </div>
-        <div class="stage-text">
-          Captura 3: Comando de salida de archivo<br>
-          Se ejecuta un comando PowerShell "@ Out-File -FilePath 'futbol_data.jsonl' -Encoding utf8" para guardar los datos de entrenamiento en "futbol_data.jsonl". Esto prepara el dataset para el entrenamiento.
-        </div>
-      </article>
-
-      <!-- ETAPA 5 = image4.png (Captura 4) -->
-      <article class="stage">
-        <div class="stage-header">
-          <div>
-            <h2 class="stage-title">Etapa 5: Inicialización Unsloth y fusión</h2>
-            <p class="stage-subtitle">Fusión del modelo base + adapters</p>
-          </div>
-          <div class="stage-number">4</div>
-        </div>
-        <div class="stage-image">
-          <img src="image4.png" alt="Inicialización Unsloth y fusión">
-        </div>
-        <div class="stage-text">
-          Captura 4: Inicialización Unsloth y fusión<br>
-          Unsloth (versión 2026.2.1) parchea 28 capas del modelo base + adapters. Descarga archivos safetensors (model-00001 y 00002), fusiona pesos en 16-bit y guarda en "C:\LLM-Training\modelo_futbol_merged". Progreso al 100%.
-        </div>
-      </article>
-
-      <!-- ETAPA 6 = image5.png (Captura 5) -->
-      <article class="stage">
-        <div class="stage-header">
-          <div>
-            <h2 class="stage-title">Etapa 6: Tokenización e inicio del entrenamiento</h2>
-            <p class="stage-subtitle">Configuración de epochs y batch size</p>
-          </div>
-          <div class="stage-number">5</div>
-        </div>
-        <div class="stage-image">
-          <img src="image5.png" alt="Tokenización e inicio de entrenamiento">
-        </div>
-        <div class="stage-text">
-          Captura 5: Tokenización y inicio de entrenamiento<br>
-          Unsloth tokeniza el texto (100%). Inicia entrenamiento con "Num examples 14, Num Epochs = 50, Total steps = 100". Configuración: batch size 8, 0.75% parámetros entrenables (24M de 3.2B).
-        </div>
-      </article>
-
-      <!-- ETAPA 7 = image1.png (Captura 1) -->
-      <article class="stage">
-        <div class="stage-header">
-          <div>
-            <h2 class="stage-title">Etapa 7: Exportación a GGUF</h2>
+            <h2 class="stage-title">CAPTURA 1</h2>
             <p class="stage-subtitle">Conversión del modelo a formato GGUF</p>
           </div>
           <div class="stage-number">1</div>
         </div>
         <div class="stage-image">
-          <img src="image1.png" alt="Conversión GGUF">
+          <img src="image1.png" alt="Captura 1 - Conversión GGUF">
         </div>
         <div class="stage-text">
-          Captura 1: Exportación a GGUF<br>
-          Se completa la conversión de un modelo a formato GGUF. Muestra progreso de escritura (100%) del archivo "temp.gguf" de 6.4 GB en la carpeta "modelo_futbol_gguf". El proceso termina exitosamente con velocidad de 702 MB/s.
+          En esta imagen se observa la terminal ejecutando el proceso de conversión del modelo a formato GGUF, que es el formato utilizado para ejecutar modelos de lenguaje de forma local. El sistema inicia la cuantización del modelo y comienza a escribir los tensores necesarios dentro del archivo modelo_futbol_gguf.<br><br>
+          Durante el proceso aparece el progreso hasta llegar al 100%, indicando que todos los datos del modelo han sido exportados correctamente. Finalmente, el mensaje confirma que el modelo se ha exportado con éxito, lo que significa que ya está preparado para ser usado en aplicaciones locales de inteligencia artificial.
         </div>
       </article>
 
-      <!-- ETAPA 8 = image6.png (Captura 6) -->
+      <!-- CAPTURA 2 -->
       <article class="stage">
         <div class="stage-header">
           <div>
-            <h2 class="stage-title">Etapa 8: Descargas y primeras épocas</h2>
-            <p class="stage-subtitle">Inicio del entrenamiento y primeras métricas</p>
+            <h2 class="stage-title">CAPTURA 2</h2>
+            <p class="stage-subtitle">Conjunto de datos JSON para entrenamiento</p>
+          </div>
+          <div class="stage-number">2</div>
+        </div>
+        <div class="stage-image">
+          <img src="image2.png" alt="Captura 2 - Datos entrenamiento">
+        </div>
+        <div class="stage-text">
+          En esta imagen aparece el conjunto de datos utilizado para entrenar el modelo. Se muestra un formato tipo JSON donde cada ejemplo contiene instrucciones, entradas y respuestas relacionadas con el fútbol.<br><br>
+          Estos datos sirven para enseñar al modelo cómo debe responder, incluyendo preguntas sobre historia, reglas, jugadores y competiciones. Gracias a este dataset, el modelo aprende el estilo de respuesta y el conocimiento específico que luego aplicará durante las conversaciones.
+        </div>
+      </article>
+
+      <!-- CAPTURA 3 -->
+      <article class="stage">
+        <div class="stage-header">
+          <div>
+            <h2 class="stage-title">CAPTURA 3</h2>
+            <p class="stage-subtitle">Preparación Unsloth + HuggingFace</p>
+          </div>
+          <div class="stage-number">3</div>
+        </div>
+        <div class="stage-image">
+          <img src="image3.png" alt="Captura 3 - Preparación entrenamiento">
+        </div>
+        <div class="stage-text">
+          Aquí se muestra el inicio del proceso de preparación del entrenamiento mediante la herramienta Unsloth junto con HuggingFace. El sistema revisa la caché local para comprobar si los archivos necesarios del modelo ya existen.<br><br>
+          Al detectar que algunos archivos faltan, comienza automáticamente la descarga de los pesos del modelo en formato safetensors. Este paso es necesario para poder continuar con el entrenamiento personalizado.
+        </div>
+      </article>
+
+      <!-- CAPTURA 4 -->
+      <article class="stage">
+        <div class="stage-header">
+          <div>
+            <h2 class="stage-title">CAPTURA 4</h2>
+            <p class="stage-subtitle">Inicio del entrenamiento y métricas</p>
+          </div>
+          <div class="stage-number">4</div>
+        </div>
+        <div class="stage-image">
+          <img src="image4.png" alt="Captura 4 - Entrenamiento en progreso">
+        </div>
+        <div class="stage-text">
+          En esta captura comienza el entrenamiento del modelo. Se muestran diferentes parámetros técnicos como el número de ejemplos, el tamaño de los lotes (batch size), las épocas de entrenamiento y la tasa de aprendizaje.<br><br>
+          También aparece el valor de "loss", que mide el error del modelo. A medida que avanza el entrenamiento, este valor va disminuyendo, lo que indica que el modelo está aprendiendo correctamente a generar mejores respuestas.
+        </div>
+      </article>
+
+      <!-- CAPTURA 5 -->
+      <article class="stage">
+        <div class="stage-header">
+          <div>
+            <h2 class="stage-title">CAPTURA 5</h2>
+            <p class="stage-subtitle">Finalización del fine-tuning</p>
+          </div>
+          <div class="stage-number">5</div>
+        </div>
+        <div class="stage-image">
+          <img src="image5.png" alt="Captura 5 - Entrenamiento finalizado">
+        </div>
+        <div class="stage-text">
+          En esta imagen se observa la parte final del entrenamiento. Los registros continúan mostrando cómo el valor de pérdida sigue bajando hasta completar todas las épocas programadas.<br><br>
+          Al finalizar, el sistema guarda automáticamente el modelo entrenado y muestra un mensaje confirmando que el modelo de fútbol ha sido almacenado correctamente. Esto significa que el fine-tuning ha terminado con éxito.
+        </div>
+      </article>
+
+      <!-- CAPTURA 6 -->
+      <article class="stage">
+        <div class="stage-header">
+          <div>
+            <h2 class="stage-title">CAPTURA 6</h2>
+            <p class="stage-subtitle">Modelos instalados en el sistema</p>
           </div>
           <div class="stage-number">6</div>
         </div>
         <div class="stage-image">
-          <img src="image6.png" alt="Descargas y primeras épocas">
+          <img src="image6.png" alt="Captura 6 - Lista de modelos">
         </div>
         <div class="stage-text">
-          Captura 6: Descargas y primeras épocas<br>
-          Descargas de archivos (4.97G y 1.46G al 100%). Primeras validaciones (2/2) y épocas: losses iniciales altos (2.26 a 2.43), grad_norm y learning_rate aumentando (hasta epoch 3.57).
+          Esta captura muestra la interfaz donde aparecen los modelos instalados en el sistema. Se puede ver el modelo personalizado junto con otros modelos disponibles, incluyendo información como el tamaño, tipo de cuantización y fecha de modificación.<br><br>
+          La presencia del modelo en esta lista confirma que ha sido reconocido correctamente por el programa y está listo para utilizarse.
+        </div>
+      </article>
+
+      <!-- CAPTURA 7 -->
+      <article class="stage">
+        <div class="stage-header">
+          <div>
+            <h2 class="stage-title">CAPTURA 7</h2>
+            <p class="stage-subtitle">Configuración del preset "Fútbol asistente"</p>
+          </div>
+          <div class="stage-number">7</div>
+        </div>
+        <div class="stage-image">
+          <img src="image7.png" alt="Captura 7 - Configuración preset">
+        </div>
+        <div class="stage-text">
+          En esta imagen se visualiza la configuración de parámetros del modelo. Se ha creado un preset llamado "Fútbol asistente" y se define un System Prompt que establece el comportamiento del modelo.<br><br>
+          El texto indica que el asistente debe actuar como experto en fútbol, explicando reglas, historia y estadísticas de forma clara y en español. Esto controla la personalidad y el estilo de respuestas del modelo.
+        </div>
+      </article>
+
+      <!-- CAPTURA 8 -->
+      <article class="stage">
+        <div class="stage-header">
+          <div>
+            <h2 class="stage-title">CAPTURA 8</h2>
+            <p class="stage-subtitle">Modelo funcionando en chat</p>
+          </div>
+          <div class="stage-number">8</div>
+        </div>
+        <div class="stage-image">
+          <img src="image8.png" alt="Captura 8 - Modelo en acción">
+        </div>
+        <div class="stage-text">
+          En la última captura se muestra el modelo ya funcionando dentro del chat. El usuario realiza una pregunta sobre el fuera de juego y el modelo responde con una explicación estructurada y detallada.<br><br>
+          Esto demuestra que todo el proceso anterior —conversión, entrenamiento y configuración— ha funcionado correctamente, ya que el modelo responde siguiendo el rol de asistente experto en fútbol.
         </div>
       </article>
     </section>
@@ -404,7 +402,7 @@
 
   <footer>
     <div class="footer-content">
-      <p>© 2026 · Análisis Técnico LLM Fútbol | <strong>ORDEN: 8→2→7→3→4→5→1→6</strong> | 6.4GB | RTX 4070 Ti</p>
+      <p>© 2026 · Análisis Técnico LLM Fútbol | <strong>8 CAPTURAS COMPLETAS</strong> | Proceso desde GGUF hasta inferencia | Listo para entrega</p>
     </div>
   </footer>
 </body>
