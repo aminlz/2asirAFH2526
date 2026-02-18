@@ -289,18 +289,25 @@
           <span class="pill">Get-Content</span>
           <span class="pill">Corpus Quijote</span>
         </div>
-        <p>
-          En esta captura se utiliza el comando <code>Invoke-WebRequest</code> desde PowerShell para descargar
-          el eBook del Quijote desde Project Gutenberg y guardarlo localmente con el nombre <code>quijote.txt</code>.
-        </p>
-        <p>
-          A continuación se ejecuta <code>Get-Content "quijote.txt" -TotalCount 5</code>, mostrando las primeras
-          cinco líneas del archivo, donde se ve el encabezado de Project Gutenberg.
-        </p>
-        <p>
-          Esto permite comprobar que el archivo se ha descargado sin errores y que el contenido corresponde al libro
-          que se va a usar como corpus para el entrenamiento.
-        </p>
+        <h3>Captura 1 – Descarga y preparación del script</h3>
+<p>
+  En la primera captura se utiliza el comando <code>Invoke-WebRequest</code> para descargar el libro del Quijote desde
+  Project Gutenberg y guardarlo en un archivo llamado <code>quijote.txt</code>.
+</p>
+<p>
+  Después se ejecuta <code>Get-Content -TotalCount 5</code> para mostrar las primeras líneas del archivo y verificar
+  que la descarga se ha realizado correctamente.
+</p>
+<p>
+  A continuación se crea el archivo <code>entrenar.py</code> mediante <code>Set-Content</code>, introduciendo en él el
+  código encargado de preparar los datos y definir el modelo de lenguaje.
+</p>
+<p>
+  Finalmente, se ejecuta <code>python entrenar.py</code>, lo que pone en marcha el proceso de entrenamiento usando el
+  texto del Quijote como corpus.
+</p>
+
+<hr />
       </div>
     </article>
 
@@ -321,18 +328,28 @@
           <span class="pill">entrenar.py</span>
           <span class="pill">Preparación del entorno</span>
         </div>
-        <p>
-          En esta captura se muestra el uso de <code>Set-Content -Path "entrenar.py" -Value @' ... '@</code>
-          para crear o sobrescribir el archivo <code>entrenar.py</code>.
-        </p>
-        <p>
-          Dentro de este bloque se introduce todo el código Python necesario para leer el archivo
-          <code>quijote.txt</code>, preparar los datos, definir la arquitectura del modelo de lenguaje basado
-          en Transformer y configurar los hiperparámetros de entrenamiento.
-        </p>
-        <p>
-          Con este paso queda generado el script que se utilizará para entrenar el modelo en las siguientes ejecuciones.
-        </p>
+       <h3>Captura 2 – Información inicial del entrenamiento</h3>
+<p>
+  En la segunda captura se observa la salida inicial del script <code>entrenar.py</code>.
+</p>
+<p>
+  Primero se indica que se está utilizando el dispositivo <code>cuda</code> y la GPU disponible
+  (NVIDIA GeForce RTX 4070 Ti) junto con la memoria de vídeo libre.
+</p>
+<p>
+  A continuación se calcula el vocabulario de caracteres únicos del texto y se muestra el número total de tokens,
+  diferenciando entre tokens de entrenamiento y de validación.
+</p>
+<p>
+  También se imprime el número total de parámetros del modelo y una estimación de la memoria que ocupa.
+</p>
+<p>
+  Por último comienza el bucle de entrenamiento, donde se muestran las iteraciones y los valores de
+  <code>Train Loss</code> y <code>Val Loss</code>, lo que permite ver cómo el modelo va aprendiendo a medida que
+  avanza el entrenamiento.
+</p>
+
+<hr />
       </div>
     </article>
 
@@ -353,20 +370,25 @@
           <span class="pill">105 caracteres</span>
           <span class="pill">Tokens train/val</span>
         </div>
-        <p>
-          En esta captura se ejecuta <code>python entrenar.py</code> desde el entorno virtual del proyecto.
-          La salida indica que se está utilizando el dispositivo <code>cuda</code> y muestra la GPU disponible
-          (NVIDIA GeForce RTX 4070 Ti) junto con la VRAM libre.
-        </p>
-        <p>
-          Después se calcula el vocabulario de caracteres del corpus, mostrando el tamaño del vocabulario
-          (105 caracteres únicos) y el listado de caracteres detectados, además del número total de tokens generados
-          a partir del texto y su reparto entre entrenamiento y validación.
-        </p>
-        <p>
-          Finalmente se indica el número total de parámetros del modelo y la memoria estimada que ocupa, lo que da
-          una idea de la complejidad y tamaño del modelo que se está entrenando.
-        </p>
+        <h3>Captura 3 – Evolución de las pérdidas</h3>
+<p>
+  En esta captura se muestra el bucle de entrenamiento del modelo, donde periódicamente se imprime el estado de la
+  pérdida.
+</p>
+<p>
+  Se indica el número de iteración y los valores de <code>Train Loss</code> y <code>Val Loss</code> cada 500
+  iteraciones, comenzando en una pérdida de entrenamiento cercana a 4,89 y descendiendo progresivamente hasta valores
+  en torno a 0,93.
+</p>
+<p>
+  La pérdida de validación también disminuye desde aproximadamente 4,89 hasta alrededor de 1,35.
+</p>
+<p>
+  Esta evolución refleja que el modelo está aprendiendo patrones del texto del Quijote y reduciendo el error tanto en
+  los datos de entrenamiento como en los de validación a medida que avanzan las iteraciones.
+</p>
+
+<hr />
       </div>
     </article>
 
@@ -387,20 +409,30 @@
           <span class="pill">Monitorización</span>
           <span class="pill">Generalización</span>
         </div>
-        <p>
-          En esta captura se muestra el bucle de entrenamiento del modelo, donde periódicamente se imprime el estado
-          de la pérdida.
-        </p>
-        <p>
-          Se indica el número de iteración y los valores de <code>Train Loss</code> y <code>Val Loss</code> cada 500
-          iteraciones, comenzando en una pérdida de entrenamiento alta y descendiendo progresivamente hasta valores
-          mucho más bajos.
-        </p>
-        <p>
-          La pérdida de validación también disminuye de forma significativa, reflejando que el modelo está aprendiendo
-          patrones del texto del Quijote y reduciendo el error tanto en los datos de entrenamiento como en los de
-          validación.
-        </p>
+       <h3>Captura 4 – Hiperparámetros del modelo</h3>
+<p>
+  En esta captura se recogen los hiperparámetros definidos en el script <code>entrenar.py</code>.
+</p>
+<p>
+  Entre ellos se encuentran <code>batch_size = 64</code> (tamaño de lote), <code>block_size = 256</code>
+  (longitud del contexto de entrada), <code>max_iters = 10000</code> (número máximo de iteraciones)
+  y <code>eval_interval = 500</code> (frecuencia de evaluación).
+</p>
+<p>
+  También se especifica <code>learning_rate = 3e-4</code> y el dispositivo de cómputo
+  <code>device = 'cuda' if torch.cuda.is_available() else 'cpu'</code>.
+</p>
+<p>
+  Además, se detallan los parámetros de la arquitectura Transformer: <code>n_embd = 384</code>
+  (dimensión de los embeddings), <code>n_head = 6</code> (número de cabezas de atención),
+  <code>n_layer = 6</code> (número de capas) y <code>dropout = 0.2</code>.
+</p>
+<p>
+  En los comentarios se explica que estos valores se han ajustado para aprovechar los 12 GB de VRAM de la RTX 4070 Ti,
+  permitir un contexto más largo y aumentar la capacidad del modelo respecto a una configuración básica.
+</p>
+
+<hr />
       </div>
     </article>
 
@@ -422,21 +454,26 @@
           <span class="pill">n_head = 6</span>
           <span class="pill">dropout = 0.2</span>
         </div>
-        <p>
-          En esta captura se recogen los hiperparámetros definidos en el script <code>entrenar.py</code>. Entre ellos
-          se encuentran <code>batch_size = 64</code>, <code>block_size = 256</code>, <code>max_iters = 10000</code> y
-          <code>eval_interval = 500</code>, además de la tasa de aprendizaje <code>learning_rate = 3e-4</code> y el
-          dispositivo de cómputo configurado para usar CUDA cuando está disponible.
-        </p>
-        <p>
-          También se detallan los parámetros de la arquitectura Transformer: <code>n_embd = 384</code> (dimensión de
-          los embeddings), <code>n_head = 6</code> (número de cabezas de atención), <code>n_layer = 6</code> (número de
-          capas) y <code>dropout = 0.2</code>.
-        </p>
-        <p>
-          Estos valores se han ajustado para aprovechar los 12 GB de VRAM de la RTX 4070 Ti, permitir un contexto más
-          largo y aumentar la capacidad del modelo respecto a una configuración básica.
-        </p>
+       <h3>Captura 5 – Texto generado y guardado del modelo</h3>
+<p>
+  En esta captura se ve el mensaje “Entrenamiento completado! Generando texto...” seguido de un bloque de texto
+  generado por el modelo.
+</p>
+<p>
+  El contenido utiliza vocabulario y estructuras propias del Quijote, aunque con frases parcialmente incoherentes
+  debido al tamaño limitado del modelo y a que trabaja a nivel de caracteres.
+</p>
+<p>
+  Este resultado demuestra que el modelo ha aprendido a imitar el estilo del corpus, combinando palabras arcaicas
+  y giros lingüísticos característicos.
+</p>
+<p>
+  Al final de la salida aparece el mensaje “Modelo guardado como <code>quijote_model.pth</code>”, indicando que los
+  pesos entrenados se han almacenado en un archivo para poder reutilizar el modelo posteriormente sin necesidad de
+  reentrenarlo desde cero.
+</p>
+
+<hr />
       </div>
     </article>
 
@@ -458,57 +495,28 @@
           <span class="pill">Estilo Quijote</span>
           <span class="pill">quijote_model.pth</span>
         </div>
-        <p>
-          En esta captura se ve el mensaje “Entrenamiento completado! Generando texto...” seguido de un bloque de texto
-          generado por el modelo que imita el estilo del Quijote.
-        </p>
-        <p>
-          El contenido utiliza vocabulario y estructuras propias de la obra original, aunque con frases parcialmente
-          incoherentes debido al tamaño limitado del modelo y al hecho de trabajar a nivel de caracteres.
-        </p>
-        <p>
-          Al final de la salida aparece el mensaje “Modelo guardado como <code>quijote_model.pth</code>”, indicando que
-          los pesos entrenados se han almacenado en un archivo para poder reutilizar el modelo posteriormente sin
-          tener que reentrenarlo desde cero.
-        </p>
+       <h3>Captura 6 – Nueva ejecución y guardado del modelo</h3>
+<p>
+  En la última captura se muestra una nueva ejecución de <code>python entrenar.py</code> dentro del mismo entorno
+  virtual.
+</p>
+<p>
+  De nuevo se indica que se está utilizando la GPU <code>cuda</code> con la NVIDIA GeForce RTX 4070 Ti y la VRAM
+  disponible.
+</p>
+<p>
+  A continuación se muestra de forma directa el mensaje “Modelo guardado como <code>quijote_model.pth</code>”, sin
+  detallar todo el proceso de entrenamiento.
+</p>
+<p>
+  Esta captura refleja que el script puede ejecutarse varias veces para continuar el entrenamiento, ajustar parámetros
+  o simplemente volver a guardar el modelo actualizado, manteniendo siempre el archivo
+  <code>quijote_model.pth</code> como salida final del proceso.
+</p>
       </div>
     </article>
 
-    <!-- Captura 7 -->
-    <article class="capture">
-      <div class="capture-header">
-        <div class="capture-title">Captura 7 · Nueva ejecución</div>
-        <div class="capture-tagline">Reutilización del script y guardado del modelo.</div>
-      </div>
-      <div class="capture-image-wrapper">
-        <div class="capture-image">
-          <img src="image7.png" alt="Nueva ejecución de entrenar.py guardando el modelo de nuevo" />
-        </div>
-      </div>
-      <div class="capture-body">
-        <div class="pill-row">
-          <span class="pill">Re-entrenamiento</span>
-          <span class="pill">Actualización de pesos</span>
-          <span class="pill">Persistencia del modelo</span>
-        </div>
-        <p>
-          En la última captura se muestra una nueva ejecución de <code>python entrenar.py</code> dentro del mismo
-          entorno virtual, volviendo a utilizar la GPU configurada mediante CUDA.
-        </p>
-        <p>
-          La salida destaca principalmente el mensaje de que el modelo ha sido guardado como
-          <code>quijote_model.pth</code>, sin detallar todo el proceso de entrenamiento intermedio.
-        </p>
-        <p>
-          Esta captura refleja que el script puede ejecutarse varias veces para continuar el entrenamiento, ajustar
-          parámetros o simplemente volver a guardar el modelo actualizado, manteniendo siempre el archivo
-          <code>quijote_model.pth</code> como salida final del proceso.
-        </p>
-      </div>
-    </article>
-
-  </section>
-</main>
+   
 
 <footer>
   <div class="footer-inner">
