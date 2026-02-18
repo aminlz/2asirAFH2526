@@ -6,21 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
-      --bg: #f3f4f6;          /* gris claro de fondo */
+      --bg: #f8fafc;          /* gris muy claro */
       --bg-card: #ffffff;     /* tarjetas blancas */
-      --accent: #10b981;      /* verde fútbol/IA */
-      --accent-soft: #d1fae5; /* verde suave */
+      --accent: #f97316;      /* naranja principal */
+      --accent-soft: #fed7aa; /* naranja suave */
       --text: #111827;        /* gris muy oscuro */
       --text-muted: #6b7280;  /* gris medio */
-      --border: #d1d5db;      /* borde gris claro */
-      --border-hover: #9ca3af;/* borde hover imagen */
+      --border: #e2e8f0;      /* borde gris claro */
+      --border-hover: #fb923c;/* borde hover naranja */
+      --bg-gradient: linear-gradient(135deg, #fef3c7 0%, #fed7aa 50%, #fb923c 100%);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #e5e7eb 0, #f3f4f6 55%);
+      background: radial-gradient(circle at top, #f1f5f9 0%, #e2e8f0 70%, #cbd5e1 100%);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.7;
     }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
@@ -29,9 +30,9 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: linear-gradient(to right, #111827, #1f2937);
-      color: #f9fafb;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+      background: var(--bg-gradient);
+      color: #7c2d12;
+      box-shadow: 0 6px 16px rgba(249,115,22,0.25);
     }
     .header-inner {
       max-width: 1100px;
@@ -51,13 +52,14 @@
       width: 34px;
       height: 34px;
       border-radius: 12px;
-      background: radial-gradient(circle at 30% 30%, #d1fae5, #10b981);
+      background: radial-gradient(circle at 30% 30%, #ffffff, #fed7aa);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 700;
       font-size: 0.9rem;
-      color: #111827;
+      color: #dc2626;
+      box-shadow: 0 4px 12px rgba(249,115,22,0.4);
     }
     .logo-text {
       display: flex;
@@ -72,7 +74,7 @@
     }
     .logo-text span:last-child {
       font-size: 0.75rem;
-      color: #e5e7eb;
+      color: #92400e;
     }
     nav {
       display: flex;
@@ -80,12 +82,13 @@
       font-size: 0.85rem;
     }
     nav a {
-      color: #e5e7eb;
-      opacity: 0.8;
+      color: #7c2d12;
+      opacity: 0.9;
+      font-weight: 500;
     }
     nav a:hover {
       opacity: 1;
-      color: #10b981;
+      color: #b45309;
     }
 
     main {
@@ -95,33 +98,25 @@
     }
 
     .hero {
-      margin-bottom: 2.5rem;
+      margin-bottom: 3rem;
       text-align: left;
+      background: rgba(254,243,199,0.3);
+      padding: 2rem;
+      border-radius: 1rem;
+      border: 1px solid rgba(249,115,22,0.2);
     }
     .hero-title {
       font-size: clamp(2rem, 3.1vw, 2.7rem);
       font-weight: 800;
       letter-spacing: -0.03em;
-      color: #111827;
+      color: #7c2d12;
       margin-bottom: 0.4rem;
     }
     .hero-sub {
       color: var(--text-muted);
       max-width: 40rem;
       margin-bottom: 1.2rem;
-    }
-    .hero-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      font-size: 0.8rem;
-    }
-    .tag {
-      border-radius: 999px;
-      padding: 0.2rem 0.7rem;
-      border: 1px solid rgba(16,185,129,0.35);
-      background: rgba(255,255,255,0.9);
-      color: #065f46;
+      font-size: 1.05rem;
     }
 
     .section-title {
@@ -132,99 +127,121 @@
       align-items: center;
       gap: 0.6rem;
       color: #111827;
-    }
-    .section-title::before {
-      content: "";
-      width: 5px;
-      height: 20px;
-      border-radius: 999px;
-      background: linear-gradient(to bottom, #10b981, #34d399);
+      background: var(--bg-gradient);
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 12px rgba(249,115,22,0.2);
     }
 
     .capture {
-      margin-bottom: 2rem;
+      margin-bottom: 2.5rem;
       background: var(--bg-card);
-      border-radius: 1rem;
-      padding: 1.1rem 1.1rem 1.2rem;
+      border-radius: 1.2rem;
+      padding: 1.5rem;
       border: 1px solid var(--border);
-      box-shadow: 0 12px 30px rgba(15,23,42,0.09);
+      box-shadow: 0 20px 40px rgba(15,23,42,0.08);
+      transition: all 0.3s ease;
+    }
+    .capture:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 25px 50px rgba(15,23,42,0.12);
     }
     .capture-header {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
       gap: 0.5rem;
-      margin-bottom: 0.8rem;
-      border-bottom: 1px dashed #e5e7eb;
-      padding-bottom: 0.4rem;
+      margin-bottom: 1rem;
+      border-bottom: 2px solid rgba(249,115,22,0.3);
+      padding-bottom: 0.6rem;
     }
     .capture-title {
-      font-size: 0.95rem;
-      font-weight: 600;
-      color: #111827;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #7c2d12;
     }
     .capture-tagline {
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       color: var(--text-muted);
+      font-style: italic;
     }
 
     .capture-image-wrapper {
-      margin-bottom: 0.9rem;
+      margin-bottom: 1.2rem;
+      background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      border-radius: 1rem;
+      padding: 0.5rem;
+      border: 2px solid var(--border);
     }
     .capture-image {
-      border-radius: 0.85rem;
-      border: 2px solid var(--border);
+      border-radius: 0.9rem;
+      border: 3px solid transparent;
       overflow: hidden;
-      transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.15s ease;
+      transition: all 0.25s ease;
       background: #111827;
+      aspect-ratio: 16/9;
+      width: 100%;
     }
     .capture-image img {
       display: block;
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
     }
     .capture-image:hover {
-      border-color: var(--border-hover);
-      box-shadow: 0 14px 28px rgba(55,65,81,0.35);
-      transform: translateY(-1px);
+      border-color: var(--accent);
+      box-shadow: 0 20px 40px rgba(249,115,22,0.25);
+      transform: scale(1.02);
     }
 
     .capture-body {
-      font-size: 0.92rem;
+      font-size: 0.95rem;
       color: var(--text);
+      background: linear-gradient(135deg, #fef7ff 0%, #f0f9ff 100%);
+      padding: 1.5rem;
+      border-radius: 0.8rem;
+      border-left: 4px solid var(--accent);
+      line-height: 1.75;
     }
     .capture-body p {
-      margin-bottom: 0.55rem;
+      margin-bottom: 0.8rem;
     }
     .capture-body code {
-      background: #f3f4f6;
-      padding: 0.1rem 0.3rem;
-      border-radius: 4px;
+      background: rgba(249,115,22,0.15);
+      padding: 0.15rem 0.4rem;
+      border-radius: 6px;
       font-family: 'Monaco', monospace;
-      font-size: 0.9em;
+      font-size: 0.88em;
+      color: #7c2d12;
+    }
+    .capture-body strong {
+      color: #b45309;
     }
 
     .pill-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.35rem;
-      margin-bottom: 0.7rem;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
     }
     .pill {
-      font-size: 0.75rem;
-      padding: 0.15rem 0.55rem;
+      font-size: 0.78rem;
+      padding: 0.2rem 0.65rem;
       border-radius: 999px;
       background: var(--accent-soft);
-      color: #065f46;
-      border: 1px solid rgba(16,185,129,0.3);
+      color: #7c2d12;
+      border: 1px solid rgba(249,115,22,0.4);
+      font-weight: 600;
     }
 
     footer {
-      border-top: 1px solid #e5e7eb;
-      background: #e5e7eb;
-      color: var(--text-muted);
-      font-size: 0.8rem;
-      padding: 1rem 1.5rem 1.4rem;
+      border-top: 2px solid rgba(249,115,22,0.3);
+      background: var(--bg-gradient);
+      color: #92400e;
+      font-size: 0.85rem;
+      padding: 1.5rem 1.5rem 2rem;
+      margin-top: 3rem;
     }
     .footer-inner {
       max-width: 1100px;
@@ -237,9 +254,10 @@
 
     @media (max-width: 768px) {
       .header-inner { flex-direction: column; align-items: flex-start; }
-      nav { width: 100%; justify-content: flex-start; flex-wrap: wrap; }
+      nav { width: 100%; justify-content: flex-start; flex-wrap: wrap; margin-top: 0.5rem; }
       main { padding-inline: 1rem; }
-      .capture { padding-inline: 0.9rem; }
+      .capture { padding: 1.2rem; }
+      .capture-body { padding: 1.2rem; font-size: 0.92rem; }
     }
   </style>
 </head>
@@ -251,7 +269,7 @@
       <div class="logo-icon">FA</div>
       <div class="logo-text">
         <span>Fine-Tuning</span>
-        <span>FútbolAl · Documentación</span>
+        <span>FútbolAl · Documentación Técnica</span>
       </div>
     </div>
     <nav>
@@ -265,142 +283,91 @@
   <section class="hero" id="intro">
     <h1 class="hero-title">Fine-Tuning Qwen2 con Unsloth</h1>
     <p class="hero-sub">
-      Proceso completo desde los logs finales del entrenamiento hasta la interfaz de FútbolAl lista para chat,
-      ejecutado en RTX 4070 Ti con optimizaciones LoRA + PEFT.
+      Documentación completa del proceso en RTX 4070 Ti - De los logs finales hasta FútbolAl listo para chat
     </p>
-    <div class="hero-tags">
-      <span class="tag">Unsloth</span>
-      <span class="tag">Qwen2 · LoRA</span>
-      <span class="tag">RTX 4070 Ti</span>
-      <span class="tag">FútbolAl</span>
-    </div>
   </section>
 
   <section id="capturas">
     <h2 class="section-title">Secuencia de capturas</h2>
 
-    <!-- Captura 1: Logs finales -->
+    <!-- Captura 1: image3.png -->
     <article class="capture">
       <div class="capture-header">
-        <div class="capture-title">Captura 1 · Logs finales</div>
-        <div class="capture-tagline">Métricas de loss, gradnorm y learning rate en epoch 50.</div>
+        <div class="capture-title">Captura 1 · Logs Finales</div>
+        <div class="capture-tagline">Métricas finales del entrenamiento Qwen2</div>
       </div>
       <div class="capture-image-wrapper">
         <div class="capture-image">
-          <img src="image1.png" alt="Logs finales del fine-tuning Qwen2" />
+          <img src="image3.png" alt="Logs finales fine-tuning Qwen2 Unsloth" />
         </div>
       </div>
       <div class="capture-body">
         <div class="pill-row">
           <span class="pill">loss 0.0131</span>
-          <span class="pill">gradnorm 0.17</span>
-          <span class="pill">epoch 50.0</span>
+          <span class="pill">RTX 4070 Ti</span>
+          <span class="pill">Torch 2.5.1</span>
+          <span class="pill">epoch 50</span>
         </div>
-        <h3>Captura 1 – Métricas finales del entrenamiento</h3>
-        <p>
-          Loss desciende de 0.0151 a 0.0131 mostrando convergencia exitosa. Gradnorm estable (0.04-0.17),
-          learning rate lineal de <code>2.3e-05</code> a <code>2.1e-06</code>.
-        </p>
-        <p>
-          <strong>Resumen:</strong> <code>trainruntime 95.6s</code>, <code>trainloss 0.308</code>, 50 épocas completadas.[file:1]
-        </p>
+        <p>Esta captura inicial muestra los logs finales del proceso de fine-tuning de un modelo Qwen2 usando Unsloth en una NVIDIA GeForce RTX 4070 Ti bajo Windows con Torch 2.5.1 y CUDA 12.1. Cada línea registra métricas clave por paso: <strong>'loss'</strong> (pérdida, que mide el error del modelo y baja de 0.0151 a 0.0131, indicando convergencia exitosa), <strong>'grad_norm'</strong> (norma del gradiente, que controla la estabilidad del descenso de gradiente, manteniéndose baja ~0.04-0.17), <strong>'learning_rate'</strong> (tasa de aprendizaje, decreciendo linealmente de 2.3e-05 a 2.1e-06 para evitar oscilaciones finales) y <strong>'epoch'</strong> (avance hasta la época 50.0). Al final, resume <code>train_runtime (95.6s)</code>, samples/steps por segundo, <code>train_loss global (0.308)</code> y confirma 50 épocas completadas.</p>
         <hr />
       </div>
     </article>
 
-    <!-- Captura 2: Barra progreso -->
+    <!-- Captura 2: image4.png -->
     <article class="capture">
       <div class="capture-header">
-        <div class="capture-title">Captura 2 · Progreso SFT</div>
-        <div class="capture-tagline">100/100 steps completados en 135s.</div>
+        <div class="capture-title">Captura 2 · Barra Progreso</div>
+        <div class="capture-tagline">SFT completado al 100%</div>
       </div>
       <div class="capture-image-wrapper">
         <div class="capture-image">
-          <img src="image2.png" alt="Barra de progreso al 100% SFT" />
+          <img src="image4.png" alt="Barra de progreso SFT 100%" />
         </div>
       </div>
       <div class="capture-body">
         <div class="pill-row">
-          <span class="pill">SFT completado</span>
-          <span class="pill">1.05 its/s</span>
-          <span class="pill">135s total</span>
-        </div>
-        <h3>Captura 2 – Finalización Supervised Fine-Tuning</h3>
-        <p>
-          Barra de progreso al <strong>100%</strong> (<code>100/100 steps</code>) confirma finalización exitosa del
-          entrenamiento supervisado SFT (Supervised Fine-Tuning).[file:1]
-        </p>
-        <hr />
-      </div>
-    </article>
-
-    <!-- Captura 3: Optimizaciones Unsloth -->
-    <article class="capture">
-      <div class="capture-header">
-        <div class="capture-title">Captura 3 · Unsloth</div>
-        <div class="capture-tagline">Parcheo QKV + MLP para 2x velocidad.</div>
-      </div>
-      <div class="capture-image-wrapper">
-        <div class="capture-image">
-          <img src="image3.png" alt="Optimizaciones Unsloth v2026.2.1" />
-        </div>
-      </div>
-      <div class="capture-body">
-        <div class="pill-row">
+          <span class="pill">SFT 100%</span>
+          <span class="pill">1.05it/s</span>
           <span class="pill">Unsloth 2026.2.1</span>
-          <span class="pill">28 capas QKV</span>
           <span class="pill">bfloat16</span>
         </div>
-        <h3>Captura 3 – Optimizaciones de Unsloth</h3>
-        <p>
-          Unsloth <code>v2026.2.1</code> parchea automáticamente 28 capas QKV (Query-Key-Value) y MLP del modelo base Qwen2.
-          Optimiza para <strong>2x velocidad</strong> y <strong>70% menos memoria</strong>.
-        </p>
-        <p>
-          Carga shards del checkpoint con <code>bfloat16</code> usando 11.99GB de la RTX 4070 Ti.[file:1]
-        </p>
+        <p>Aquí aparece la barra de progreso al 100% (100/100 steps en 1:35 a 1.05it/s), indicando finalización del entrenamiento supervisado (SFT). Unsloth (versión 2026.2.1) parchea automáticamente 28 capas QKV (Query-Key-Value para atención) y MLP (perceptrones multicapa) del modelo base Qwen2, optimizando para velocidad 2x con 70% menos memoria. Carga shards del checkpoint y habilita <code>bfloat16</code> para precisión eficiente en GPU (11.99GB usados de 1 GPU).</p>
         <hr />
       </div>
     </article>
 
-    <!-- Captura 4: Fusión LoRA -->
+    <!-- Captura 3: image1.png -->
     <article class="capture">
       <div class="capture-header">
-        <div class="capture-title">Captura 4 · LoRA</div>
-        <div class="capture-tagline">Fusión del adaptador al modelo base 4-bit.</div>
+        <div class="capture-title">Captura 3 · Fusión LoRA</div>
+        <div class="capture-tagline">Adaptador LoRA fusionado al modelo base</div>
       </div>
       <div class="capture-image-wrapper">
         <div class="capture-image">
-          <img src="image4.png" alt="Fusión LoRA y advertencia PEFT" />
+          <img src="image1.png" alt="Fusión LoRA PEFT" />
         </div>
       </div>
       <div class="capture-body">
         <div class="pill-row">
-          <span class="pill">LoRA 1% params</span>
+          <span class="pill">LoRA 1%</span>
           <span class="pill">4-bit quant</span>
-          <span class="pill">.futbolmodelmerged</span>
+          <span class="pill">futbol_model_merged</span>
+          <span class="pill">PEFT</span>
         </div>
-        <h3>Captura 4 – Fusión LoRA + PEFT</h3>
-        <p>
-          Fusión del adaptador LoRA (solo <code>1%</code> parámetros entrenados) al modelo base cuantizado 4-bit,
-          generando <code>.futbolmodelmerged</code>.
-        </p>
-        <p>
-          Advertencia PEFT sobre diferencias por redondeo en capas <code>bnb</code>. Cierre PowerShell venv listo para inferencia.[file:1]
-        </p>
+        <p>Esta sección detalla la fusión del adaptador LoRA (Low-Rank Adaptation, que entrena solo ~1% de parámetros para eficiencia) al modelo base en 4-bit quantization, generando <code>./futbol_model_merged</code>. La advertencia de PEFT (Parameter-Efficient Fine-Tuning) advierte sobre posibles diferencias en generaciones por errores de redondeo en capas lineales bnb (bitsandbytes). Finaliza con cierre de PowerShell en entorno venv (virtualenv), confirmando guardado listo para inferencia.</p>
         <hr />
       </div>
     </article>
 
-    <!-- Captura 5: Interfaz final -->
+    <!-- Captura 4: image2.png -->
     <article class="capture">
       <div class="capture-header">
-        <div class="capture-title">Captura 5 · FútbolAl</div>
-        <div class="capture-tagline">Interfaz LM Studio/Ollama lista para chat.</div>
+        <div class="capture-title">Captura 4 · Interfaz Launcher</div>
+        <div class="capture-tagline">FútbolAl en LM Studio/Ollama</div>
       </div>
       <div class="capture-image-wrapper">
         <div class="capture-image">
-          <img src="image5.png" alt="FútbolAl system prompt en launcher" />
+          <img src="image2.png" alt="Launcher preset Fútbol" />
         </div>
       </div>
       <div class="capture-body">
@@ -408,16 +375,32 @@
           <span class="pill">FútbolAl</span>
           <span class="pill">51 tokens</span>
           <span class="pill">LM Studio</span>
+          <span class="pill">Ready</span>
         </div>
-        <h3>Captura 5 – FútbolAl listo para producción</h3>
-        <p>
-          Interfaz final con preset <strong>FútbolAl</strong>: "Experto en táctica, historia, reglamento, análisis partidos
-          y stats. Responde precisa y apasionadamente" (<code>51 tokens</code>).[file:1]
-        </p>
-        <p>
-          Opciones <code>Save/Discard</code>, <code>Ctrl+E</code>. ¡Modelo fusionado listo para chat interactivo!
-        </p>
+        <p>La captura final muestra la interfaz de un launcher o playground (probablemente LM Studio u Ollama) con preset "Futbol". El editor de system prompt define "FútbolAl" como un experto en táctica, historia, reglamento, análisis de partidos y estadísticas, con instrucciones para respuestas precisas y apasionadas (51 tokens). Incluye opciones como "Save/Discard", <code>Ctrl+E</code> para editar y barras de carga al 100%, preparando el modelo fusionado para chat interactivo sobre fútbol.</p>
         <hr />
+      </div>
+    </article>
+
+    <!-- Captura 5: image5.png -->
+    <article class="capture">
+      <div class="capture-header">
+        <div class="capture-title">Captura 5 · System Prompt</div>
+        <div class="capture-tagline">Editor Ctrl+E del prompt FútbolAl</div>
+      </div>
+      <div class="capture-image-wrapper">
+        <div class="capture-image">
+          <img src="image5.png" alt="Editor system prompt FútbolAl" />
+        </div>
+      </div>
+      <div class="capture-body">
+        <div class="pill-row">
+          <span class="pill">System Prompt</span>
+          <span class="pill">Ctrl+E</span>
+          <span class="pill">Save/Discard</span>
+          <span class="pill">51 tokens</span>
+        </div>
+        <p><strong>Editor (Ctrl+E) del prompt:</strong> "Eres FútbolAl, experto en táctica, historia, reglamento, análisis partidos y stats. Respondes precisa y apasionadamente" (51 tokens). Opciones Save/Discard, prepara modelo merged para chats fútbol-specific, integrando conocimiento fine-tuned del dataset.</p>
       </div>
     </article>
   </section>
@@ -425,8 +408,8 @@
 
 <footer>
   <div class="footer-inner">
-    <span>© 2026 · Fine-Tuning · FútbolAl.</span>
-    <span>RTX 4070 Ti · Unsloth + Qwen2</span>
+    <span>© 2026 · Fine-Tuning Qwen2 · FútbolAl</span>
+    <span>RTX 4070 Ti · Unsloth v2026.2.1 · LoRA + PEFT</span>
   </div>
 </footer>
 
