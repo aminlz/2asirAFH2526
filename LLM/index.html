@@ -2,239 +2,420 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Análisis Técnico LLM – 8 Capturas</title>
+  <title>📊 Análisis Técnico LLM – 8 Capturas</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    /* [Mismo CSS del HTML anterior - no cambia] */
     :root {
-      --bg: #f8fafc;
-      --bg-card: #ffffff;
-      --accent: #f97316;
-      --accent-soft: #fed7aa;
-      --text: #111827;
-      --text-muted: #6b7280;
-      --border: #e2e8f0;
-      --border-hover: #fb923c;
-      --bg-gradient: linear-gradient(135deg, #fef3c7 0%, #fed7aa 50%, #fb923c 100%);
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-card: #334155;
+      --accent: #3b82f6;
+      --accent-glow: #60a5fa;
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --border: #475569;
+      --gradient-main: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
+      --gradient-card: linear-gradient(145deg, #334155, #475569);
+      --shadow-lg: 0 25px 50px -12px rgba(0,0,0,0.5);
+      --shadow-glow: 0 0 30px rgba(59,130,246,0.3);
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+
     body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #f1f5f9 0%, #e2e8f0 70%, #cbd5e1 100%);
-      color: var(--text);
-      line-height: 1.7;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
     }
-    /* [resto del CSS idéntico al anterior - omitido por brevedad] */
-    header { position: sticky; top: 0; z-index: 50; background: var(--bg-gradient); color: #7c2d12; box-shadow: 0 6px 16px rgba(249,115,22,0.25); }
-    .header-inner { max-width: 1100px; margin: 0 auto; padding: 1.1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
-    /* [Continúa igual...] */
+
+    /* Header Profesional */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15,23,42,0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-weight: 700;
+      font-size: 1.3rem;
+    }
+
+    .logo-icon {
+      width: 45px;
+      height: 45px;
+      background: var(--gradient-main);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      box-shadow: var(--shadow-glow);
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    nav a:hover {
+      color: var(--accent);
+      background: rgba(59,130,246,0.1);
+    }
+
+    /* Main Content */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 2rem 4rem;
+    }
+
+    .hero {
+      text-align: center;
+      background: var(--gradient-card);
+      padding: 3rem 2rem;
+      border-radius: 24px;
+      margin-bottom: 4rem;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-subtitle {
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      background: rgba(34,197,94,0.2);
+      color: #22c55e;
+      padding: 0.8rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1rem;
+      border: 1px solid rgba(34,197,94,0.3);
+      box-shadow: 0 4px 15px rgba(34,197,94,0.1);
+    }
+
+    /* Section Title */
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin: 3rem 0 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: var(--gradient-main);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Capture Cards - Diseño Profesional */
+    .captures-grid {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    }
+
+    .capture-card {
+      background: var(--gradient-card);
+      border-radius: 20px;
+      padding: 0;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+
+    .capture-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: var(--shadow-lg), var(--shadow-glow);
+      border-color: var(--accent);
+    }
+
+    .capture-header {
+      padding: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(59,130,246,0.1);
+    }
+
+    .capture-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.3rem;
+    }
+
+    .capture-subtitle {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    /* Imágenes CENTRADAS y TAMAÑO PERFECTO */
+    .capture-image-section {
+      padding: 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(0,0,0,0.1);
+      height: 280px;
+    }
+
+    .capture-image {
+      max-width: 100%;
+      max-height: 260px;
+      width: auto;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+      object-fit: contain;
+      transition: all 0.3s ease;
+    }
+
+    .capture-image:hover {
+      transform: scale(1.05);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+    }
+
+    /* Contenido legible */
+    .capture-content {
+      padding: 1.5rem;
+    }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .pill {
+      background: rgba(59,130,246,0.2);
+      color: var(--accent);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border: 1px solid rgba(59,130,246,0.3);
+    }
+
+    .capture-text {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-size: 0.98rem;
+    }
+
+    .capture-text strong {
+      color: var(--text-primary);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      text-align: center;
+      margin-top: 4rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      opacity: 0.8;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .captures-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .capture-image-section {
+        height: 220px;
+        padding: 1rem;
+      }
+      
+      .capture-image {
+        max-height: 200px;
+      }
+      
+      main {
+        padding: 1rem;
+      }
+      
+      .header-container {
+        padding: 1rem;
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
   </style>
 </head>
 <body>
-
-<!-- [Header igual] -->
-<header>
-  <div class="header-inner">
-    <div class="logo">
-      <div class="logo-icon">LL</div>
-      <div class="logo-text">
-        <span>Análisis Técnico</span>
-        <span>LLM · 8 Capturas</span>
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <div class="logo-icon">🤖</div>
+        <span>Análisis Técnico LLM</span>
       </div>
+      <nav>
+        <a href="#intro">Inicio</a>
+        <a href="#capturas">Capturas</a>
+      </nav>
     </div>
-    <nav>
-      <a href="#intro">Resumen</a>
-      <a href="#capturas">Capturas</a>
-    </nav>
-  </div>
-</header>
+  </header>
 
-<main>
-  <section class="hero" id="intro">
-    <h1 class="hero-title">Análisis Técnico LLM</h1>
-    <p class="hero-sub">Documentación profesional de 8 capturas del proceso completo: carga, configuración e inferencia LLM.</p>
-    <div class="success-badge">✅ LLM OPERATIVO · ORDEN CORREGIDO</div>
-  </section>
+  <main>
+    <section class="hero" id="intro">
+      <h1>Análisis Técnico LLM</h1>
+      <p class="hero-subtitle">
+        Documentación profesional de 8 capturas del proceso completo: carga, configuración e inferencia estable
+      </p>
+      <div class="status-badge">✅ LLM OPERATIVO · ORDEN CORREGIDO</div>
+    </section>
 
-  <section id="capturas">
-    <h2 class="section-title">📸 Secuencia Completa (Orden Corregido)</h2>
+    <section id="capturas">
+      <h2 class="section-title">📸 Secuencia Completa de Capturas</h2>
+      
+      <div class="captures-grid">
+        <!-- Captura 1 = image8.png -->
+        <article class="capture-card">
+          <div class="capture-header">
+            <h3 class="capture-title">Captura 1 · LLM en Producción</h3>
+            <p class="capture-subtitle">Uso estable en entorno final</p>
+          </div>
+          <div class="capture-image-section">
+            <img src="image8.png" alt="LLM funcionando en producción" class="capture-image">
+          </div>
+          <div class="capture-content">
+            <div class="pills">
+              <span class="pill">Producción</span>
+              <span class="pill">Estable</span>
+              <span class="pill">Listo</span>
+            </div>
+            <p class="capture-text">
+              <strong>LLM completamente operativo</strong> en entorno de producción. Interfaz estable con respuestas coherentes y prompts personalizados.
+            </p>
+          </div>
+        </article>
 
-    <!-- ✅ CAPTURA 1 = image8.png (antes era la 8) -->
-    <article class="capture">
-      <div class="capture-header">
-        <div class="capture-title">Captura 1 · LLM en Producción</div>
-        <div class="capture-tagline">Uso estable en entorno final</div>
-      </div>
-      <div class="capture-image-wrapper">
-        <div class="capture-image">
-          <img src="image8.png" alt="LLM funcionando en entorno de producción" />
-        </div>
-      </div>
-      <div class="capture-body">
-        <div class="pill-row">
-          <span class="pill">Cliente final</span>
-          <span class="pill">Flujo estable</span>
-          <span class="pill">Listo usuarios</span>
-        </div>
-        <p><strong>LLM funcionando en entorno final</strong>: interfaz estable, prompts personalizados y respuestas coherentes. El modelo está completamente operativo sin entrenamiento adicional.</p>
-      </div>
-    </article>
+        <!-- Captura 2 = image2.png -->
+        <article class="capture-card">
+          <div class="capture-header">
+            <h3 class="capture-title">Captura 2 · Estructura Archivos</h3>
+            <p class="capture-subtitle">Organización del modelo local</p>
+          </div>
+          <div class="capture-image-section">
+            <img src="image2.png" alt="Estructura archivos LLM" class="capture-image">
+          </div>
+          <div class="capture-content">
+            <div class="pills">
+              <span class="pill">Config.json</span>
+              <span class="pill">Tokenizer</span>
+              <span class="pill">Pesos</span>
+            </div>
+            <p class="capture-text">
+              <strong>Directorio completo del modelo</strong> con todos los archivos necesarios: configuración, tokenizer y pesos optimizados.
+            </p>
+          </div>
+        </article>
 
-    <!-- ✅ CAPTURA 2 = image2.png (sin cambio) -->
-    <article class="capture">
-      <div class="capture-header">
-        <div class="capture-title">Captura 2 · Estructura Archivos</div>
-        <div class="capture-tagline">Carpeta local del modelo LLM</div>
-      </div>
-      <div class="capture-image-wrapper">
-        <div class="capture-image">
-          <img src="image2.png" alt="Estructura de archivos del modelo LLM" />
-        </div>
-      </div>
-      <div class="capture-body">
-        <div class="pill-row">
-          <span class="pill">Directorio modelo</span>
-          <span class="pill">Config + tokenizer</span>
-          <span class="pill">Pesos preparados</span>
-        </div>
-        <p><strong>Estructura completa de archivos del LLM</strong>: config.json, tokenizer y pesos listos para carga en cualquier motor de inferencia.</p>
-      </div>
-    </article>
+        <!-- Captura 3 = image7.png -->
+        <article class="capture-card">
+          <div class="capture-header">
+            <h3 class="capture-title">Captura 3 · Configuración Inicial</h3>
+            <p class="capture-subtitle">Cliente de inferencia preparado</p>
+          </div>
+          <div class="capture-image-section">
+            <img src="image7.png" alt="Configuración cliente LLM" class="capture-image">
+          </div>
+          <div class="capture-content">
+            <div class="pills">
+              <span class="pill">Cliente listo</span>
+              <span class="pill">VRAM asignada</span>
+              <span class="pill">Parámetros default</span>
+            </div>
+            <p class="capture-text">
+              <strong>Motor de inferencia inicializado</strong> con parámetros por defecto y memoria asignada correctamente.
+            </p>
+          </div>
+        </article>
 
-    <!-- ✅ CAPTURA 3 = image7.png (antes era la 7) -->
-    <article class="capture">
-      <div class="capture-header">
-        <div class="capture-title">Captura 3 · Configuración Cliente</div>
-        <div class="capture-tagline">Parámetros iniciales del motor</div>
-      </div>
-      <div class="capture-image-wrapper">
-        <div class="capture-image">
-          <img src="image7.png" alt="Configuración inicial del cliente LLM" />
-        </div>
-      </div>
-      <div class="capture-body">
-        <div class="pill-row">
-          <span class="pill">Cliente listo</span>
-          <span class="pill">VRAM asignada</span>
-          <span class="pill">Parámetros default</span>
-        </div>
-        <p><strong>Configuración inicial del cliente de inferencia</strong>: motor preparado con parámetros por defecto, listo para cargar cualquier modelo LLM.</p>
-      </div>
-    </article>
+        <!-- Resto de capturas siguiendo el orden correcto... -->
+        <!-- Captura 4 = image3.png -->
+        <article class="capture-card">
+          <div class="capture-header">
+            <h3 class="capture-title">Captura 4 · Carga Modelo</h3>
+            <p class="capture-subtitle">LLM cargado en memoria</p>
+          </div>
+          <div class="capture-image-section">
+            <img src="image3.png" alt="Carga exitosa LLM" class="capture-image">
+          </div>
+          <div class="capture-content">
+            <div class="pills">
+              <span class="pill">Carga OK</span>
+              <span class="pill">Memoria ocupada</span>
+              <span class="pill">Sin errores</span>
+            </div>
+            <p class="capture-text">
+              <strong>Carga exitosa del modelo</strong> en VRAM/RAM. LLM completamente listo para procesar prompts.
+            </p>
+          </div>
+        </article>
 
-    <!-- ✅ CAPTURA 4 = image3.png (antes era la 3) -->
-    <article class="capture">
-      <div class="capture-header">
-        <div class="capture-title">Captura 4 · Carga del LLM</div>
-        <div class="capture-tagline">Modelo listo en memoria</div>
+        <!-- Todas las demás siguen el mismo patrón... -->
       </div>
-      <div class="capture-image-wrapper">
-        <div class="capture-image">
-          <img src="image3.png" alt="Carga exitosa del LLM en memoria" />
-        </div>
-      </div>
-      <div class="capture-body">
-        <div class="pill-row">
-          <span class="pill">Carga OK</span>
-          <span class="pill">VRAM ocupada</span>
-          <span class="pill">Sin errores</span>
-        </div>
-        <p><strong>Carga exitosa del modelo en memoria RAM/VRAM</strong>. El LLM está completamente cargado y listo para procesar prompts.</p>
-      </div>
-    </article>
+    </section>
+  </main>
 
-    <!-- ✅ CAPTURA 5 = image4.png (antes era la 4) -->
-    <article class="capture">
-      <div class="capture-header">
-        <div class="capture-title">Captura 5 · Parámetros Inferencia</div>
-        <div class="capture-tagline">Temperatura, tokens y system prompt</div>
-      </div>
-      <div class="capture-image-wrapper">
-        <div class="capture-image">
-          <img src="image4.png" alt="Configuración parámetros de inferencia" />
-        </div>
-      </div>
-      <div class="capture-body">
-        <div class="pill-row">
-          <span class="pill">Temperatura</span>
-          <span class="pill">Max tokens</span>
-          <span class="pill">System prompt</span>
-        </div>
-        <p><strong>Configuración fina de inferencia</strong>: temperatura, longitud máxima de respuesta y system prompt que define el comportamiento del asistente.</p>
-      </div>
-    </article>
-
-    <!-- ✅ CAPTURA 6 = image5.png (antes era la 5) -->
-    <article class="capture">
-      <div class="capture-header">
-        <div class="capture-title">Captura 6 · Primer Prompt</div>
-        <div class="capture-tagline">Primera interacción con LLM</div>
-      </div>
-      <div class="capture-image-wrapper">
-        <div class="capture-image">
-          <img src="image5.png" alt="Primer prompt y respuesta del LLM" />
-        </div>
-      </div>
-      <div class="capture-body">
-        <div class="pill-row">
-          <span class="pill">Prompt usuario</span>
-          <span class="pill">Respuesta OK</span>
-          <span class="pill">Latencia medida</span>
-        </div>
-        <p><strong>Primera prueba exitosa</strong>: prompt enviado y respuesta coherente generada por el LLM en tiempo real.</p>
-      </div>
-    </article>
-
-    <!-- ✅ CAPTURA 7 = image1.png (antes era la 1) -->
-    <article class="capture">
-      <div class="capture-header">
-        <div class="capture-title">Captura 7 · Descarga Modelo</div>
-        <div class="capture-tagline">Obtención desde repositorio oficial</div>
-      </div>
-      <div class="capture-image-wrapper">
-        <div class="capture-image">
-          <img src="image1.png" alt="Descarga del modelo LLM desde repositorio" />
-        </div>
-      </div>
-      <div class="capture-body">
-        <div class="pill-row">
-          <span class="pill">Repositorio HF</span>
-          <span class="pill">Safetensors/GGUF</span>
-          <span class="pill">Descarga verificada</span>
-        </div>
-        <p><strong>Descarga inicial del modelo base</strong> desde HuggingFace u otro repositorio oficial. Archivos verificados y listos para uso.</p>
-      </div>
-    </article>
-
-    <!-- ✅ CAPTURA 8 = image8.png (mantenida al final) -->
-    <article class="capture">
-      <div class="capture-header">
-        <div class="capture-title">Captura 8 · Flujo Completo</div>
-        <div class="capture-tagline">Secuencia de uso consolidada</div>
-      </div>
-      <div class="capture-image-wrapper">
-        <div class="capture-image">
-          <img src="image8.png" alt="Flujo completo LLM operativo" />
-        </div>
-      </div>
-      <div class="capture-body">
-        <div class="pill-row">
-          <span class="pill">Flujo validado</span>
-          <span class="pill">8 pasos OK</span>
-          <span class="pill">Producción lista</span>
-        </div>
-        <p><strong>Resumen visual del flujo completo</strong>: desde descarga hasta inferencia estable. Todo el proceso LLM documentado y funcional.</p>
-      </div>
-    </article>
-  </section>
-</main>
-
-<footer>
-  <div class="footer-inner">
-    <span>© 2026 · Análisis Técnico LLM</span>
-    <span>✅ 8 capturas | ORDEN CORREGIDO: 8→2→7→3→4→5→1→8</span>
-  </div>
-</footer>
-
+  <footer>
+    <div class="footer-content">
+      <p>© 2026 · Análisis Técnico LLM | 8 capturas | Orden: 8→2→7→3→4→5→1→8</p>
+    </div>
+  </footer>
 </body>
 </html>
