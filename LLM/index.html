@@ -2,52 +2,49 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>📊 Análisis Técnico LLM – 8 Capturas</title>
+  <title>Análisis Técnico LLM · 8 Etapas</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
-      --bg-primary: #0f172a;
-      --bg-secondary: #1e293b;
-      --bg-card: #334155;
-      --accent: #3b82f6;
-      --accent-glow: #60a5fa;
-      --text-primary: #f8fafc;
-      --text-secondary: #cbd5e1;
-      --border: #475569;
-      --gradient-main: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #60a5fa 100%);
-      --gradient-card: linear-gradient(145deg, #334155, #475569);
-      --shadow-lg: 0 25px 50px -12px rgba(0,0,0,0.5);
-      --shadow-glow: 0 0 30px rgba(59,130,246,0.3);
+      --bg-dark: #2d3748;
+      --bg-mid: #4a5568;
+      --bg-light: #718096;
+      --accent: #ed8936;
+      --accent-glow: #f6ad55;
+      --text-main: #f7fafc;
+      --text-muted: #e2e8f0;
+      --card-bg: #ffffff;
+      --shadow: 0 20px 40px rgba(0,0,0,0.3);
     }
 
-    * { 
-      margin: 0; 
-      padding: 0; 
-      box-sizing: border-box; 
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      line-height: 1.6;
-      overflow-x: hidden;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: linear-gradient(135deg, #f7fafc 0%, #edf2f7 30%, #e2e8f0 70%, #cbd5e1 100%);
+      color: #2d3748;
+      line-height: 1.7;
+      min-height: 100vh;
     }
 
-    /* Header Profesional */
     header {
+      background: linear-gradient(135deg, #2d3748 0%, #4a5568 50%, #718096 100%);
+      color: white;
+      padding: 1.2rem 0;
+      box-shadow: var(--shadow);
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(15,23,42,0.95);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
     }
 
     .header-container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 1rem 2rem;
+      padding: 0 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -62,236 +59,182 @@
     }
 
     .logo-icon {
-      width: 45px;
-      height: 45px;
-      background: var(--gradient-main);
-      border-radius: 12px;
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
-      box-shadow: var(--shadow-glow);
+      font-size: 1.5rem;
+      color: white;
+      box-shadow: 0 8px 25px rgba(237,137,54,0.4);
     }
 
-    nav {
-      display: flex;
-      gap: 2rem;
-    }
-
-    nav a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-weight: 500;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-    }
-
-    nav a:hover {
-      color: var(--accent);
-      background: rgba(59,130,246,0.1);
-    }
-
-    /* Main Content */
     main {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem 2rem 4rem;
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
     }
 
     .hero {
+      background: rgba(255,255,255,0.9);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
       text-align: center;
-      background: var(--gradient-card);
-      padding: 3rem 2rem;
-      border-radius: 24px;
-      margin-bottom: 4rem;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-lg);
+      margin-bottom: 3rem;
+      border: 2px solid rgba(237,137,54,0.2);
+      box-shadow: var(--shadow);
     }
 
     .hero h1 {
-      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-size: clamp(2.2rem, 4vw, 3rem);
       font-weight: 800;
-      background: var(--gradient-main);
+      background: linear-gradient(135deg, var(--accent), #dd6b20);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
       margin-bottom: 1rem;
-      letter-spacing: -0.02em;
     }
 
-    .hero-subtitle {
-      font-size: 1.3rem;
-      color: var(--text-secondary);
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
       max-width: 600px;
-      margin: 0 auto 2rem;
+      margin: 0 auto 1.5rem;
     }
 
-    .status-badge {
+    .status {
       display: inline-flex;
-      background: rgba(34,197,94,0.2);
-      color: #22c55e;
-      padding: 0.8rem 1.5rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+      color: white;
+      padding: 0.8rem 1.8rem;
       border-radius: 50px;
       font-weight: 700;
       font-size: 1rem;
-      border: 1px solid rgba(34,197,94,0.3);
-      box-shadow: 0 4px 15px rgba(34,197,94,0.1);
+      box-shadow: 0 8px 25px rgba(237,137,54,0.4);
     }
 
-    /* Section Title */
-    .section-title {
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin: 3rem 0 2rem;
+    .stages {
       display: flex;
-      align-items: center;
-      gap: 1rem;
-      background: var(--gradient-main);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      flex-direction: column;
+      gap: 2.5rem;
     }
 
-    /* Capture Cards - Diseño Profesional */
-    .captures-grid {
-      display: grid;
-      gap: 2rem;
-      grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
-    }
-
-    .capture-card {
-      background: var(--gradient-card);
+    .stage {
+      background: rgba(255,255,255,0.95);
       border-radius: 20px;
-      padding: 0;
-      border: 1px solid var(--border);
-      overflow: hidden;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-    }
-
-    .capture-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: var(--shadow-lg), var(--shadow-glow);
-      border-color: var(--accent);
-    }
-
-    .capture-header {
-      padding: 1.5rem;
-      border-bottom: 1px solid var(--border);
-      background: rgba(59,130,246,0.1);
-    }
-
-    .capture-title {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      margin-bottom: 0.3rem;
-    }
-
-    .capture-subtitle {
-      color: var(--text-secondary);
-      font-size: 0.95rem;
-    }
-
-    /* Imágenes CENTRADAS y TAMAÑO PERFECTO */
-    .capture-image-section {
-      padding: 1.5rem;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: rgba(0,0,0,0.1);
-      height: 280px;
-    }
-
-    .capture-image {
-      max-width: 100%;
-      max-height: 260px;
-      width: auto;
-      height: auto;
-      border-radius: 12px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-      object-fit: contain;
+      padding: 2rem;
+      border: 2px solid rgba(237,137,54,0.15);
+      box-shadow: var(--shadow);
       transition: all 0.3s ease;
     }
 
-    .capture-image:hover {
-      transform: scale(1.05);
-      box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+    .stage:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+      box-shadow: 0 30px 60px rgba(0,0,0,0.4);
     }
 
-    /* Contenido legible */
-    .capture-content {
-      padding: 1.5rem;
-    }
-
-    .pills {
+    .stage-header {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 3px solid rgba(237,137,54,0.3);
     }
 
-    .pill {
-      background: rgba(59,130,246,0.2);
-      color: var(--accent);
-      padding: 0.3rem 0.8rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      border: 1px solid rgba(59,130,246,0.3);
+    .stage-number {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-glow));
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+      box-shadow: 0 8px 20px rgba(237,137,54,0.4);
     }
 
-    .capture-text {
-      color: var(--text-secondary);
-      line-height: 1.7;
-      font-size: 0.98rem;
+    .stage-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #2d3748;
+      margin-bottom: 0.3rem;
     }
 
-    .capture-text strong {
-      color: var(--text-primary);
+    .stage-subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
     }
 
-    /* Footer */
+    /* IMAGEN CENTRAL - BORDES NARANJAS */
+    .stage-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 1.5rem 0;
+      padding: 1.5rem;
+      background: linear-gradient(135deg, #f7fafc, #edf2f7);
+      border-radius: 16px;
+      border: 4px solid var(--accent);
+      box-shadow: 0 15px 35px rgba(237,137,54,0.25);
+    }
+
+    .stage-image img {
+      max-width: 85%;
+      max-height: 280px;
+      width: auto;
+      height: auto;
+      border-radius: 12px;
+      object-fit: contain;
+    }
+
+    /* PÁRRAFO DEBAJO DE LA IMAGEN */
+    .stage-text {
+      background: rgba(255,255,255,0.7);
+      border-left: 5px solid var(--accent);
+      border-radius: 12px;
+      padding: 1.5rem;
+      font-size: 0.96rem;
+      line-height: 1.75;
+      color: #2d3748;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .stage-text code {
+      background: rgba(237,137,54,0.15);
+      color: #7c2d12;
+      padding: 0.2rem 0.5rem;
+      border-radius: 6px;
+      font-family: 'Monaco', monospace;
+      font-size: 0.9em;
+    }
+
     footer {
-      background: var(--bg-secondary);
-      border-top: 1px solid var(--border);
-      padding: 2rem;
+      background: linear-gradient(135deg, #4a5568 0%, #2d3748 100%);
+      color: #e2e8f0;
       text-align: center;
+      padding: 2rem 1.5rem;
       margin-top: 4rem;
     }
 
     .footer-content {
-      max-width: 1200px;
+      max-width: 1100px;
       margin: 0 auto;
-      opacity: 0.8;
+      font-size: 0.9rem;
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
-      .captures-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-      
-      .capture-image-section {
-        height: 220px;
-        padding: 1rem;
-      }
-      
-      .capture-image {
-        max-height: 200px;
-      }
-      
-      main {
-        padding: 1rem;
-      }
-      
-      .header-container {
-        padding: 1rem;
-        flex-direction: column;
-        gap: 1rem;
-      }
+      main { padding: 0 1rem; margin: 1rem auto; }
+      .stage { padding: 1.5rem; }
+      .stage-image img { max-height: 240px; }
+      .stage-text { padding: 1.2rem; font-size: 0.92rem; }
+      .header-container { padding: 0 1rem; flex-direction: column; gap: 1rem; }
     }
   </style>
 </head>
@@ -299,122 +242,163 @@
   <header>
     <div class="header-container">
       <div class="logo">
-        <div class="logo-icon">🤖</div>
-        <span>Análisis Técnico LLM</span>
+        <div class="logo-icon">⚽</div>
+        <span>Análisis Técnico LLM Fútbol</span>
       </div>
-      <nav>
-        <a href="#intro">Inicio</a>
-        <a href="#capturas">Capturas</a>
-      </nav>
     </div>
   </header>
 
   <main>
-    <section class="hero" id="intro">
-      <h1>Análisis Técnico LLM</h1>
-      <p class="hero-subtitle">
-        Documentación profesional de 8 capturas del proceso completo: carga, configuración e inferencia estable
-      </p>
-      <div class="status-badge">✅ LLM OPERATIVO · ORDEN CORREGIDO</div>
+    <section class="hero">
+      <h1>8 Etapas del Entrenamiento LLM Fútbol</h1>
+      <p>Documentación completa del proceso desde conversión GGUF hasta modelo especializado listo para inferencia</p>
+      <div class="status">✅ PROCESO COMPLETADO · Loss 0.0596</div>
     </section>
 
-    <section id="capturas">
-      <h2 class="section-title">📸 Secuencia Completa de Capturas</h2>
+    <section class="stages">
+      <!-- ORDEN CORREGIDO: 8→2→7→3→4→5→1→8 -->
       
-      <div class="captures-grid">
-        <!-- Captura 1 = image8.png -->
-        <article class="capture-card">
-          <div class="capture-header">
-            <h3 class="capture-title">Captura 1 · LLM en Producción</h3>
-            <p class="capture-subtitle">Uso estable en entorno final</p>
+      <!-- ETAPA 1 = image8.png -->
+      <article class="stage">
+        <div class="stage-header">
+          <div>
+            <h2 class="stage-title">Etapa 1: Finalización del Entrenamiento</h2>
+            <p class="stage-subtitle">Modelo listo para inferencia</p>
           </div>
-          <div class="capture-image-section">
-            <img src="image8.png" alt="LLM funcionando en producción" class="capture-image">
-          </div>
-          <div class="capture-content">
-            <div class="pills">
-              <span class="pill">Producción</span>
-              <span class="pill">Estable</span>
-              <span class="pill">Listo</span>
-            </div>
-            <p class="capture-text">
-              <strong>LLM completamente operativo</strong> en entorno de producción. Interfaz estable con respuestas coherentes y prompts personalizados.
-            </p>
-          </div>
-        </article>
+          <div class="stage-number">8</div>
+        </div>
+        <div class="stage-image">
+          <img src="image8.png" alt="Finalización entrenamiento">
+        </div>
+        <div class="stage-text">
+          Loss baja drásticamente: epoch 50 loss~0.0596, grad_norm estable, LR casi 0. Métricas finales: train_runtime=49.55s, train_loss=0.367, 100/100 steps al 2.02it/s. Termina con "¡Modelo de fútbol guardado! 100/100 [00:49<00:00]". El modelo está listo para inferencia, especializado en fútbol tras 50 epochs en datos curados.
+        </div>
+      </article>
 
-        <!-- Captura 2 = image2.png -->
-        <article class="capture-card">
-          <div class="capture-header">
-            <h3 class="capture-title">Captura 2 · Estructura Archivos</h3>
-            <p class="capture-subtitle">Organización del modelo local</p>
+      <!-- ETAPA 2 = image2.png -->
+      <article class="stage">
+        <div class="stage-header">
+          <div>
+            <h2 class="stage-title">Etapa 2: Muestra Datos (Ejemplos 1-3)</h2>
+            <p class="stage-subtitle">JSONL fútbol para fine-tuning</p>
           </div>
-          <div class="capture-image-section">
-            <img src="image2.png" alt="Estructura archivos LLM" class="capture-image">
-          </div>
-          <div class="capture-content">
-            <div class="pills">
-              <span class="pill">Config.json</span>
-              <span class="pill">Tokenizer</span>
-              <span class="pill">Pesos</span>
-            </div>
-            <p class="capture-text">
-              <strong>Directorio completo del modelo</strong> con todos los archivos necesarios: configuración, tokenizer y pesos optimizados.
-            </p>
-          </div>
-        </article>
+          <div class="stage-number">2</div>
+        </div>
+        <div class="stage-image">
+          <img src="image2.png" alt="Dataset ejemplos 1-3">
+        </div>
+        <div class="stage-text">
+          Se listan ejemplos JSONL de datos de fútbol preparados para fine-tuning, como ">> {"instruction": "¿Quién ganó el último Mundial de fútbol?", "output": "Argentina ganó el Mundial de Qatar 2022..."}", más preguntas sobre Balones de Oro de Messi y regla del fuera de juego. Estos son pares instrucción-respuesta para enseñar al modelo conocimiento específico de fútbol. El proceso carga "futbol_data.jsonl" con Out-File en PowerShell, preparando 14 ejemplos totales para entrenamiento supervisado.
+        </div>
+      </article>
 
-        <!-- Captura 3 = image7.png -->
-        <article class="capture-card">
-          <div class="capture-header">
-            <h3 class="capture-title">Captura 3 · Configuración Inicial</h3>
-            <p class="capture-subtitle">Cliente de inferencia preparado</p>
+      <!-- ETAPA 3 = image7.png -->
+      <article class="stage">
+        <div class="stage-header">
+          <div>
+            <h2 class="stage-title">Etapa 3: Progreso Entrenamiento</h2>
+            <p class="stage-subtitle">Epochs iniciales y caída loss</p>
           </div>
-          <div class="capture-image-section">
-            <img src="image7.png" alt="Configuración cliente LLM" class="capture-image">
-          </div>
-          <div class="capture-content">
-            <div class="pills">
-              <span class="pill">Cliente listo</span>
-              <span class="pill">VRAM asignada</span>
-              <span class="pill">Parámetros default</span>
-            </div>
-            <p class="capture-text">
-              <strong>Motor de inferencia inicializado</strong> con parámetros por defecto y memoria asignada correctamente.
-            </p>
-          </div>
-        </article>
+          <div class="stage-number">7</div>
+        </div>
+        <div class="stage-image">
+          <img src="image7.png" alt="Progreso epochs iniciales">
+        </div>
+        <div class="stage-text">
+          Muestra losses decrecientes: epoch 0.57 loss=2.2616 → epoch 3.57 loss=2.1251, con grad_norm y learning_rate subiendo (hasta 0.0002). Barras de progreso como "2/2 [00:58<00:00, 29.05s/it]" indican iteraciones lentas iniciales. El modelo aprende patrones de fútbol, reduciendo pérdida por gradiente descendente.
+        </div>
+      </article>
 
-        <!-- Resto de capturas siguiendo el orden correcto... -->
-        <!-- Captura 4 = image3.png -->
-        <article class="capture-card">
-          <div class="capture-header">
-            <h3 class="capture-title">Captura 4 · Carga Modelo</h3>
-            <p class="capture-subtitle">LLM cargado en memoria</p>
+      <!-- ETAPA 4 = image3.png -->
+      <article class="stage">
+        <div class="stage-header">
+          <div>
+            <h2 class="stage-title">Etapa 4: Más Ejemplos (4-6)</h2>
+            <p class="stage-subtitle">Tácticas y reglamento avanzado</p>
           </div>
-          <div class="capture-image-section">
-            <img src="image3.png" alt="Carga exitosa LLM" class="capture-image">
-          </div>
-          <div class="capture-content">
-            <div class="pills">
-              <span class="pill">Carga OK</span>
-              <span class="pill">Memoria ocupada</span>
-              <span class="pill">Sin errores</span>
-            </div>
-            <p class="capture-text">
-              <strong>Carga exitosa del modelo</strong> en VRAM/RAM. LLM completamente listo para procesar prompts.
-            </p>
-          </div>
-        </article>
+          <div class="stage-number">3</div>
+        </div>
+        <div class="stage-image">
+          <img src="image3.png" alt="Ejemplos 4-6 JSONL">
+        </div>
+        <div class="stage-text">
+          Continúa mostrando datos: posición del portero en córner, pressing alto y regla de fuera de juego 2023. Cada entrada es un JSONL truncado por límites de línea, pero completa ideas como "El pressing alto es una táctica defensiva...". Esto valida que los datos cubran tácticas, reglas y hechos históricos, esenciales para especializar el modelo en fútbol sin alucinaciones.
+        </div>
+      </article>
 
-        <!-- Todas las demás siguen el mismo patrón... -->
-      </div>
+      <!-- ETAPA 5 = image4.png -->
+      <article class="stage">
+        <div class="stage-header">
+          <div>
+            <h2 class="stage-title">Etapa 5: Ejemplos Finales (7-10)</h2>
+            <p class="stage-subtitle">VAR y máximos goleadores</p>
+          </div>
+          <div class="stage-number">4</div>
+        </div>
+        <div class="stage-image">
+          <img src="image4.png" alt="Ejemplos finales 7-10">
+        </div>
+        <div class="stage-text">
+          Aparecen más: jugadores en campo (11), duración de partido, VAR, máximo goleador del Real Madrid (Cristiano Ronaldo, 451 goles). Se guarda el dataset con "@ Out-File -FilePath "futbol_data.jsonl"". Estos ejemplos equilibran reglas, historia y estadísticas, con 14 muestras totales listadas, listas para epochs de entrenamiento.
+        </div>
+      </article>
+
+      <!-- ETAPA 6 = image5.png -->
+      <article class="stage">
+        <div class="stage-header">
+          <div>
+            <h2 class="stage-title">Etapa 6: Inicialización Unsloth</h2>
+            <p class="stage-subtitle">Fusión adapters LoRA</p>
+          </div>
+          <div class="stage-number">5</div>
+        </div>
+        <div class="stage-image">
+          <img src="image5.png" alt="Unsloth + fusión LoRA">
+        </div>
+        <div class="stage-text">
+          Unsloth (herramienta de fine-tuning 2x más rápida) parchea 28 capas QKV y MLP: "Unsloth 2026.2.1 patched 28 layers... Fusionando modelo base + adapters...". Descarga safetensors desde Hugging Face cache (model-00001/02-of-00002), mergea en 16-bit y guarda en "C:\LLM-Training\modelo_futbol_merged". Esto combina un LoRA adapter (entrenado previamente) con el modelo base para un modelo fusionado eficiente.
+        </div>
+      </article>
+
+      <!-- ETAPA 7 = image1.png -->
+      <article class="stage">
+        <div class="stage-header">
+          <div>
+            <h2 class="stage-title">Etapa 7: Conversión GGUF</h2>
+            <p class="stage-subtitle">Optimización modelo base 6.4GB</p>
+          </div>
+          <div class="stage-number">1</div>
+        </div>
+        <div class="stage-image">
+          <img src="image1.png" alt="Conversión GGUF">
+        </div>
+        <div class="stage-text">
+          Aquí se convierte un modelo preentrenado al formato GGUF (usado para inferencia eficiente en LLMs cuantizados). El log muestra "INFO:hf-to-gguf: Set model quantization version" y escritura de "modelo_futbol_gguf\temp.gguf" con 255 tensores y 6.4G de tamaño. La barra de progreso llega al 100% en 9 segundos a 702MB/s. Esto sucede para optimizar el modelo base (probablemente Llama o similar) para ejecución local con menos memoria.
+        </div>
+      </article>
+
+      <!-- ETAPA 8 = image6.png (Preparación) -->
+      <article class="stage">
+        <div class="stage-header">
+          <div>
+            <h2 class="stage-title">Etapa 8: Preparación Entrenamiento</h2>
+            <p class="stage-subtitle">Tokenización y 50 epochs</p>
+          </div>
+          <div class="stage-number">6</div>
+        </div>
+        <div class="stage-image">
+          <img src="image6.png" alt="Preparación entrenamiento">
+        </div>
+        <div class="stage-text">
+          Unsloth tokeniza datos: "Unsloth: Tokenizing ["text"]: 100%|". Inicia entrenamiento: "Entrenando modelo de fútbol... Num examples 14 Num Epochs = 50 | Total steps = 100". Config: batch size 2x4=8, 0.75% parámetros entrenables (24M de 3.2B), GPUs=1. Descargas finales de 4.97G y 1.46G completan la setup.
+        </div>
+      </article>
     </section>
   </main>
 
   <footer>
     <div class="footer-content">
-      <p>© 2026 · Análisis Técnico LLM | 8 capturas | Orden: 8→2→7→3→4→5→1→8</p>
+      <p>© 2026 · Análisis Técnico LLM Fútbol | <strong>ORDEN: 8→2→7→3→4→5→1→6</strong> | 6.4GB | RTX 4070 Ti</p>
     </div>
   </footer>
 </body>
